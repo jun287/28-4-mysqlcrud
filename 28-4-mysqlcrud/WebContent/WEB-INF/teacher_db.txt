@@ -1,0 +1,20 @@
+CREATE TABLE `teacher` (
+	`teacher_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`teacher_name` VARCHAR(50) NOT NULL,
+	`teacher_age` INT(10) NOT NULL,
+	PRIMARY KEY (`teacher_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
+
+
+CREATE TABLE `teacheraddr` (
+	`teacher_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`teacher_no` INT(10) NULL DEFAULT NULL,
+	`teacher_addr_content` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`teacher_addr_no`),
+	INDEX `FK_teacheraddr_teacher` (`teacher_no`),
+	CONSTRAINT `FK_teacheraddr_teacher` FOREIGN KEY (`teacher_no`) REFERENCES `teacher` (`teacher_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
