@@ -1,0 +1,83 @@
+-----------28기 이원상 2018. 6. 25(금)--------------------------
+
+------------DB생성문장 -----------------
+create database 284db;
+
+-----------계정 생성문장 ---------------
+grant select,insert,update,delete,create,drop,alter on 284db.* to 'java'@'localhost' identified by 'java0000';
+
+----------MEMBER table 생성문장 ----------
+CREATE TABLE `MEMBER` (`member_no` INT(10) NOT NULL AUTO_INCREMENT,`member_name` VARCHAR(50) NOT NULL,`member_age` INT(10) NOT NULL,PRIMARY KEY (`member_no`))
+COLLATE='utf8_general_ci' ENGINE=InnoDB;
+
+----------MEMBER_ADDR table 생성문장 ---------------
+CREATE TABLE `MEMBER_ADDR` (`member_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`member_no` INT(10) NOT NULL,`member_addr_content` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`member_addr_no`),
+	CONSTRAINT `FK__member` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`))
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+----------STUDENT table 생성문장 ------------------- 
+CREATE TABLE `STUDENT` (
+`student_no` INT(10) NOT NULL AUTO_INCREMENT,
+`student_name` VARCHAR(50) NOT NULL,
+`student_age` INT(10) NOT NULL,
+PRIMARY KEY (`student_no`))
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+----------STUDENT_ADDR table 생성문장 ---------------
+CREATE TABLE `STUDENT_ADDR` (
+`student_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
+`student_no` INT(10) NOT NULL,
+`student_addr_content` VARCHAR(50) NOT NULL,
+PRIMARY KEY (`student_addr_no`),
+CONSTRAINT `FK__student` FOREIGN KEY (`student_no`) REFERENCES `student` (`student_no`))
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+----------teacher table 생성문장 -----------------------
+CREATE TABLE `teacher` (
+`teachter_no` INT(10) NOT NULL AUTO_INCREMENT,
+`teacher_name` VARCHAR(50) NOT NULL,
+`teacher_age` INT(10) NOT NULL,
+PRIMARY KEY (`teachter_no`))
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+----------TEACHER_ADDR table 생성문장 -----------------------
+CREATE TABLE `TEACHER_ADDR` (
+`teacher_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
+`teacher_no` INT(10) NOT NULL,
+`teacher_addr_content` VARCHAR(50) NOT NULL,
+PRIMARY KEY (`teacher_addr_no`),
+CONSTRAINT `FK__teacher` FOREIGN KEY (`teacher_no`) REFERENCES `teacher` (`teachter_no`))
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+-----------employed table 생성문장 -------------------
+CREATE TABLE `employed` (
+`employed_no` INT(10) NOT NULL AUTO_INCREMENT,
+`employed_name` VARCHAR(50) NOT NULL,
+`employed_number` INT(10) NOT NULL,
+PRIMARY KEY (`employed_no`))
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+----------employed_addr 생성문장 ------------------
+CREATE TABLE `employed_addr` (
+`employed_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
+`employed_no` INT(10) NOT NULL,
+`employed_addr_content` VARCHAR(50) NOT NULL,
+PRIMARY KEY (`employed_addr_no`),
+CONSTRAINT `FK__employed` FOREIGN KEY (`employed_no`) REFERENCES `employed` (`employed_no`))
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+
+---------db alter 문장 ----------------
+ALTER DATABASE 284db DEFAULT CHARACTER SET UTF8;
+
+
+ 
