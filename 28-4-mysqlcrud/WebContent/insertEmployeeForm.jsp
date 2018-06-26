@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>insertEmployeeForm.jsp</title>
-		<link rel="stylesheet" type="text/css" href="css/insertEmployeeForm.css">
+		<link rel="stylesheet" type="text/css" href="./style/insertEmployeeForm.css">
 	</head>
 	<body>
 		<!-- 회원 가입폼 -->
