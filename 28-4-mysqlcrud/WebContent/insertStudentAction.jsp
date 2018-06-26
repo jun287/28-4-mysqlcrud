@@ -6,8 +6,7 @@
 <jsp:setProperty name="stu" property="*"/>		<!-- jsp:usebean 액션태그로 생성된 객체의 프로퍼티의 값을 *로 지정할 경우 같은 이름을 같는 파라미터의 값을 설정 -->
 <%
 	StudentDao sDao = new StudentDao();
-	stu=sDao.studentInsert(stu);
-/* 	sDao.studentAddressInsert(stu); */
+	sDao.insertStudent(stu);
 %>
 <!DOCTYPE html>
 <html>

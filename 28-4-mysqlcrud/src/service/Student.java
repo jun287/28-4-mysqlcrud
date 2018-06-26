@@ -2,12 +2,12 @@
 package service;
 
 public class Student {
-	int studentNO;
-	String studentName;
-	int studentAge;
-	int studentAddrNo;
-	String studentAddrContent;
-	
+	private int studentNO;
+	private String studentName;
+	private int studentAge;
+	private int studentAddrNo;
+	private String studentAddrContent;
+	// 프로퍼티 private 접근제한(private, 동일클래스내에서만 접근가능)
 	public int getStudentNO() {
 		return studentNO;
 	}
