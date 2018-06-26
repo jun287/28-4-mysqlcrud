@@ -19,8 +19,9 @@
 			
 			//employee주소를 찾아가서 set메서드에 form에서 넘어온 파라미터 값들을 매개변수에 대입하고 호출한다
 			employee.setEmployeeName(request.getParameter("name"));
-			employee.setEmployeeAge(request.getParameter("age"));
-		
+			employee.setEmployeeAge(Integer.parseInt(request.getParameter("age")));
+			
+
 			//dao의 객체를 생성한다
 			EmployeeDao employeedao=new EmployeeDao();
 			

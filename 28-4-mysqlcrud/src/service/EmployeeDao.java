@@ -35,7 +35,7 @@ public class EmployeeDao {
 			
 			//물음표에 변수에 담겨있는 값들을 대입한다
 			pstmt.setString(1, employee.getEmployeeName());
-			pstmt.setString(2, employee.getEmployeeAge());
+			pstmt.setInt(2, employee.getEmployeeAge());
 			
 			System.out.println(pstmt+"<--pstmt");
 			
