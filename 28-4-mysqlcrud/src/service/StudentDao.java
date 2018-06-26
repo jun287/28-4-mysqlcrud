@@ -4,8 +4,9 @@ import java.sql.*;			// java.sql패키지내 클래스 임포트(Connection,PreparedStatem
 public class StudentDao {
 	/*
 	메소드 설명	
-	1. 용도 : 학생 입력하는 메소드임.
+	1. 용도 : 학생 1명을 입력하는 메소드임(Database내 Student테이블의 한개의 행을 입력하는 메소드).
 	2. 매개변수는 Student class data type이고 매개변수명은 Student class를 통해 만들어진 객체참조변수의 참조값임.
+	  - 접근지정자는 모두 private임. int studentNO,String studentName,int studentAge,int studentAddrNo,String studentAddrContent
 	3. 리턴값 : 없음.
 	*/		
 	public void insertStudent(Student stu) {
