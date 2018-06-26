@@ -1,0 +1,20 @@
+CREATE TABLE `employee` (
+	`employee_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`employee_name` VARCHAR(50) NULL DEFAULT NULL,
+	`employee_age` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`employee_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=6;
+
+CREATE TABLE `employee_addr` (
+	`employee_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`employee_no` INT(10) NOT NULL,
+	`employee_addr_content` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`employee_addr_no`),
+	INDEX `FK_employee_addr_employee` (`employee_no`),
+	CONSTRAINT `FK_employee_addr_employee` FOREIGN KEY (`employee_no`) REFERENCES `employee` (`employee_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
