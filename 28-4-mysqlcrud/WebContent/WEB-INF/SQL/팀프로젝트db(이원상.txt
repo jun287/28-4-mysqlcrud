@@ -1,24 +1,31 @@
------------28±‚ ¿Ãø¯ªÛ 2018. 6. 25(±›)--------------------------
+-----------28ÔøΩÔøΩ ÔøΩÃøÔøΩÔøΩÔøΩ 2018. 6. 25(ÔøΩÔøΩ)--------------------------
 
-------------DBª˝º∫πÆ¿Â -----------------
+------------DBÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ -----------------
 create database 284db;
 
------------∞Ë¡§ ª˝º∫πÆ¿Â ---------------
+-----------ÔøΩÔøΩÔøΩÔøΩ ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ ---------------
 grant select,insert,update,delete,create,drop,alter on 284db.* to 'java'@'localhost' identified by 'java0000';
 
-----------MEMBER table ª˝º∫πÆ¿Â ----------
-CREATE TABLE `MEMBER` (`member_no` INT(10) NOT NULL AUTO_INCREMENT,`member_name` VARCHAR(50) NOT NULL,`member_age` INT(10) NOT NULL,PRIMARY KEY (`member_no`))
-COLLATE='utf8_general_ci' ENGINE=InnoDB;
-
-----------MEMBER_ADDR table ª˝º∫πÆ¿Â ---------------
-CREATE TABLE `MEMBER_ADDR` (`member_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
-	`member_no` INT(10) NOT NULL,`member_addr_content` VARCHAR(50) NOT NULL,
+----------member table ÏÉùÏÑ±Î¨∏Ïû•----------
+CCREATE TABLE `member` (
+	`member_no` INT(10) NOT NULL AUTO_INCREMENT,`member_name` VARCHAR(50) NOT NULL,`member_age` INT(10) NOT NULL,PRIMARY KEY (`member_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=2;
+----------meber_addr table ÏÉùÏÑ±Î¨∏Ïû•---------------
+CREATE TABLE `member_addr` (
+	`member_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`member_no` INT(10) NOT NULL,
+	`member_addr_content` VARCHAR(50) NOT NULL,
 	PRIMARY KEY (`member_addr_no`),
-	CONSTRAINT `FK__member` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`))
-COLLATE='utf8_general_ci'
+	INDEX `member_no` (`member_no`),
+	CONSTRAINT `member_no` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`)
+)
+COLLATE='euckr_korean_ci'
 ENGINE=InnoDB;
 
-----------STUDENT table ª˝º∫πÆ¿Â ------------------- 
+----------STUDENT table ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ ------------------- 
 CREATE TABLE `STUDENT` (
 `student_no` INT(10) NOT NULL AUTO_INCREMENT,
 `student_name` VARCHAR(50) NOT NULL,
@@ -27,7 +34,7 @@ PRIMARY KEY (`student_no`))
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 
-----------STUDENT_ADDR table ª˝º∫πÆ¿Â ---------------
+----------STUDENT_ADDR table ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ ---------------
 CREATE TABLE `STUDENT_ADDR` (
 `student_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
 `student_no` INT(10) NOT NULL,
@@ -37,7 +44,7 @@ CONSTRAINT `FK__student` FOREIGN KEY (`student_no`) REFERENCES `student` (`stude
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 
-----------teacher table ª˝º∫πÆ¿Â -----------------------
+----------teacher table ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ -----------------------
 CREATE TABLE `teacher` (
 `teachter_no` INT(10) NOT NULL AUTO_INCREMENT,
 `teacher_name` VARCHAR(50) NOT NULL,
@@ -46,7 +53,7 @@ PRIMARY KEY (`teachter_no`))
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 
-----------TEACHER_ADDR table ª˝º∫πÆ¿Â -----------------------
+----------TEACHER_ADDR table ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ -----------------------
 CREATE TABLE `TEACHER_ADDR` (
 `teacher_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
 `teacher_no` INT(10) NOT NULL,
@@ -56,7 +63,7 @@ CONSTRAINT `FK__teacher` FOREIGN KEY (`teacher_no`) REFERENCES `teacher` (`teach
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 
------------employed table ª˝º∫πÆ¿Â -------------------
+-----------employed table ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ -------------------
 CREATE TABLE `employed` (
 `employed_no` INT(10) NOT NULL AUTO_INCREMENT,
 `employed_name` VARCHAR(50) NOT NULL,
@@ -65,7 +72,7 @@ PRIMARY KEY (`employed_no`))
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 
-----------employed_addr ª˝º∫πÆ¿Â ------------------
+----------employed_addr ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ ------------------
 CREATE TABLE `employed_addr` (
 `employed_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
 `employed_no` INT(10) NOT NULL,
@@ -76,7 +83,7 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 
 
----------db alter πÆ¿Â ----------------
+---------db alter ÔøΩÔøΩÔøΩÔøΩ ----------------
 ALTER DATABASE 284db DEFAULT CHARACTER SET UTF8;
 
 
