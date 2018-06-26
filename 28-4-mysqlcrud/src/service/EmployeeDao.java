@@ -1,3 +1,4 @@
+// 2018. 06. 25 28±â Á¤¹Î¼ö
 package service;
 
 import java.sql.Connection;
@@ -9,52 +10,52 @@ public class EmployeeDao {
 	
 	public void insertEmployee(Employee employee) {
 		
-		//class data typeìœ¼ë¡œ ë³€ìˆ˜ì„ ì„ ì–¸í•˜ê³  nullë¡œ ì´ˆê¸°í™” í•˜ì—¬ë¼
+		//class data typeÀ¸·Î º¯¼öÀ» ¼±¾ğÇÏ°í null·Î ÃÊ±âÈ­ ÇÏ¿©¶ó
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		
 	
 		
-		//tryì´ì—ìˆëŠ” ë¬¸ì¥ë“¤ì—ì„œ ì˜ˆì™¸ê°€ ë°œìƒí•˜ë©´ catchë¡œ ë„˜ì–´ê°„ë‹¤
+		//tryÀÌ¿¡ÀÖ´Â ¹®Àåµé¿¡¼­ ¿¹¿Ü°¡ ¹ß»ıÇÏ¸é catch·Î ³Ñ¾î°£´Ù
 		try{
-			//ipì£¼ì†Œ,í¬íŠ¸ë²ˆí˜¸,dbëª…,ì‚¬ìš©ìid,íŒ¨ìŠ¤ì›Œë“œë¥¼ ê°ê° String data typeìœ¼ë¡œ ì„ ì–¸ëœ ë³€ìˆ˜ì— ë‹´ì•„ë¼
+			//ipÁÖ¼Ò,Æ÷Æ®¹øÈ£,db¸í,»ç¿ëÀÚid,ÆĞ½º¿öµå¸¦ °¢°¢ String data typeÀ¸·Î ¼±¾ğµÈ º¯¼ö¿¡ ´ã¾Æ¶ó
 			String dbname="jdbc:mysql://localhost:3306/284db?"+"useUnicode=true&characterEncoding=euckr";
 			String userid="java";
 			String userpw="java0000";
 		
-			//Driverë¡œë”©
+			//Driver·Îµù
 			String dbDriver="com.mysql.jdbc.Driver";
 			Class.forName(dbDriver);
-			//dbì—°ê²°
-			//Connection ê°ì²´ë¥¼ ìƒì„±,ê°ì²´ì£¼ì†Œë¥¼ conn ë³€ìˆ˜ì— í• ë‹¹í•œë‹¤.
+			//db¿¬°á
+			//Connection °´Ã¼¸¦ »ı¼º,°´Ã¼ÁÖ¼Ò¸¦ conn º¯¼ö¿¡ ÇÒ´çÇÑ´Ù.
 			conn=DriverManager.getConnection(dbname,userid,userpw);
 			
-			//ì¿¼ë¦¬ ì‹¤í–‰ì¤€ë¹„
-			//connì£¼ì†Œë¥¼ ì°¾ì•„ê°€ì„œ prepareStatementë©”ì„œë“œì—  ë§¤ê°œë³€ìˆ˜ì— ì¿¼ë¦¬ë¬¸ì„ ëŒ€ì…í›„ PreparedStatementê°ì²´ìƒì„±í›„ ì£¼ì†Œë¥¼ pstmtì— ëŒ€ì…í•œë‹¤. 
+			//Äõ¸® ½ÇÇàÁØºñ
+			//connÁÖ¼Ò¸¦ Ã£¾Æ°¡¼­ prepareStatement¸Ş¼­µå¿¡  ¸Å°³º¯¼ö¿¡ Äõ¸®¹®À» ´ëÀÔÈÄ PreparedStatement°´Ã¼»ı¼ºÈÄ ÁÖ¼Ò¸¦ pstmt¿¡ ´ëÀÔÇÑ´Ù. 
 			pstmt=conn.prepareStatement("insert into employee(employee_name,employee_age) values(?,?)");
 			
-			//ë¬¼ìŒí‘œì— ë³€ìˆ˜ì— ë‹´ê²¨ìˆëŠ” ê°’ë“¤ì„ ëŒ€ì…í•œë‹¤
+			//¹°À½Ç¥¿¡ º¯¼ö¿¡ ´ã°ÜÀÖ´Â °ªµéÀ» ´ëÀÔÇÑ´Ù
 			pstmt.setString(1, employee.getEmployeeName());
 			pstmt.setInt(2, employee.getEmployeeAge());
 			
 			System.out.println(pstmt+"<--pstmt");
 			
-			//ì¿¼ë¦¬ ì‹¤í–‰
+			//Äõ¸® ½ÇÇà
 			pstmt.executeUpdate();
 			
 			System.out.println(pstmt+"<--pstmt");
 		
-		 //sqlì— ì˜ˆì™¸ê°€ ë°œìƒí•˜ì—¬ catchì— ìˆëŠ” ë¬¸ì¥ë“¤ì„ ì‹¤í–‰í•œë‹¤.
+		 //sql¿¡ ¿¹¿Ü°¡ ¹ß»ıÇÏ¿© catch¿¡ ÀÖ´Â ¹®ÀåµéÀ» ½ÇÇàÇÑ´Ù.
 		}catch(SQLException ex) {
-			System.out.println("sql ì˜¤ë¥˜ê°€ ì•„ë‹Œë‹¤.");
+			System.out.println("sql ¿À·ù°¡ ¾Æ´Ñ´Ù.");
 			System.out.println(ex.getMessage());
 			ex.printStackTrace();
 		
-		 //ì˜ˆì™¸ê°€ ë°œìƒí•´ë„ ë°˜ë“œì‹œ ì‹¤í–‰í•œë‹¤
+		 //¿¹¿Ü°¡ ¹ß»ıÇØµµ ¹İµå½Ã ½ÇÇàÇÑ´Ù
 		}catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		}finally{
-			//ê°ì²´ ì¢…ë£Œ
+			//°´Ã¼ Á¾·á
 			try {pstmt.close();	} catch (SQLException e) {e.printStackTrace();}
 			try {conn.close();	} catch (SQLException e) {e.printStackTrace();}
 			
