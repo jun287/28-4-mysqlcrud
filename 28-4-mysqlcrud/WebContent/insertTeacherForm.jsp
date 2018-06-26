@@ -1,7 +1,6 @@
-<!-- 2018. 06. 25 28기 공세준 -->
-
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
+<!-- 2018. 06. 25 28기 공세준 -->
 <!DOCTYPE html>
 <html>
 	<head>
@@ -71,12 +70,6 @@
 						<ul class="cols">
 							<li class="col1">나이 :</li>
 							<li class="col2"><input type="text" name="teacherAge"></li>
-						</ul>
-					</li>
-					<li>
-						<ul class="cols">
-							<li class="col1">주소 :</li> 
-							<li class="col2"><input type="text" name="teacherAddrContent"></li>
 						</ul>
 					</li>
 					<li>

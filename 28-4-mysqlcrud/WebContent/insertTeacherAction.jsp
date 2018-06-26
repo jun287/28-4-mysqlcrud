@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
+<!-- 2018. 06. 25 28기 공세준 -->
 <%@ page import = "service.TeacherDao" %>
 
 <% request.setCharacterEncoding("EUC-KR"); %> 
-<jsp:useBean id="tb" class="service.Teacher"/>
-<jsp:useBean id="tab" class="service.TeacherAddr"/>
-<jsp:setProperty name="tb" property="*" />
-<jsp:setProperty name="tab" property="*" />
+<jsp:useBean id="tdb" class="service.Teacher"/>
+<jsp:setProperty name="tdb" property="*" />
 
 <!DOCTYPE html>
 <html>
@@ -16,11 +15,10 @@
 	</head>
 	<body>
 	<%
-		System.out.println(tb.getTeacherName());
-		System.out.println(tb.getTeacherAge());
-		System.out.println(tab.getTeacherAddrContent());
+		System.out.println(tdb.getTeacherName());
+		System.out.println(tdb.getTeacherAge());
 		TeacherDao tdao = new TeacherDao();
-		tdao.getCon();
+		tdao.insertTeacher(tdb);
 	 %>
 	</body>
 </html>

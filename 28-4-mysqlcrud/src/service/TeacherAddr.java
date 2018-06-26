@@ -1,9 +1,12 @@
+// 2018. 06. 25 28기 공세준
+
 package service;
 
 public class TeacherAddr {
-	public int teacherAddrNo;
-	public int teahcerNo;
-	public String teacherAddrContent;
+	
+	private int teacherAddrNo;
+	private int teahcerNo;
+	private String teacherAddrContent;
 	
 	public int getTeacherAddrNo() {
 		return teacherAddrNo;

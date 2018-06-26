@@ -1,9 +1,12 @@
+// 2018. 06. 25 28기 공세준 
+
 package service;
 
 public class Teacher {
-	public int teacherNo;
-	public String teacherName;
-	public int teacherAge;
+	
+	private int teacherNo;
+	private String teacherName;
+	private int teacherAge;
 	
 	public int getTeacherNo() {
 		return teacherNo;
