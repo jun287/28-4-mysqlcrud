@@ -4,8 +4,8 @@
 <%@ page import = "service.TeacherDao" %>
 
 <% request.setCharacterEncoding("EUC-KR"); %> 
-<jsp:useBean id="tdb" class="service.Teacher"/>
-<jsp:setProperty name="tdb" property="*" />
+<jsp:useBean id="teacher" class="service.Teacher"/>
+<jsp:setProperty name="teacher" property="*" />
 
 <!DOCTYPE html>
 <html>
@@ -15,11 +15,10 @@
 	</head>
 	<body>
 	<%
-		
-		System.out.println(tdb.getTeacherName());
-		System.out.println(tdb.getTeacherAge());
-		TeacherDao tdao = new TeacherDao();
-		tdao.insertTeacher(tdb);
+		System.out.println(teacher.getTeacherName());
+		System.out.println(teacher.getTeacherAge());
+		TeacherDao teacherDao = new TeacherDao();
+		teacherDao.insertTeacher(teacher);
 	 %>
 	</body>
 </html>

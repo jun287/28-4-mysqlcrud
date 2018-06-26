@@ -12,7 +12,7 @@ public class TeacherDao {
 	// 설명 : 드라이버 로딩 , DB연결 , insert 쿼리문 작성 실행해서  teacher 테이블에 교사 데이터 입력하는 메서드 선언 
 	// 매개변수 : Teacher 클래스 타입으로 한명의 교사 정보를 담는 객체의 주소값을 담은 변수
 	// 리턴값 : void로 없습니다.
-	public void insertTeacher(Teacher tdb) {
+	public void insertTeacher(Teacher teacher) {
 		
 		Connection con = null; 
 		PreparedStatement pstmt = null;
@@ -30,8 +30,8 @@ public class TeacherDao {
 			System.out.println("DB연결");
 			
 			pstmt = con.prepareStatement("INSERT INTO teacher(teacher_name, teacher_age) VALUES (?,?)");
-			pstmt.setString(1, tdb.getTeacherName());
-			pstmt.setInt(2, tdb.getTeacherAge());
+			pstmt.setString(1, teacher.getTeacherName());
+			pstmt.setInt(2, teacher.getTeacherAge());
 			
 			pstmt.executeUpdate();
 		
