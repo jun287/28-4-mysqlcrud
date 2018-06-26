@@ -15,6 +15,7 @@
 	</head>
 	<body>
 	<%
+		
 		System.out.println(tdb.getTeacherName());
 		System.out.println(tdb.getTeacherAge());
 		TeacherDao tdao = new TeacherDao();
