@@ -1,0 +1,23 @@
+----------member table 생성문장
+
+CCREATE TABLE `member` (
+	`member_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`member_name` VARCHAR(50) NOT NULL,
+	`member_age` INT(10) NOT NULL,PRIMARY KEY (`member_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=2;
+
+-----------member_addr table 생성문장
+
+CREATE TABLE `member_addr` (
+	`member_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`member_no` INT(10) NOT NULL,
+	`member_addr_content` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`member_addr_no`),
+	INDEX `member_no` (`member_no`),
+	CONSTRAINT `member_no` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
