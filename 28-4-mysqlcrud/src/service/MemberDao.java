@@ -31,30 +31,27 @@ public class MemberDao {
 			String dbPassword ="java0000";
 			//my-sql(DB)연결하기 위해 localhost번호 & 데이터 베이스 & mysql(DB) ID ,PW 입력입니다. 
 			
-			try {
-				connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-				//my-sql(DB)연결하기 위해 DriverManager변수에 들어가 getConnection메소드로 통해 dbUrl ,dbUser , dbPassword 변수에 들어있는 값과 일치하는 곳의 주소값을 connection변수에 할당시킵니다.
-				System.out.println(connection +"<- connection");
-				//my-sql(DB)연결하기 위해 데이터 베이스명 & ID &PW 설정하고 연결 작업입니다.
-				
-				String insertQuery = "INSERT INTO member(member_name ,member_age) VALUES(? ,?)";
-				//Query문을 String타입으로 선언이 되어있는 insertQuery변수에 할당 시킵니다.
-				preparedStatement = connection.prepareStatement(insertQuery);
-				preparedStatement.setString(1, member.getMemberName());
-				preparedStatement.setInt(2, member.getMemberAge());
-				System.out.println(preparedStatement +"<- preparedStatement");
-				//Query실행 준비를 위해 connection변수에 대입 되어있는 주소값을 찾아가 prepareStatement객체 생성을해 Query문을 대입을 시키고 그 주소값을 preparedStatemnet변수에 할당 시킵니다.
-				
-				preparedStatement.executeUpdate();
-				//reparedStatement변수에 대입되어있는 주소값을 찾아가 prepareStatement객체에 대입되어있는 Query문을 executeUpdate()메소드로 실행을 시킵니다.
-			}catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.print(e.getMessage() +"<- connection&preparedStatement클래스 로딩 실패");
-				//에러가 일어나면 SQLException클래스형식으로 선언된 e변수를 통해 getMessage()메소드롤 통해 connection&preparedStatement클래스오류 메세지를 출력하도록 설정 했습니다.
-				
+			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
+			//my-sql(DB)연결하기 위해 DriverManager변수에 들어가 getConnection메소드로 통해 dbUrl ,dbUser , dbPassword 변수에 들어있는 값과 일치하는 곳의 주소값을 connection변수에 할당시킵니다.
+			System.out.println(connection +"<- connection");
+			//my-sql(DB)연결하기 위해 데이터 베이스명 & ID &PW 설정하고 연결 작업입니다.
 			
-			}
+			String insertQuery = "INSERT INTO member(member_name ,member_age) VALUES(? ,?)";
+			//Query문을 String타입으로 선언이 되어있는 insertQuery변수에 할당 시킵니다.
+			preparedStatement = connection.prepareStatement(insertQuery);
+			preparedStatement.setString(1, member.getMemberName());
+			preparedStatement.setInt(2, member.getMemberAge());
+			System.out.println(preparedStatement +"<- preparedStatement");
+			//Query실행 준비를 위해 connection변수에 대입 되어있는 주소값을 찾아가 prepareStatement객체 생성을해 Query문을 대입을 시키고 그 주소값을 preparedStatemnet변수에 할당 시킵니다.
+			
+			preparedStatement.executeUpdate();
+			//reparedStatement변수에 대입되어있는 주소값을 찾아가 prepareStatement객체에 대입되어있는 Query문을 executeUpdate()메소드로 실행을 시킵니다.
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.print(e.getMessage() +"<- connection&preparedStatement클래스 로딩 실패");
+			//에러가 일어나면 SQLException클래스형식으로 선언된 e변수를 통해 getMessage()메소드롤 통해 connection&preparedStatement클래스오류 메세지를 출력하도록 설정 했습니다.
+			
 		}catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,11 +62,13 @@ public class MemberDao {
 			if(preparedStatement != null)try {
 				preparedStatement.close();
 			}catch(SQLException e){
+				e.printStackTrace();
 			//만약에 preparedStatemnet변수안의 값이 null값이 아니면 try &catch문을 열어 preparedStatemnet변수를 종료를 시켜줍니다.	
 			}
 			if(connection != null) try {
 				connection.close();
 			}catch(SQLException e) {
+				e.printStackTrace();
 			//만약에 connection변수안의 값이 null값이 아니면 try & catch문을  열어 connection변수를 종료 시켜줍니다.
 			}
 		}
