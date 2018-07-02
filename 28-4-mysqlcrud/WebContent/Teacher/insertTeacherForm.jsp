@@ -58,7 +58,7 @@
 	</head>
 	<body>
 		<h3>교사 등록</h3>
-			<form action="<%= request.getContextPath()%>/insertTeacherAction.jsp" method="post">
+			<form action="<%= request.getContextPath()%>/Teacher/insertTeacherAction.jsp" method="post">
 				<ul id="mem_form">
 					<li>
 						<ul class="cols">
