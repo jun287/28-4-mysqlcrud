@@ -38,7 +38,8 @@
 					<tr>
 					<tr>
 						<td>4. 정민수</td>
-						<td><a href="<%= request.getContextPath() %>/insertEmployeeForm.jsp">고용 등록</a></td>
+						<td><a href="<%= request.getContextPath() %>/Employee/insertEmployeeForm.jsp">고용 등록</a></td>
+						<td><a href="<%= request.getContextPath() %>/Employee/insertEmployeeAction.jsp">고용 등록</a></td>
 					<tr>
 				</tbody>
 			</table>
