@@ -4,21 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<style>
-div{
-	border:solid 1px #212121;
-	padding:10px 0 0 10px;
-}
-ul{
-	list-style-type:none;	
-}
-input{
-	margin-bottom:15px;
-}
-input#address{
-	width:650px;
-}
-</style>
+<link rel= "stylesheet" type= "text/css" href="../css/studentForm.css">
 <script type="text/javascript">
 window.addEventListener("load", function(){
 	// 원칙은 아니지만 자바스크립트 코드가 head에 위치하게 하기위해 이벤트처리를 통해서 문서가 읽히고(load) 나서 자바스크립트 코드가 읽히도록 하기 위한 코드임.
@@ -75,7 +61,7 @@ window.addEventListener("load", function(){
 					<input type="text" id="address" name="studentAddrContent" required>	
 				</li>
 				<li>	
-					<input type="button" id="signup"value="등록">
+					<input type="button" id="signup" value="등록">
 				</li>	
 			</ul>	
 		</form>
