@@ -1,0 +1,5 @@
+@charset "EUC-KR";
+/* studentList.jsp */
+table, tr, td{
+	border:1px solid #353535;
+}

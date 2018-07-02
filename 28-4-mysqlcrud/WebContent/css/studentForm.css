@@ -1,0 +1,14 @@
+@charset "EUC-KR";
+div{
+	border:solid 1px #212121;
+	padding:10px 0 0 10px;
+}
+ul{
+	list-style-type:none;	
+}
+input{
+	margin-bottom:15px;
+}
+input#address{
+	width:650px;
+}
