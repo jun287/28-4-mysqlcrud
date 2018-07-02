@@ -19,7 +19,7 @@ public class TeacherDao {
 	//설명 : 마지막 페이지를 구하기 위해 메서드를 선언합니다.
 	//매개변수 : 매개변수는 없습니다.
 	//리턴값 : 리턴값은 totalRow로 teacher 테이블에 teacher_no의 갯수를 리턴합니다.
-	public int count() {
+	public int countTeacherRow() {
 		
 		Connection connection = null;
 		PreparedStatement statement = null;

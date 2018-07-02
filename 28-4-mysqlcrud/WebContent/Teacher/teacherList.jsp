@@ -46,8 +46,8 @@
 		%>
 			</table>
 		<%
-			// 마지막 페이지를 구하기 위해 int 기본타입으로 totalRow 변수를 선언하고 teacherDao 클래스객체의 count() 메서드르 호출하고 리턴값(COUNT(teacher_no))을 대입합니다.
-			int totalRow = teacherDao.count();
+			// 마지막 페이지를 구하기 위해 int 기본타입으로 totalRow 변수를 선언하고 teacherDao 클래스객체의 countTeacherRow() 메서드를 호출하고 리턴값(COUNT(teacher_no))을 대입합니다.
+			int totalRow = teacherDao.countTeacherRow();
 			
 			// 대입한 값이 담긴 totalRow와 rowPerPage로 마지막 페이지(lastPage)를 구하고 대입합니다.
 			int lastPage = (totalRow-1) / rowPerPage;
