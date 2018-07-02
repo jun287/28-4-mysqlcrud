@@ -1,0 +1,22 @@
+@charset "EUC-KR";
+* {
+	margin : 0;	/* 경계선 외부 공간을 설정합니다 */
+	padding : 0;	/* 내용물과 경계선 사이의 공간을 설정합니다 */
+}
+ul {
+	list-style-type : none; /* ul태그에 있는 아이콘을 쓰지 않겠습니다. */
+}
+h3 {
+	margin:20px 0 0 50px;	/* 경계선 외부 공간을 상우하좌 순서대로 설정합니다  */
+}
+.member_list {
+	width : 500px;
+	margin : 10px 0 0 30px;
+	font-size : 14px;
+	border-top : solid 2px ; 
+}
+.cols li{
+	display:inline-block;
+	padding : 10px 0 0 10px;
+}
+	
