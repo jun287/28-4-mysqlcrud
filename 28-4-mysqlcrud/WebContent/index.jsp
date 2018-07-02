@@ -31,7 +31,10 @@
 					<tr>
 					<tr>
 						<td>3. 공세준</td>
-						<td><a href="<%= request.getContextPath() %>/insertTeacherForm.jsp">교사 등록</a></td>
+						<td>
+							<a href="<%= request.getContextPath() %>/Teacher/insertTeacherForm.jsp">교사 등록</a><br>
+							<a href="<%= request.getContextPath() %>/Teacher/teacherList.jsp">교사 목록</a>
+						</td>		
 					<tr>
 					<tr>
 						<td>4. 정민수</td>

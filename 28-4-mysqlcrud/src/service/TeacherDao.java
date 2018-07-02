@@ -46,7 +46,6 @@ public class TeacherDao {
 				totalRow=resultSet.getInt("COUNT(teacher_no)");
 			}
 			
-			
 		}catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}catch(SQLException e) {
