@@ -17,15 +17,16 @@ import java.util.ArrayList;
 public class TeacherDao {
 	
 	//설명 : 마지막 페이지를 구하기 위해 메서드를 선언합니다.
-	//매개변수 : 매개변수는 없습니다.
+	//매개변수 : int 기본타입으로 rowPerPage 매개변수를 가지고 페이지당 갯수를 받습니다.
 	//리턴값 : 리턴값은 totalRow로 teacher 테이블에 teacher_no의 갯수를 리턴합니다.
-	public int countTeacherRow() {
+	public int lastPage(int rowPerPage) {
 		
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 
 		int totalRow=0;
+		int lastPage=0;
 		
 		try {
 			
@@ -45,6 +46,11 @@ public class TeacherDao {
 			if (resultSet.next()) {
 				totalRow=resultSet.getInt("COUNT(teacher_no)");
 			}
+			lastPage = (totalRow-1) / rowPerPage;
+			// if 조건문을 사용해 총 데이터갯수(COUNT(teacher_no))-1 을 rowPerPage로 나눈수가 0이 아닐때 마지막 페이지를 1씩 증가 시킵니다.
+			if((totalRow-1) % rowPerPage != 0) {
+				lastPage++;
+			}
 			
 		}catch(ClassNotFoundException e) {
 			e.printStackTrace();
@@ -53,7 +59,7 @@ public class TeacherDao {
 		} finally {
 			
 		}
-		return totalRow;
+		return lastPage;
 	} 
 	
 	// 설명 : 드라이버 로딩 , DB연결 , select 쿼리문 작성 실행해서  teacher 테이블에 교사 데이터를 조회하고 조회된 데이터를 ArrayList 클래스타입으로 객체들의 배열의 주소값들이 담긴 ArrayList객체의 주소값을 리턴하는 메서드 선언 
