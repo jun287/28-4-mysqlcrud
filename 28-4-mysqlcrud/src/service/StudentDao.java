@@ -137,11 +137,11 @@ public class StudentDao {
 	4. Student Class 프로퍼티
 		- 접근지정자는 모두 private임. int studentNO,String studentName,int studentAge
 	*/		
-	public int countStudent() {
+	public int countStudent(int pagePerRow) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		int result = 0;
+		int lastPage = 0;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
@@ -151,8 +151,12 @@ public class StudentDao {
 			preparedStatement = connection.prepareStatement("select count(student_no) as count from student");
 			resultSet = preparedStatement.executeQuery();
 			resultSet.next();
-			result = resultSet.getInt("count");
-			System.out.println(result+"<--DB내 student 테이블 총 행의 갯수");
+			int totalRow = resultSet.getInt("count");
+			System.out.println(totalRow+"<--DB내 student 테이블 총 행의 갯수");
+			lastPage = totalRow/pagePerRow;
+				if(totalRow%pagePerRow!=0){
+					lastPage++;
+				}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -184,7 +188,7 @@ public class StudentDao {
 			}
 			
 		}
-		return result;
+		return lastPage;
 		
 	}
 }

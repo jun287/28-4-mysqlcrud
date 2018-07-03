@@ -9,6 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>학생 리스트</title>
 <link rel= "stylesheet" type= "text/css" href="../css/studentList.css">
+<script type="text/javascript" src="../script/studentList.js">
+</script>
 </head>
 <body>
 <%
@@ -23,25 +25,22 @@
 	if(request.getParameter("pagePerRow") != null){
 		pagePerRow = Integer.parseInt(request.getParameter("pagePerRow"));
 	}
-	int totalRow = studentDao.countStudent();
+	int lastPage = studentDao.countStudent(pagePerRow);
 	
-	int lastPage = totalRow/pagePerRow;
-		if(totalRow%pagePerRow!=0){
-			lastPage++;
-		}
 	ArrayList<Student> studentList = studentDao.selectStudentByPage(currentPage, pagePerRow); 
 %>
-	<form action="./studentList.jsp" method="post" id="selectPagePerRow">
-		<select name="pagePerRow">
+	<form action="./studentList.jsp" method="post" id="selectForm">
+		<select id="pagePerRow" name="pagePerRow">
 			<option value="3">3개씩 보기</option>
 			<option value="5">5개씩 보기</option>
 			<option value="7">7개씩 보기</option>
 			<option value="10">10개씩 보기</option>
-		</select>	
+		</select>
+		<button type="button" id="pagePerRowButton">보기설정</button>	
 	</form>
 	<table>
 		<tr>
-			<th>학생번호</th><th>학생이름</th><th>학생나이</th>
+			<th>학생번호</th><th>학생이름</th><th>학생나이</th><th>삭제</th><th>수정</th>
 		</tr>
 <%
 	for(int i=0; i<studentList.size(); i++){
@@ -49,11 +48,21 @@
 %>
 		<tr>
 			<td><%=student.getStudentNO() %></td><td><%=student.getStudentName() %></td><td><%=student.getStudentAge() %></td>
+			<!-- 네임에 주소 링크걸어 studentList.jsp -->
+			<!-- deleteStudentAction.jsp -->
+			<!-- updateStudentForm.jsp -> Action -->
 		</tr>
 <% 		
 	}
 %>				
 	</table>
+	<form>
+		<div>
+			이름 :
+			<input type="text" name="searchWord">
+			<button type="button" id="nameSearch"></button>
+		</div>	
+	</form>
 	<div>
 <%
 	if(currentPage !=0 && currentPage != 1){

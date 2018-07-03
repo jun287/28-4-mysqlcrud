@@ -27,7 +27,8 @@
 					<tr>
 					<tr>
 						<td>2. 이원상</td>
-						<td><a href="<%= request.getContextPath() %>/insertStudentForm.jsp">학생 등록</a></td>
+						<td><a href="<%= request.getContextPath() %>Student/insertStudentForm.jsp">학생 등록</a></td>
+						<td><a href="<%= request.getContextPath() %>Student/studentList.jsp">학생 목록</a></td>
 					<tr>
 					<tr>
 						<td>3. 공세준</td>
