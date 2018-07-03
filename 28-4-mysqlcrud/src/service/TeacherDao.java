@@ -337,7 +337,7 @@ public class TeacherDao {
 	}
 		
 	// 설명 : 드라이버 로딩 , DB연결 , insert 쿼리문 작성 실행해서  teacherAddr 테이블에 주소 데이터 입력하는 메서드 선언 
-	// 매개변수 : teacherNo int 기본타입, String 참조타입으로 교사넘버와 주소를 담은 변수
+	// 매개변수 : TeacherAddr 클래스타입으로 teacherAddr 객체의 주소값을 받습니다.
 	// 리턴값 : void로 없습니다.
 	public void insertTeacherAddr(TeacherAddr teacherAddr) {
 		
