@@ -1,5 +1,5 @@
 package service;
-//2018.06.25 28기 개발자 전재현.
+//2018.06.25 28기 전재현.
 
 public class Member {
 	private int memberNo;
