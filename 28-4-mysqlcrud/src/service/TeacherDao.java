@@ -1,6 +1,6 @@
-package service;
+// 2018. 07. 03 28기 공세준
 
-// 2018. 07. 03 28기 공세준 
+package service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,6 +15,56 @@ import java.util.ArrayList;
  */
 
 public class TeacherDao {
+	
+	// 설명 : 드라이버 로딩 , DB연결 , select 쿼리문 작성 실행해서 teacherAddr 테이블에 데이터를 TeacherAddr 객체로 받아서 객체의 주소값을 리턴하는 메서드 선언
+	// 매개변수 : int teacherNo 매개변수로 번호를 받습니다.
+	// 리턴값 : TeacherAddr 클래스타입으로 객체의 주소값을 리턴합니다.
+	public TeacherAddr selectTeacherAddr(int teacherNo) {
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		TeacherAddr teacherAddr = new TeacherAddr();
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
+			String dbUser = "java";
+			String dbPass = "java0000";
+			
+			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			
+			statement = connection.prepareStatement("SELECT * FROM teacheraddr WHERE teacher_no=?");
+			statement.setInt(1, teacherNo);
+			
+			resultSet = statement.executeQuery();
+			
+			if(resultSet.next()) {
+				teacherAddr.setTeacherNo(resultSet.getInt("teacher_no"));
+				teacherAddr.setTeacherAddrContent(resultSet.getString("teacher_addr_content"));
+			}
+			
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally{
+			if(statement != null)try{
+				statement.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+			if(connection != null)try{
+				connection.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+		}
+		return teacherAddr;
+		
+	}
 	
 	// 설명 : 드라이버 로딩 , DB연결 , update 쿼리문 작성 실행해서 teacherAddr 테이블에 주소값을 수정하는 메서드 선언
 	// 매개변수 : TeacherAddr 클래스타입으로 teacherAddr 매개변수를 선언하고 주소와 번호가 담긴 객체의 주소값을 받습니다.
@@ -36,7 +86,7 @@ public class TeacherDao {
 			
 			statement = connection.prepareStatement("UPDATE teacherAddr SET teacher_addr_content=? WHERE teacher_no=?");
 			statement.setString(1, teacherAddr.getTeacherAddrContent());
-			statement.setInt(2, teacherAddr.getTeahcerNo());
+			statement.setInt(2, teacherAddr.getTeacherNo());
 			
 			statement.executeUpdate();
 
@@ -45,8 +95,17 @@ public class TeacherDao {
 			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
-		}finally {
-			
+		}finally{
+			if(statement != null)try{
+				statement.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+			if(connection != null)try{
+				connection.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
 		}
 	}
 	
@@ -57,7 +116,6 @@ public class TeacherDao {
 			
 		Connection connection = null;
 		PreparedStatement statement = null;
-		ResultSet resultSet = null;
 		
 		try {
 			
@@ -75,14 +133,22 @@ public class TeacherDao {
 			statement.setInt(3, teacher.getTeacherNo());
 			
 			statement.executeUpdate();
-
 			
 		}catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
-		} finally {
-			
+		}finally{
+			if(statement != null)try{
+				statement.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+			if(connection != null)try{
+				connection.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
 		}
 	}
 	
@@ -120,8 +186,17 @@ public class TeacherDao {
 			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
-		} finally {
-			
+		}finally{
+			if(statement != null)try{
+				statement.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+			if(connection != null)try{
+				connection.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
 		}
 		
 		return teacherAddr;
@@ -164,8 +239,17 @@ public class TeacherDao {
 			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
-		} finally {
-			
+		}finally{
+			if(statement != null)try{
+				statement.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+			if(connection != null)try{
+				connection.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
 		}
 		
 		return teacher;
@@ -197,11 +281,20 @@ public class TeacherDao {
 			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
-		} finally {
-			
+		}finally{
+			if(statement != null)try{
+				statement.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+			if(connection != null)try{
+				connection.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
 		}
-
 	}
+	
 	// 설명 : 드라이버 로딩 , DB연결 , delete 쿼리문 작성 실행해서 teacherAddr 테이블에 데이터 삭제하는 메서드 선언
 	// 매개변수 : int 기본타입으로 teacherNo 매개변수를 선언하고 등록된 번호를 받습니다.
 	// 리턴값 : void로 업습니다.
@@ -228,8 +321,17 @@ public class TeacherDao {
 			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
-		} finally {
-			
+		}finally{
+			if(statement != null)try{
+				statement.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+			if(connection != null)try{
+				connection.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
 		}
 
 	}
@@ -237,7 +339,7 @@ public class TeacherDao {
 	// 설명 : 드라이버 로딩 , DB연결 , insert 쿼리문 작성 실행해서  teacherAddr 테이블에 주소 데이터 입력하는 메서드 선언 
 	// 매개변수 : teacherNo int 기본타입, String 참조타입으로 교사넘버와 주소를 담은 변수
 	// 리턴값 : void로 없습니다.
-	public void insertTeacherAddr(int teacherNo , String teacherAddrContent) {
+	public void insertTeacherAddr(TeacherAddr teacherAddr) {
 		
 		Connection connection = null; 
 		PreparedStatement statement = null;
@@ -253,10 +355,12 @@ public class TeacherDao {
 			connection = DriverManager.getConnection(URL, dbUser, dbPass);
 			
 			System.out.println("DB연결");
+			System.out.println(teacherAddr.getTeacherNo());
+			System.out.println(teacherAddr.getTeacherAddrContent());
 
 			statement = connection.prepareStatement("INSERT INTO teacheraddr(teacher_no, teacher_addr_content) VALUES (?,?)");
-			statement.setInt(1, teacherNo);
-			statement.setString(2, teacherAddrContent);
+			statement.setInt(1, teacherAddr.getTeacherNo());
+			statement.setString(2, teacherAddr.getTeacherAddrContent());
 			
 			statement.executeUpdate();
 		
@@ -283,14 +387,12 @@ public class TeacherDao {
 				ex.printStackTrace();
 			}
 		}
-		
 	}
-	
 	
 	//설명 : 마지막 페이지를 구하기 위해 메서드를 선언합니다.
 	//매개변수 : int 기본타입으로 rowPerPage 매개변수를 가지고 페이지당 갯수를 받습니다.
 	//리턴값 : 리턴값은 totalRow로 teacher 테이블에 teacher_no의 갯수를 리턴합니다.
-	public int lastPage(int rowPerPage) {
+	public int lastPageTeacher(int rowPerPage) {
 		
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -327,8 +429,17 @@ public class TeacherDao {
 			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
-		} finally {
-			
+		}finally{
+			if(statement != null)try{
+				statement.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+			if(connection != null)try{
+				connection.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
 		}
 		return lastPage;
 	} 
@@ -377,7 +488,16 @@ public class TeacherDao {
 		}catch(SQLException e) {
 			e.printStackTrace();	
 		}finally {
-			
+			if(statement != null)try{
+				statement.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+			if(connection != null)try{
+				connection.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
 		}
 	
 		return teacherlist; // ArrayList 클래스 객체의 주소값을 리턴합니다.
@@ -437,6 +557,5 @@ public class TeacherDao {
 				ex.printStackTrace();
 			}
 		}
-		
 	}
 }

@@ -1,4 +1,4 @@
-<!-- 2018. 07. 02 28기 공세준 -->
+<!-- 2018. 07. 03 28기 공세준 -->
 
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
     
@@ -7,6 +7,7 @@
 <%@ page import = "java.util.ArrayList" %>
 
 <!DOCTYPE html>
+
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -62,7 +63,7 @@
 			</form>
 		<%
 			// 마지막 페이지를 구하기 위해 int 기본타입으로 lastPage 변수를 선언하고 teacherDao 클래스객체의 lastPage() 메서드를 호출하고 리턴값을 대입합니다.
-			int lastPage = teacherDao.lastPage(rowPerPage);
+			int lastPage = teacherDao.lastPageTeacher(rowPerPage);
 
 			
 			if(currentPage>1){

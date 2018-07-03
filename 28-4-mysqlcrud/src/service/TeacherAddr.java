@@ -5,7 +5,7 @@ package service;
 public class TeacherAddr {
 	
 	private int teacherAddrNo;
-	private int teahcerNo;
+	private int teacherNo;
 	private String teacherAddrContent;
 	
 	public int getTeacherAddrNo() {
@@ -14,11 +14,11 @@ public class TeacherAddr {
 	public void setTeacherAddrNo(int teacherAddrNo) {
 		this.teacherAddrNo = teacherAddrNo;
 	}
-	public int getTeahcerNo() {
-		return teahcerNo;
+	public int getTeacherNo() {
+		return teacherNo;
 	}
-	public void setTeahcerNo(int teahcerNo) {
-		this.teahcerNo = teahcerNo;
+	public void setTeacherNo(int teacherNo) {
+		this.teacherNo = teacherNo;
 	}
 	public String getTeacherAddrContent() {
 		return teacherAddrContent;

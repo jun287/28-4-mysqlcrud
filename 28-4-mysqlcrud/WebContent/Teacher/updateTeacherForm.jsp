@@ -1,12 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<!-- 2018. 07. 03 28기 공세준 -->
 
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <%@ page import = "service.TeacherDao" %>
 <%@ page import = "service.Teacher" %>
 <%@ page import = "service.TeacherAddr" %>
 
-<!-- 2018. 07. 03 28기 공세준 -->
 <!DOCTYPE html>
+
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -70,7 +71,7 @@
 			TeacherAddr teacherAddr = teacherDao.updateSelectTeacherAddr(teacherNo);
 		
 		%>
-		<h3>정보 수정</h3>
+			<h3>정보 수정</h3>
 			<form action="<%= request.getContextPath()%>/Teacher/updateTeacherAction.jsp" method="post">
 				<ul id="mem_form">
 					<li>

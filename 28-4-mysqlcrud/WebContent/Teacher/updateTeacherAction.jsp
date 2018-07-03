@@ -1,3 +1,5 @@
+<!-- 2018. 07. 03 28기 공세준 -->
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <%@ page import = "service.Teacher" %>
@@ -21,7 +23,7 @@
 			
 			TeacherAddr teacherAddr = new TeacherAddr();
 			
-			teacherAddr.setTeahcerNo(teacherNo);
+			teacherAddr.setTeacherNo(teacherNo);
 			teacherAddr.setTeacherAddrContent(teacherAddrContent);
 			
 			Teacher teacher = new Teacher();
