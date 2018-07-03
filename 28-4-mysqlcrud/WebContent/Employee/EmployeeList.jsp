@@ -1,3 +1,4 @@
+<!-- 28기 정민수 2018. 7.3(화)insertEmployee.jsp -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="service.EmployeeDao" %>
 <%@ page import="service.Employee" %>
@@ -16,6 +17,9 @@
 				<th>번호</th>
 				<th>이름</th>
 				<th>나이</th>
+				<th>주소</th>
+				<th>삭제</th>
+				<th>수정</th>
 			</tr>
 			<%
 				//화면에 몇개씩 출력할건지 변수에 갯수를 저장함
@@ -42,14 +46,26 @@
 			%>
 					<tr>
 						<td><%=employee.getEmployeeNo() %></td>
-						<td><%=employee.getEmployeeName() %></td>
+						<td><a href="./EmployeeAddrList.jsp"><%=employee.getEmployeeName() %></a></td>
 						<td><%=employee.getEmployeeAge() %></td>
+						<!--주소입력을 눌렀을시  insertEmployeeAddrForm.jsp,삭제를 눌렀을시 deleteEmployee.jsp,수정을 눌렀을시 updateEmployeeForm.jsp에 각각 no변수에 employee.getEmployeeNo()값을 담아 넘긴다-->
+						<td><a href="./insertEmployeeAddrForm.jsp?no=<%=employee.getEmployeeNo() %>">주소입력</a></td>
+						<td><a href="./deleteEmployee.jsp?no=<%=employee.getEmployeeNo() %>">삭제</a></td>
+						<td><a href="./updateEmployeeForm.jsp?no=<%=employee.getEmployeeNo() %>">수정</a></td>						
 					</tr>
 			<%
 				}
 				
 			%>
 		</table>
+		
+		<form>
+			<div>
+				이름 :
+				<input type="text" name="searchWord">
+				<button type="button">검색</button>
+			</div>
+		</form>
 		<%
 			//employeedao주소를 찾아가서 paging메서드에 StartRow값을 대입후 호출한다
 			int total=employeedao.paging(StartRow);

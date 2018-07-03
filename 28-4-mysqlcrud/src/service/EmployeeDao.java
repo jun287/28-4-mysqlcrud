@@ -79,6 +79,7 @@ public class EmployeeDao {
 	}
 	
 	//페이징 작업
+	
 	public int paging(int StartRow) {
 		
 		Connection connection=null;
@@ -135,6 +136,8 @@ public class EmployeeDao {
 	
 	//회원 정보를 db에다가 저장하기위한 메서드
 	public void insertEmployee(Employee employee) {
+
+		
 		
 		//class data type으로 변수을 선언하고 null로 초기화 하여라
 		Connection conn=null;
@@ -173,7 +176,6 @@ public class EmployeeDao {
 		
 		 //sql에 예외가 발생하여 catch에 있는 문장들을 실행한다.
 		}catch(SQLException ex) {
-			System.out.println("sql 오류가 아닌다.");
 			System.out.println(ex.getMessage());
 			ex.printStackTrace();
 		
@@ -186,5 +188,211 @@ public class EmployeeDao {
 			try {conn.close();	} catch (SQLException e) {e.printStackTrace();}
 			
 		}
+	}
+	
+	//회웝정보 삭제
+	//회원번호를 알아야 삭제를 할 수 있기 때문에 회원번호를 매개변수에 대입한다
+	public void deleteEmployee(String no) {
+		Connection connection=null;
+		PreparedStatement statement=null;
+		PreparedStatement statement1=null;
+		
+		//ip주소,포트번호,db명,사용자id,패스워드를 각각 String data type으로 선언된 변수에 담아라
+		String dbname="jdbc:mysql://localhost:3306/284db?"+"useUnicode=true&characterEncoding=euckr";
+		String userid="java";
+		String userpw="java0000";
+	
+		//Driver로딩
+		String dbDriver="com.mysql.jdbc.Driver";
+		
+		//employee table에서 employee_no가?인 행을 삭제하여라
+		String sql="delete from employee where employee_no=?";
+		
+		//employee table에서 employee_addr가?인 행을 삭제하여라
+		String sql1="delete from employee_addr where employee_no=?";
+		
+		try {
+			Class.forName(dbDriver);
+			
+			connection=DriverManager.getConnection(dbname, userid, userpw);
+			
+			statement1=connection.prepareStatement(sql1);
+			statement1.setString(1, no);
+			
+			statement1.executeUpdate();
+			
+			statement=connection.prepareStatement(sql);
+			statement.setString(1, no);
+		
+			statement.executeUpdate();
+			
+		}catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+			ex.printStackTrace();
+		
+		 //예외가 발생해도 반드시 실행한다
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}finally {
+			try {statement.close();} catch (SQLException e) {e.printStackTrace();}
+			try {connection.close();} catch (SQLException e) {e.printStackTrace();}
+		}
+	
+	}
+	
+	//회원정보에서 주소 추가
+	//dto의 변수에 담겨있는 값을 사용하기위해서 매개변수에 dto의 주소를 담는다
+	public void insertEmployeeAddr(EmployeeAddr employeeAddr) {
+		
+		Connection connection=null;
+		PreparedStatement statement=null;
+		
+		//ip주소,포트번호,db명,사용자id,패스워드를 각각 String data type으로 선언된 변수에 담아라
+		String dbname="jdbc:mysql://localhost:3306/284db?"+"useUnicode=true&characterEncoding=euckr";
+		String userid="java";
+		String userpw="java0000";
+	
+		//Driver로딩
+		String dbDriver="com.mysql.jdbc.Driver";
+		
+		//employee_addr table의 칼럼명이 employee_no,employee_addr_content인 곳에 ?를 대입하여라
+		String sql="insert into employee_addr(employee_no,employee_addr_content) values(?,?);";
+	
+		try {
+			Class.forName(dbDriver);
+			
+			connection=DriverManager.getConnection(dbname, userid, userpw);
+			
+			statement=connection.prepareStatement(sql);
+			statement.setString(1, employeeAddr.getEmployee_no());
+			statement.setString(2, employeeAddr.getEmployee_addr_content());
+			
+			statement.executeUpdate();
+			
+		}catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+			ex.printStackTrace();
+		
+		 //예외가 발생해도 반드시 실행한다
+		}catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {statement.close();} catch (SQLException e) {e.printStackTrace();}
+			try {connection.close();} catch (SQLException e) {e.printStackTrace();}
+		}
+	}
+	
+	//회원정보 검색
+	//회원번호를 알아야 회원 정보를 검색하기 때문에 매개변수에 회원 번호르 대입한다.
+	public Employee updateSelectEmployee(int no) {
+		System.out.println("updateEmployee");
+		Connection connection=null;
+		PreparedStatement statement=null;
+		ResultSet resultSet=null;
+		Employee employee=new Employee();
+		//ip주소,포트번호,db명,사용자id,패스워드를 각각 String data type으로 선언된 변수에 담아라
+		String dbname="jdbc:mysql://localhost:3306/284db?"+"useUnicode=true&characterEncoding=euckr";
+		String userid="java";
+		String userpw="java0000";
+	
+		//Driver로딩
+		String dbDriver="com.mysql.jdbc.Driver";
+		
+		//employee table의 employee_name,employee_age컬럼을 employee_no가?인것에 대해 조회하여라
+		String sql="select employee_name,employee_age from employee where employee_no=?";
+	
+		try {
+			Class.forName(dbDriver);
+			
+			connection=DriverManager.getConnection(dbname, userid, userpw);
+			
+		
+			
+			statement=connection.prepareStatement(sql);
+			statement.setInt(1, no);
+			
+			resultSet=statement.executeQuery();
+			
+			while(resultSet.next()) {
+				employee.setEmployeeName(resultSet.getString("employee_name"));
+				employee.setEmployeeAge(resultSet.getInt("employee_age"));
+			}
+			
+		}catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+			ex.printStackTrace();
+		
+		 //예외가 발생해도 반드시 실행한다
+		}catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {statement.close();} catch (SQLException e) {e.printStackTrace();}
+			try {connection.close();} catch (SQLException e) {e.printStackTrace();}
+		}
+		
+		return employee;
+	}
+	
+	//회원정보 수정
+	//dto의 변수에 담겨잇는 값들을 가져와서 수정을 해야기 때문에 dto 주소를 매개변수에 대입한다.
+	public Employee updateEmployee(Employee employee) {
+
+		
+		//class data type으로 변수을 선언하고 null로 초기화 하여라
+		Connection connection=null;
+		PreparedStatement statement=null;
+		
+	
+		
+		//try이에있는 문장들에서 예외가 발생하면 catch로 넘어간다
+		try{
+			//ip주소,포트번호,db명,사용자id,패스워드를 각각 String data type으로 선언된 변수에 담아라
+			String dbname="jdbc:mysql://localhost:3306/284db?"+"useUnicode=true&characterEncoding=euckr";
+			String userid="java";
+			String userpw="java0000";
+		
+			//Driver로딩
+			String dbDriver="com.mysql.jdbc.Driver";
+			String sql="update employee set employee_name=?,employee_age=?  where employee_no=? ";
+			Class.forName(dbDriver);
+			//db연결
+			//Connection 객체를 생성,객체주소를 conn 변수에 할당한다.
+			connection=DriverManager.getConnection(dbname,userid,userpw);
+			
+			//쿼리 실행준비
+			//conn주소를 찾아가서 prepareStatement메서드에  매개변수에 쿼리문을 대입후 PreparedStatement객체생성후 주소를 pstmt에 대입한다. 
+			//employee table에 employee_no가?인행ㅔ employee_name,employee_age에 각각 값는 수정한다
+			statement=connection.prepareStatement(sql);
+			
+			//물음표에 변수에 담겨있는 값들을 대입한다
+			statement.setString(1, employee.getEmployeeName());
+			statement.setInt(2, employee.getEmployeeAge());
+			statement.setInt(3, employee.getEmployeeNo());
+			
+			System.out.println(statement+"<--pstmt");
+			
+			//쿼리 실행
+			statement.executeUpdate();
+			
+			System.out.println(statement+"<--pstmt");
+		
+		 //sql에 예외가 발생하여 catch에 있는 문장들을 실행한다.
+		}catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+			ex.printStackTrace();
+		
+		 //예외가 발생해도 반드시 실행한다
+		}catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}finally{
+			//객체 종료
+			try {statement.close();	} catch (SQLException e) {e.printStackTrace();}
+			try {connection.close();	} catch (SQLException e) {e.printStackTrace();}
+			
+		}
+		
+		return employee;
 	}
 }
