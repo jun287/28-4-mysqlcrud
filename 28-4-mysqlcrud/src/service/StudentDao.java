@@ -2,6 +2,7 @@
 package service;
 import java.sql.*;			// java.sql패키지내 클래스 임포트(Connection,PreparedStatement,SQLException,DriverManager)
 import java.util.ArrayList;
+import service.Student;
 public class StudentDao {
 	/*
 	메소드 설명	
@@ -90,7 +91,7 @@ public class StudentDao {
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				student = new Student();
-				student.setStudentNO(resultSet.getInt("student_no"));
+				student.setStudentNo(resultSet.getInt("student_no"));
 				student.setStudentName(resultSet.getString("student_name"));
 				student.setStudentAge(resultSet.getInt("student_age"));
 				studentList.add(student);
@@ -191,4 +192,151 @@ public class StudentDao {
 		return lastPage;
 		
 	}
+	
+	/*
+	메소드 설명	
+	1. 용도 : 학생의 1명을 삭제하는 메소드임(Database내 Student테이블의 1개행을 삭제하는 메소드).
+	2. 매개변수 : int studentNo(list에서 get방식으로 넘겨받은 값을 int data로 변환 받은 후 대입)
+	3. 리턴값 : void
+	4. Student Class 프로퍼티
+		- 접근지정자는 모두 private임. int studentNO,String studentName,int studentAge
+	*/		
+	public void deleteStudent(int studentNo) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
+			String dbUser = "java";
+			String dbPass = "java0000";
+			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			preparedStatement = connection.prepareStatement("delete from student where student_no=?");
+			preparedStatement.setInt(1, studentNo);
+			preparedStatement.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	/*
+	메소드 설명	
+	1. 용도 : 학생의 1명을 수정하는 메소드임(Database내 Student테이블의 1개행을 수정하는 메소드).
+	2. 매개변수 : Student student(updateForm에서 수정된 parameter값을 Student클래스를 통해 생성된 student객체에 셋팅)
+	3. 리턴값 : void
+	4. Student Class 프로퍼티
+		- 접근지정자는 모두 private임. int studentNO,String studentName,int studentAge
+	*/	
+	public void updateStudent(Student student) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
+			String dbUser = "java";
+			String dbPass = "java0000";
+			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			preparedStatement = connection.prepareStatement("UPDATE student SET student_name=?, student_age=? WHERE student_no=?");
+			preparedStatement.setString(1, student.getStudentName());
+			preparedStatement.setInt(2, student.getStudentAge());
+			preparedStatement.setInt(3, student.getStudentNo());
+			preparedStatement.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+	
+	/*
+	메소드 설명	
+	1. 용도 : 학생의 1명을 조회하는 메소드임(Database내 Student테이블의 1개행을 조회하는 메소드).
+	2. 매개변수 : Student student(Student클래스를 통해 생성된 student객체의 참조값)
+	3. 리턴값 : Student student(Student클래스를 통해 생성된 student객체의 참조값)
+	4. Student Class 프로퍼티
+		- 접근지정자는 모두 private임. int studentNO,String studentName,int studentAge
+	*/	
+	public Student selectStudentDetail(Student student) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
+			String dbUser = "java";
+			String dbPass = "java0000";
+			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			preparedStatement = connection.prepareStatement("select student_no,student_name,student_age from student where student_no=?");
+			preparedStatement.setInt(1, student.getStudentNo());
+			System.out.println(preparedStatement+"<--preparedStatement");
+			resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			student.setStudentNo(resultSet.getInt("student_no"));
+			student.setStudentName(resultSet.getString("student_name"));
+			student.setStudentAge(resultSet.getInt("student_age"));
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return student;
+		
+	}
+
 }

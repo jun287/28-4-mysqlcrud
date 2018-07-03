@@ -7,13 +7,5 @@
 <%
 	StudentDao sDao = new StudentDao();
 	sDao.insertStudent(stu);
+	response.sendRedirect(request.getContextPath()+"/Student/studentList.jsp");
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>학생 등록처리</title>
-</head>
-<body>
-</body>
-</html>

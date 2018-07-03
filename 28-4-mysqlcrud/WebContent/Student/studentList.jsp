@@ -8,8 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>학생 리스트</title>
-<link rel= "stylesheet" type= "text/css" href="../css/studentList.css">
-<script type="text/javascript" src="../script/studentList.js">
+<link rel= "stylesheet" type= "text/css" href="<%=request.getContextPath() %>/css/studentList.css">
+<script type="text/javascript" src="<%=request.getContextPath() %>/script/studentList.js">
 </script>
 </head>
 <body>
@@ -29,7 +29,7 @@
 	
 	ArrayList<Student> studentList = studentDao.selectStudentByPage(currentPage, pagePerRow); 
 %>
-	<form action="./studentList.jsp" method="post" id="selectForm">
+	<form action="<%=request.getContextPath() %>/Student/studentList.jsp" method="post" id="selectForm">
 		<select id="pagePerRow" name="pagePerRow">
 			<option value="3">3개씩 보기</option>
 			<option value="5">5개씩 보기</option>
@@ -40,17 +40,19 @@
 	</form>
 	<table>
 		<tr>
-			<th>학생번호</th><th>학생이름</th><th>학생나이</th><th>삭제</th><th>수정</th>
+			<th>학생번호</th><th>학생이름</th><th>학생나이</th><th>주소입력</th><th>삭제</th><th>수정</th>
 		</tr>
 <%
 	for(int i=0; i<studentList.size(); i++){
 		student = studentList.get(i);
 %>
 		<tr>
-			<td><%=student.getStudentNO() %></td><td><%=student.getStudentName() %></td><td><%=student.getStudentAge() %></td>
-			<!-- 네임에 주소 링크걸어 studentList.jsp -->
-			<!-- deleteStudentAction.jsp -->
-			<!-- updateStudentForm.jsp -> Action -->
+			<td><%=student.getStudentNo() %></td>
+			<td><a href="<%=request.getContextPath() %>/Student/studentAddrList.jsp?studentNo=<%=student.getStudentNo() %>"><%=student.getStudentName() %></a></td>
+			<td><%=student.getStudentAge() %></td>
+			<td><a href="<%=request.getContextPath() %>/Student/insertStudentAddrForm.jsp?studentNo=<%=student.getStudentNo() %>">주소입력</a></td>
+			<td><a href="<%=request.getContextPath() %>/Student/deleteStudentAction.jsp?studentNo=<%=student.getStudentNo() %>">삭제</a></td>
+			<td><a href="<%=request.getContextPath() %>/Student/updateStudentForm.jsp?studentNo=<%=student.getStudentNo() %>">수정</a></td>
 		</tr>
 <% 		
 	}
@@ -67,15 +69,15 @@
 <%
 	if(currentPage !=0 && currentPage != 1){
 %>
-		<a href="./studentList.jsp?currentPage=<%=currentPage-1 %>">이전</a>
+		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=currentPage-1 %>">이전</a>
 <%
 	}for(int p=1; p<=lastPage; p++){
 %>		
-		<a href="./studentList.jsp?currentPage=<%=p%>"><%=p%></a>
+		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=p%>"><%=p%></a>
 <%		
 	}if(currentPage < lastPage){
 %>	
-		<a href="./studentList.jsp?currentPage=<%=currentPage+1 %>">다음</a>
+		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=currentPage+1 %>">다음</a>
 <%
 	}
 %>		

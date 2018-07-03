@@ -2,16 +2,16 @@
 package service;
 
 public class Student {
-	private int studentNO;
+	private int studentNo;
 	private String studentName;
 	private int studentAge;
 	// 프로퍼티 private 접근제한(private, 동일클래스내에서만 접근가능)
-	public int getStudentNO() {
-		return studentNO;
+	public int getStudentNo() {
+		return studentNo;
 	}
-	public void setStudentNO(int studentNO) {
-		this.studentNO = studentNO;
-		System.out.println(studentNO+"<--setStudentNo service.Student.java");
+	public void setStudentNo(int studentNo) {
+		this.studentNo = studentNo;
+		System.out.println(studentNo+"<--setStudentNo service.Student.java");
 	}
 	public String getStudentName() {
 		return studentName;
@@ -29,7 +29,7 @@ public class Student {
 	}
 	@Override
 	public String toString() {
-		return "Student [studentNO=" + studentNO + ", studentName=" + studentName + ", studentAge=" + studentAge + "]";
+		return "Student [studentNo=" + studentNo + ", studentName=" + studentName + ", studentAge=" + studentAge + "]";
 	}
 	
 }
