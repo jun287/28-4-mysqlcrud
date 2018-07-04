@@ -9,17 +9,19 @@
 	</head>
 	<body>
 		<%
-			String getMember_name =	request.getParameter("member_name");
-			int getMember_age = Integer.parseInt(request.getParameter("member_age"));
-			int getMember_no = Integer.parseInt(request.getParameter("member_no"));
-			System.out.println(getMember_no +"<- Member_no");
-			System.out.println(getMember_name +"<- Member_name");
-			System.out.println(getMember_age +"<- Member_age");
+			request.setCharacterEncoding("euckr");
+			
+			int getMemberNo = Integer.parseInt(request.getParameter("memberNo"));
+			int getMemberAge = Integer.parseInt(request.getParameter("memberAge"));
+			String getMemberName =	request.getParameter("memberName");
+			System.out.println(getMemberNo +"<- MemberNO");
+			System.out.println(getMemberName +"<- MemberName");
+			System.out.println(getMemberAge +"<- MemberAge");
 			
 			MemberDao memberDao = new MemberDao();
-			memberDao.updateMemberDetail(getMember_no ,getMember_name ,getMember_age);
+			memberDao.updateMember(getMemberNo ,getMemberName ,getMemberAge);
 			
-			response.sendRedirect("../ListMember/memberList.jsp");
+			response.sendRedirect("../listMember/memberList.jsp");
 		%>
 	</body>
 </html>

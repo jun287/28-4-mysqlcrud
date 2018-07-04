@@ -23,7 +23,8 @@
 				<tbody>
 					<tr>
 						<td>1. 전재현</td>
-						<td><a href="<%= request.getContextPath() %>/insertMemberForm.jsp">멤버 등록</a></td>
+						<td><a href="<%= request.getContextPath() %>/Member/insertMember/insertMemberForm.jsp">멤버 등록</a></td>
+						<td><a href="<%= request.getContextPath() %>/Member/listMember/memberList.jsp">멤버 목록</a></td>
 					<tr>
 					<tr>
 						<td>2. 이원상</td>

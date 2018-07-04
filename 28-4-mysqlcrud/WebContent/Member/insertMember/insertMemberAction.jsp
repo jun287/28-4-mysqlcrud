@@ -28,7 +28,7 @@
 			//MemberDao()생성자 메소드를 통해 새로운 객체를 생성을 하고 생성된 주소값을 MemberDao클래스형식으로 선언되어 있는 MemberAction변수에 대입을 했습니다.
 			MemberAction.insertMember(member);
 			//MemberAction변수에 들어있는 주소값에 들어가 insertMember메소드를 통해 member변수를 실행을 했습니다.
-			response.sendRedirect(".../index.jsp");
+			response.sendRedirect("../../index.jsp");
 		%>
 	</body>
 </html>

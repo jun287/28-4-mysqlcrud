@@ -1,13 +1,14 @@
 ----------member table 생성문장
 
-CCREATE TABLE `member` (
+CREATE TABLE `member` (
 	`member_no` INT(10) NOT NULL AUTO_INCREMENT,
 	`member_name` VARCHAR(50) NOT NULL,
-	`member_age` INT(10) NOT NULL,PRIMARY KEY (`member_no`)
+	`member_age` INT(10) NOT NULL,
+	PRIMARY KEY (`member_no`)
 )
-COLLATE='euckr_korean_ci'
 ENGINE=InnoDB
-AUTO_INCREMENT=2;
+;
+
 
 -----------member_addr table 생성문장
 CREATE TABLE `member_addr` (

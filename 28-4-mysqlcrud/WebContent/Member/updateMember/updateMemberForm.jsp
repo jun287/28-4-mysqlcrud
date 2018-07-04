@@ -16,18 +16,19 @@
 			Member member = memberDao.updateMemberSelect(getMember_no);
 		%>
 		<h3>멤버 등록 </h3>
-		<form action="./insertMemberAction.jsp?Member_no=<%=member.getMemberNo()%>" method="post">
+		<form action="./updateMemberAction.jsp" method="post">
 			<ul class="member_list">
 				<li>
 					<ul class="cols">
+						<li><input type="hidden" name="memberNo" value="<%=member.getMemberNo()%>"></li>
 						<li class="col1">이름: </li>
-						<li class="col2"><input type="text" name="member_name"><%=member.getMemberName()%></li>
+						<li class="col2"><input type="text" name="memberName" value="<%=member.getMemberName()%>"></li>
 					</ul>
 				</li>
 				<li>
 					<ul class="cols">
 						<li class="col1">나이: </li>
-						<li class="col2"><input type="text" name="member_age"><%=member.getMemberAge()%></li>
+						<li class="col2"><input type="text" name="memberAge" value="<%=member.getMemberAge()%>"></li>
 						<li><input type="submit" value="수정"></li>
 					</ul>
 				</li>
