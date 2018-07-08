@@ -34,6 +34,7 @@
 				<th>번호 </th>
 				<th>이름 </th>
 				<th>나이 </th>
+				<th>주소입력</th>
 				<th>삭제하기</th>
 				<th>수정하기</th>
 			</tr> 
@@ -45,8 +46,9 @@
 		%>
 				<tr>
 					<td><%=member.getMemberNo()%></td>
-					<td><a href="./memberAddrList.jsp"><%=member.getMemberName()%></a></td>
+					<td><a href="./memberAddrList.jsp?memberNo=<%=member.getMemberNo()%>"><%=member.getMemberName()%></a></td>
 					<td><%=member.getMemberAge()%></td>
+					<td><a href="../insertMemberAddr/insertMemberAddrFrom.jsp?memberNo=<%=member.getMemberNo()%>">주소입력</a></td>
 					<td><a href="../deleteMember/deleteMember.jsp?memberNo=<%=member.getMemberNo()%>">삭제</a></td>
 					<td><a href="../updateMember/updateMemberForm.jsp?memberNo=<%=member.getMemberNo()%>">수정</a></td>
 				</tr>
@@ -60,6 +62,7 @@
 			<!-- 이름 :  -->
 			<input type="text" name="searchWord">
 			<button type="submit">검색</button>
+			<a href="../../index.jsp">홈페이지로</a>
 		</form>
 		<%
 			int lastPage = memberDao.CountMemberList(pagePerRow);
