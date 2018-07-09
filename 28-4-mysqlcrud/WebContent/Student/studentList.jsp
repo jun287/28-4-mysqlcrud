@@ -14,6 +14,7 @@
 </head>
 <body>
 <%
+	request.setCharacterEncoding("euc-kr");
 	StudentDao studentDao = new StudentDao();
 	Student student = new Student();
 	
@@ -27,7 +28,12 @@
 	}
 	int lastPage = studentDao.countStudent(pagePerRow);
 	
-	ArrayList<Student> studentList = studentDao.selectStudentByPage(currentPage, pagePerRow); 
+	String searchWord = "";
+	if(request.getParameter("searchWord")!=null){
+		searchWord = request.getParameter("searchWord");
+	}
+	System.out.println(searchWord+"<--searchWord");
+	ArrayList<Student> studentList = studentDao.selectStudentByPage(currentPage, pagePerRow, searchWord); 
 %>
 	<form action="<%=request.getContextPath() %>/Student/studentList.jsp" method="post" id="selectForm">
 		<select id="pagePerRow" name="pagePerRow">
@@ -40,7 +46,8 @@
 	</form>
 	<table>
 		<tr>
-			<th>학생번호</th><th>학생이름</th><th>학생나이</th><th>주소입력</th><th>삭제</th><th>수정</th>
+			<th>학생번호</th><th>학생이름</th><th>학생나이</th><th>주소입력</th><th>삭제</th><th>수정</th><th>점수입력</th><th>점수보기</th>
+			<!-- 점수는 한번만 입력, join문 연습, 학생의 정보까지  -->
 		</tr>
 <%
 	for(int i=0; i<studentList.size(); i++){
@@ -53,16 +60,18 @@
 			<td><a href="<%=request.getContextPath() %>/Student/insertStudentAddrForm.jsp?studentNo=<%=student.getStudentNo() %>">주소입력</a></td>
 			<td><a href="<%=request.getContextPath() %>/Student/deleteStudentAction.jsp?studentNo=<%=student.getStudentNo() %>">삭제</a></td>
 			<td><a href="<%=request.getContextPath() %>/Student/updateStudentForm.jsp?studentNo=<%=student.getStudentNo() %>">수정</a></td>
+			<td><a href="<%=request.getContextPath() %>/Student/insertStudentScoreForm.jsp?studentNo=<%=student.getStudentNo() %>">점수입력</a></td>
+			<td><a href="<%=request.getContextPath() %>/Student/studentAndScoreList.jsp?studentNo=<%=student.getStudentNo() %>">점수보기</a></td>
 		</tr>
 <% 		
 	}
 %>				
 	</table>
-	<form>
+	<form action="<%=request.getContextPath()%>/Student/studentList.jsp" method="post">
 		<div>
 			이름 :
 			<input type="text" name="searchWord">
-			<button type="button" id="nameSearch"></button>
+			<input type="submit" id="nameSearch" value="검색">
 		</div>	
 	</form>
 	<div>

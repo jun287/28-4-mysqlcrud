@@ -71,7 +71,7 @@ public class StudentDao {
 	4. Student Class 프로퍼티
 		- 접근지정자는 모두 private임. int studentNO,String studentName,int studentAge
 	*/		
-	public ArrayList<Student> selectStudentByPage(int currentPage, int pagePerRow){
+	public ArrayList<Student> selectStudentByPage(int currentPage, int pagePerRow, String searchWord){
 		ArrayList<Student> studentList = new ArrayList<>();
 		Student student = new Student();
 		Connection connection = null;
@@ -84,10 +84,18 @@ public class StudentDao {
 			String dbPass = "java0000";
 			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			int startRow = (currentPage-1)*pagePerRow;
-			String sql = "select student_no,student_name,student_age from student order by student_no asc limit ?,?";
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, startRow);
-			preparedStatement.setInt(2, pagePerRow);	
+			if(searchWord.equals("")) {
+				String sql = "select student_no,student_name,student_age from student order by student_no asc limit ?,?";
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setInt(1, startRow);
+				preparedStatement.setInt(2, pagePerRow);	
+			}else {
+				String sql = "select student_no,student_name,student_age from student where student_name like ? order by student_no asc limit ?,?";
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setString(1, "%"+searchWord+"%");
+				preparedStatement.setInt(2, startRow);
+				preparedStatement.setInt(3, pagePerRow);
+			}	
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				student = new Student();
@@ -338,5 +346,4 @@ public class StudentDao {
 		return student;
 		
 	}
-
 }
