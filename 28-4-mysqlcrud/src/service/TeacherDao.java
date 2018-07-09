@@ -1,4 +1,4 @@
-// 2018. 07. 03 28기 공세준
+// 2018. 07. 09 28기 공세준
 
 package service;
 
@@ -27,14 +27,16 @@ public class TeacherDao {
 		ArrayList<Teacher> arrayListTeacher = new ArrayList<Teacher>();
 		String sql = null;
 		
+		
 		if(searchSelect.equals("teacher_name")){
 			sql = "SELECT * FROM teacher WHERE "+searchSelect+" like '%"+searchWord+"%'";
 			System.out.println(sql);
 		}else if(searchSelect.equals("teacher_age")){
 			sql = "SELECT * FROM teacher WHERE "+searchSelect+" like '"+searchWord+"'";
 			System.out.println(sql);
+		}else {
+			System.out.println("옵션을 선택하시고 키워드를 입력하세요");
 		}
-		
 		
 		try {
 			
@@ -512,13 +514,14 @@ public class TeacherDao {
 	// 설명 : 드라이버 로딩 , DB연결 , select 쿼리문 작성 실행해서  teacher 테이블에 교사 데이터를 조회하고 조회된 데이터를 ArrayList 클래스타입으로 객체들의 배열의 주소값들이 담긴 ArrayList객체의 주소값을 리턴하는 메서드 선언 
 	// 매개변수 : int 기본타입으로 currentPage,와 pagePerRow를 받아서 select 쿼리문에 limit를 써서 조회하게합니다.
 	// 리턴값 : ArrayList<Teacher> 타입으로 Teacher 객체들의 주소값이 ArrayList에 add(Teacher)메서드 호출해서 index(객체배열)에 추가 되고 주소값을 리턴합니다.
-	public ArrayList<Teacher> selectTeacherByPage(int currentPage, int pagePerRow){
+	public ArrayList<Teacher> selectTeacherByPage(int currentPage, int pagePerRow, String searchWord){
 		
 		ArrayList<Teacher> teacherlist = new ArrayList<Teacher>(); // 객체들의 주소값들을 받기위해 ArrayList 클래스를 import 하고 객체를 생성합니다.
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-
+		
+		int startRow = (currentPage-1)*pagePerRow; //currentPage, pagePerRow 매개변수를 받아서 시작하는 데이터열을 구하고 starRow 변수에 대입합니다.
 		String sql = "SELECT * FROM teacher ORDER BY teacher_no LIMIT ?,?";
 		
 		try {
@@ -530,10 +533,18 @@ public class TeacherDao {
 			
 			connection = DriverManager.getConnection(URL, dbUser, dbPass);
 			
-			int startRow = (currentPage-1)*pagePerRow; //currentPage, pagePerRow 매개변수를 받아서 시작하는 데이터열을 구하고 starRow 변수에 대입합니다.
-			statement = connection.prepareStatement(sql);
-			statement.setInt(1, startRow);
-			statement.setInt(2, pagePerRow);
+			if(searchWord.equals("")) {
+				sql = "SELECT * FROM teacher ORDER BY teacher_no LIMIT ?,?";
+				statement = connection.prepareStatement(sql);
+				statement.setInt(1, startRow);
+				statement.setInt(2, pagePerRow);
+			}else {
+				sql = "SELECT * FROM teacher WHERE teacher_name like ? ORDER BY teacher_no LIMIT ?,?";
+				statement = connection.prepareStatement(sql);
+				statement.setString(1, "%"+searchWord+"%");
+				statement.setInt(2, startRow);
+				statement.setInt(3, pagePerRow);
+			}
 			
 			resultSet = statement.executeQuery();
 			// 반복문을 사용해 데이터값들을 Teacher 클래스 객체를 생성후 객체내에 메서드(setTeacherNo)를 이용해 쿼리실행후 데이터들을 저장합니다.
