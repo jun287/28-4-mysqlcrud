@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<%
-			request.setCharacterEncoding("euckr");
+			request.setCharacterEncoding("EUC-KR");
 			
 			int getMemberNo = Integer.parseInt(request.getParameter("memberNo"));
 			int getMemberAge = Integer.parseInt(request.getParameter("memberAge"));

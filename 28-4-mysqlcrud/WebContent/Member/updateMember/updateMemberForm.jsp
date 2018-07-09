@@ -10,7 +10,7 @@
 	</head>
 	<body>
 		<%	
-			int getMember_no = Integer.parseInt(request.getParameter("member_no"));
+			int getMember_no = Integer.parseInt(request.getParameter("memberNo"));
 			System.out.println (getMember_no +"<- getMember_no");
 			MemberDao memberDao = new MemberDao();
 			Member member = memberDao.updateMemberSelect(getMember_no);
@@ -20,7 +20,6 @@
 			<ul class="member_list">
 				<li>
 					<ul class="cols">
-						<li><input type="hidden" name="memberNo" value="<%=member.getMemberNo()%>"></li>
 						<li class="col1">이름: </li>
 						<li class="col2"><input type="text" name="memberName" value="<%=member.getMemberName()%>"></li>
 					</ul>
@@ -29,6 +28,7 @@
 					<ul class="cols">
 						<li class="col1">나이: </li>
 						<li class="col2"><input type="text" name="memberAge" value="<%=member.getMemberAge()%>"></li>
+						<li><input type="hidden" name="memberNo" value="<%=member.getMemberNo()%>"></li>
 						<li><input type="submit" value="수정"></li>
 					</ul>
 				</li>

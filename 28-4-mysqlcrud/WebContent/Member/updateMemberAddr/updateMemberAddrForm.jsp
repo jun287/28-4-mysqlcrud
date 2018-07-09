@@ -24,7 +24,9 @@
 			<table>
 				<tr>
 					<td>번호 :</td>
-					<td><input type="text" name="sendContent" value="<%=memberAddr.getMemberAddrNo()%>"></td>
+					<td><input type="text" name="sendContent" value="<%=memberAddr.getMemberAddrNo()%>" readonly></td>
+				</tr>
+				<tr>
 					<td>주소 :</td>
 					<td><input type="text" name="sendContent" value="<%=memberAddr.getMemberAddrContent()%>"></td>
 					<td><a href="../listMember/memberAddrList.jsp">목록으로</a></td>	<!-- 되돌아가기 -->

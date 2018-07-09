@@ -8,6 +8,9 @@ import service.MemberAddr;
 //2018.06.26 28기 전재현.
 public class MemberAddrDao {
 	
+	//
+	
+	//member_addr클래스 조회 메서드입니다.
 	public MemberAddr selectMemberAddrList(int memberAddrNo) {
 		
 		Connection connection = null;
@@ -53,6 +56,7 @@ public class MemberAddrDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
+		//Query문을 실행하기 위해 class타입으로 변수를 선언을 시켜주고 값은 null값으로 셋팅을 해줬습니다
 		ArrayList<MemberAddr> totalMemberAddr = null;
 		MemberAddr memberAddr = null;
 		
@@ -66,13 +70,15 @@ public class MemberAddrDao {
 			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
 			//my-sql(DB)연결 입니다
 			
-			String SelectQuery = "SELECT member.member_no ,member_addr.memberAddr_no ,member_addr.memberAddr_content FROM member LEFT JOIN member_addr ON member.member_no = member_addr.member_no WHERE member_name=? ORDER BY memberAddr_no DESC";
-			//LEFT JOIN을 통해 member테이블 기준으로 member_name컬럼의 값이 있을시 member테이블의 member_no 값과 member_addr테이블의 member_no 값이 일치하는 행만 출력이 되고 member_addr테이블에 값이 없으면 null값으로 출력이 되도록 했습니다.  
+			String SelectQuery = "SELECT member.member_no ,member_addr.memberAddr_no ,member_addr.memberAddr_content FROM member JOIN member_addr ON member.member_no = member_addr.member_no WHERE member_name=? ORDER BY memberAddr_no DESC";
+			//LEFT JOIN을 통해 member테이블 기준으로 member_name컬럼의 값이 있을시 member테이블의 member_no 값과 member_addr테이블의 member_no 값이 일치하는 행만 출력이 되고 member_addr테이블에 값이 출력이 되도록 했습니다. 
 			preparedStatement = connection.prepareStatement(SelectQuery);
 			preparedStatement.setString(1, memberName);
 			//매게변수 memberNo값으로 selectQuery문 작성을 해줬습니다.
 			resultSet = preparedStatement.executeQuery();
 			totalMemberAddr = new ArrayList<MemberAddr>();
+			
+			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
 				memberAddr = new MemberAddr();
