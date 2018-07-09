@@ -3,7 +3,7 @@
 <%@ page import="service.EmployeeDao" %>
 <%@ page import="service.Employee" %>
 <%@ page import="java.util.ArrayList" %>
-
+<% request.setCharacterEncoding("euckr"); %>
 
 <!DOCTYPE html>
 <html>
@@ -12,6 +12,13 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
+		<form action="./EmployeeList.jsp" method="post">
+			<div>
+				이름 :
+				<input type="text" name="searchWord">
+				<button type="button">검색</button>
+			</div>
+		</form>
 		<table border="1">
 			<tr>
 				<th>번호</th>
@@ -20,8 +27,12 @@
 				<th>주소</th>
 				<th>삭제</th>
 				<th>수정</th>
+				<th>점수입력</th>
+				<th>점수보기</th>
 			</tr>
 			<%
+				String word=request.getParameter("searchWord");
+				System.out.println(word+"<--word");
 				//화면에 몇개씩 출력할건지 변수에 갯수를 저장함
 				int StartRow=5;
 			
@@ -37,7 +48,7 @@
 				
 				EmployeeDao employeedao=new EmployeeDao();
 				//employee의 주소를 찾아가서 메서드에 현재페이지 값과 몇개를 출력할 것인지를 매개변수에 대입하고 호출하여 주소값을 resultList에 대입한다
-				ArrayList<Employee> resultList=employeedao.selectEmployeeAll(currentPage,StartRow);
+				ArrayList<Employee> resultList=employeedao.selectEmployeeAll(currentPage,StartRow,word);
 				
 				//ArryaList에 저장되어있는 갯수만큼 출력하고 dto주소를 찾아가서 값들을 가져와 화면에 출력한다
 				for(int i=0;i<resultList.size();i++){
@@ -52,6 +63,8 @@
 						<td><a href="./insertEmployeeAddrForm.jsp?no=<%=employee.getEmployeeNo() %>">주소입력</a></td>
 						<td><a href="./deleteEmployee.jsp?no=<%=employee.getEmployeeNo() %>">삭제</a></td>
 						<td><a href="./updateEmployeeForm.jsp?no=<%=employee.getEmployeeNo() %>">수정</a></td>						
+						<td><a href="./insertEmployeeScoreForm.jsp?no=<%=employee.getEmployeeNo() %>">점수입력</a></td>						
+						<td><a href="./EmployeeAndScoreList.jsp?no=<%=employee.getEmployeeNo() %>">점수보기</a></td>						
 					</tr>
 			<%
 				}
@@ -59,13 +72,7 @@
 			%>
 		</table>
 		
-		<form>
-			<div>
-				이름 :
-				<input type="text" name="searchWord">
-				<button type="button">검색</button>
-			</div>
-		</form>
+	
 		<%
 			//employeedao주소를 찾아가서 paging메서드에 StartRow값을 대입후 호출한다
 			int total=employeedao.paging(StartRow);
