@@ -45,8 +45,27 @@ public class MemberAddrDao {
 			close.printStackTrace();
 		}catch(SQLException close) {
 			close.printStackTrace();
+		}finally {
+			if(resultSet != null)
+				try {
+					resultSet.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(preparedStatement != null)
+				try {
+					preparedStatement.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(connection != null) {
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			}
 		}
-		
 		return memberAddr;
 	}
 	
@@ -146,6 +165,26 @@ public class MemberAddrDao {
 			close.printStackTrace();
 		}catch(Exception close) {
 			close.printStackTrace();
+		}finally {
+			if(resultSet != null)
+				try {
+					resultSet.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(preparedStatement != null)
+				try {
+					preparedStatement.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(connection != null) {
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			}
 		}
 		
 		return memberName;
@@ -176,6 +215,20 @@ public class MemberAddrDao {
 			close.printStackTrace();
 		}catch(SQLException close) {
 			close.printStackTrace();
+		}finally {
+			if(preparedStatement != null)
+				try {
+					preparedStatement.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(connection != null) {
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			}
 		}
 	}
 	

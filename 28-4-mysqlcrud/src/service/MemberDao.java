@@ -229,8 +229,7 @@ public class MemberDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		searchWord = "";
-
+		System.out.println(searchWord +"<- searchWord");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			//my-sql(DB)로딩을 해줬습니다

@@ -40,8 +40,8 @@
 				<tr>
 					<td><%=memberAddr.getMemberAddrNo()%></td>
 					<td><%=memberAddr.getMemberAddrContent()%></td>
-					<td><a href="../updateMemberAddr/updateMemberAddrForm.jsp?memberAddrNo=<%=memberAddr.getMemberAddrNo()%>">수정</a></td>
-					<td><a href="../deleteMemberAddr/deleteMemberAddrAction.jsp?memberAddrNo=<%=memberAddr.getMemberAddrNo()%>">삭제</a></td>
+					<td><a href="../updateMember/updateMemberAddrForm.jsp?memberAddrNo=<%=memberAddr.getMemberAddrNo()%>">수정</a></td>
+					<td><a href="../deleteMember/deleteMemberAddrAction.jsp?memberAddrNo=<%=memberAddr.getMemberAddrNo()%>">삭제</a></td>
 				</tr>
 		<%
 			}

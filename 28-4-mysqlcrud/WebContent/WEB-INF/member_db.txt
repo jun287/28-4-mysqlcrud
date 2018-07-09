@@ -1,4 +1,4 @@
-----------member table 생성문장
+----------member table
 
 CREATE TABLE `member` (
 	`member_no` INT(10) NOT NULL AUTO_INCREMENT,
@@ -10,7 +10,7 @@ ENGINE=InnoDB
 ;
 
 
------------member_addr table 생성문장
+-----------member_addr table
 CREATE TABLE `member_addr` (
 	`memberAddr_no` INT(10) NOT NULL AUTO_INCREMENT,
 	`member_no` INT(10) NOT NULL,
@@ -21,3 +21,17 @@ CREATE TABLE `member_addr` (
 )
 COLLATE='euckr_korean_ci'
 ENGINE=InnoDB;
+
+
+
+--------------member_score table 
+CREATE TABLE `member_score` (
+	`member_score_no` INT(11) NOT NULL AUTO_INCREMENT,
+	`member_no` INT(11) NOT NULL,
+	`score` INT(11) NOT NULL,
+	PRIMARY KEY (`member_score_no`),
+	INDEX `FK_member_score_member` (`member_no`),
+	CONSTRAINT `FK_member_score_member` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`)
+)
+ENGINE=InnoDB
+;

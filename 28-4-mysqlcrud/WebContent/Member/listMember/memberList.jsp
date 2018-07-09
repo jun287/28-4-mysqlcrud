@@ -12,7 +12,7 @@
 	<body>
 		<%
 			request.setCharacterEncoding("euc-kr");
-			
+		
 			String word = request.getParameter("searchWord");
 			System.out.println(word +"<- word");
 			int currentPage = 1; //현재 페이지를 1로 설정했습니다.
@@ -30,19 +30,22 @@
 			//memberDao변수에 들어있는 주소값을 찾아가 selectMemberByPage메서드안에 들어있는 매게변수에 들어있는 값을 대입후 실행을 합니다
 			//실행후 return값을 Member클래스 타입의 ArrayList으로 선언을 한 get_list변수에 할당을 했습니다. 
 		%>
+		
+		<h2>멤버 리스트</h2>
 		<form action="./memberList.jsp" method="post">
 			<!-- 이름 :  -->
 			<input type="text" name="searchWord">
 			<button type="submit">검색</button>
 			<a href="../../index.jsp">홈페이지로</a>
 		</form>
-		<h2>멤버 리스트</h2>
 		<table>
 			<tr>
 				<th>번호 </th>
 				<th>이름 </th>
 				<th>나이 </th>
 				<th>주소입력</th>
+				<th>점수 입력</th>
+				<th>점수 보기</th>
 				<th>삭제하기</th>
 				<th>수정하기</th>
 			</tr> 
@@ -56,7 +59,9 @@
 					<td><%=member.getMemberNo()%></td>
 					<td><a href="./memberAddrList.jsp?memberNo=<%=member.getMemberNo()%>"><%=member.getMemberName()%></a></td>
 					<td><%=member.getMemberAge()%></td>
-					<td><a href="../insertMemberAddr/insertMemberAddrFrom.jsp?memberNo=<%=member.getMemberNo()%>">주소입력</a></td>
+					<td><a href="../insertMember/insertMemberAddrForm.jsp?memberNo=<%=member.getMemberNo()%>">주소입력</a></td>
+					<td><a href="../insertMember/insertMemberScoreForm.jsp?memberNo=<%=member.getMemberNo()%>">점수 등록</a></td>
+					<td><a href="../listMember/memberAndScoreList.jsp?memberNo=<%=member.getMemberNo()%>">점수 보기</a></td>
 					<td><a href="../deleteMember/deleteMember.jsp?memberNo=<%=member.getMemberNo()%>">삭제</a></td>
 					<td><a href="../updateMember/updateMemberForm.jsp?memberNo=<%=member.getMemberNo()%>">수정</a></td>
 				</tr>
