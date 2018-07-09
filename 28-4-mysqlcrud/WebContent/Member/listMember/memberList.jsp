@@ -13,6 +13,8 @@
 		<%
 			request.setCharacterEncoding("euc-kr");
 			
+			String word = request.getParameter("searchWord");
+			System.out.println(word +"<- word");
 			int currentPage = 1; //현재 페이지를 1로 설정했습니다.
 			System.out.println(currentPage +"<- currentPage");
 			if(request.getParameter("currentPage") != null) {
@@ -23,11 +25,17 @@
 			int pagePerRow = 5; //한 페이지에 나오는 갯수를 설정입니다.
 			System.out.println(pagePerRow +"<- pagePerRow");
 			MemberDao memberDao = new MemberDao();
-			ArrayList<Member> get_totalList = memberDao.selectMemberByPage(currentPage ,pagePerRow);
+			ArrayList<Member> get_totalList = memberDao.selectMemberByPage(currentPage ,pagePerRow ,word);
 			System.out.println(get_totalList +"<- totalList");
-			//memberDao변수에 들어있는 주소값을 찾아가 selectMemberByPage메서드안에 들어있는 currentPage변수와 pagePerRow변수에 값을 대입후 실행을 합니다
+			//memberDao변수에 들어있는 주소값을 찾아가 selectMemberByPage메서드안에 들어있는 매게변수에 들어있는 값을 대입후 실행을 합니다
 			//실행후 return값을 Member클래스 타입의 ArrayList으로 선언을 한 get_list변수에 할당을 했습니다. 
 		%>
+		<form action="./memberList.jsp" method="post">
+			<!-- 이름 :  -->
+			<input type="text" name="searchWord">
+			<button type="submit">검색</button>
+			<a href="../../index.jsp">홈페이지로</a>
+		</form>
 		<h2>멤버 리스트</h2>
 		<table>
 			<tr>
@@ -58,27 +66,21 @@
 			
 		%>
 		</table>
-		<form>
-			<!-- 이름 :  -->
-			<input type="text" name="searchWord">
-			<button type="submit">검색</button>
-			<a href="../../index.jsp">홈페이지로</a>
-		</form>
 		<%
 			int lastPage = memberDao.CountMemberList(pagePerRow);
 			// memberDao변수에 들어있는 주소값을 찾아가 CountMemberList()메서드안에 pagePerRow변수값을 가지고 실행을 하고 결과값을 int형식으로 선언한 lsatPage변수에 대입했습니다.
 			
 			if(currentPage>1){
-				%>
+		%>
 				<a href = "./memberList.jsp?currentPage=<%=currentPage-1%>">◀ 이전</a>
-				<%
+		<%
 			}
 			//currentPage가 1보다 크면 이전 a link태그가 나오도록 설정 했습니다.
 
 			if(currentPage<lastPage){
-				%>
+		%>
 				<a href = "./memberList.jsp?currentPage=<%=currentPage+1%>">다음 ▶</a>
-				<%
+		<%
 			}
 			//currentPage가 lastPage보다 작으면 a link태그가 나오도록 설정했습니다 
 		%>

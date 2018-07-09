@@ -4,279 +4,302 @@ import service.Member;
 import java.sql.*;
 import java.util.ArrayList;
 
-//2018.06.26 28ê¸° ì „ì¬í˜„.
+//2018.06.26 28±â ÀüÀçÇö.
 public class MemberDao {
+	
+	//»èÁ¦ Ã³¸® ÇÏ±âÀ§ÇÑ ¸Ş¼­µåÀÔ´Ï´Ù.
+	public void deleteMember(int memberNo) {
 		
-		//ì‚­ì œ ì²˜ë¦¬í•˜ê¸° ìœ„í•œ ë©”ì„œë“œì…ë‹ˆë‹¤
-		public void deleteMember(int memberNo) {
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			//my-sql(DB)·ÎµùÀ» ÇØÁá½À´Ï´Ù
+			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
+			//¿¬°áÀ» À§ÇØ StringÅ¸ÀÔÀ¸·Î ¼±¾ğÇÑ º¯¼ö¾È¿¡ Æ÷Æ®¹øÈ£ ,µ¥ÀÌÅÍº£ÀÌ½º¸í ,EncodingÀ» ´ëÀÔÀ» Çß½À´Ï´Ù
+			String dbUser = "java";
+			//my-sql(DB) ID°ªÀÔ´Ï´Ù
+			String dbPassword = "java0000";
+			//my-sql(DB) Password°ªÀÔ´Ï´Ù
+			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
+			//my-sql(DB)DriverManagerÅ¬·¡½º¸¦ ÅëÇØ getConnection¸Ş¼­µå¿¡ µé¾îÀÖ´Â ¸Å°³º¯¼ö°ªÀ¸·Î ¿¬°áÀ» ½ÇÇàÇÏ°í ½ÇÇàÁÖ¼Ò°ªÀ» ÂüÁ¶º¯¼ö¿¡ ÇÒ´ç½ÃÄÑÁá½À´Ï´Ù.
 			
-			PreparedStatement preparedStatement = null;
-			Connection connection = null;
+			String deleteQuery = "DELETE FROM member WHERE member_no=?";
+			//query¹®À» StringÇü½ÄÀ¸·Î ¼±¾ğµÈ º¯¼ö¿¡ ´ëÀÔÇß½À´Ï´Ù
+			preparedStatement = connection.prepareStatement(deleteQuery);
+			preparedStatement.setInt(1, memberNo);
+			//query¹®ÀÇ 1¹øÂ° ? °ªÀ»  memberNo¸Å°³º¯¼ö¿¡ µé¾îÀÖ´Â °ªÀ» ´ëÀÔ Çß½À´Ï´Ù.
 			
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				//my-sql(DB)ë“œë¼ì´ë¸Œ ë¡œë”©í–ˆìŠµë‹ˆë‹¤
-				String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-				String dbUser = "java";
-				String dbPassword = "java0000";
-				//DBì—°ê²°í•˜ê¸° ìœ„í•œ í¬íŠ¸ë²ˆí˜¸ ,ë°ì´í„°ë² ì´ìŠ¤ëª… ,ID ,PWê°’ ì„¤ì •í–ˆìŠµë‹ˆë‹¤
-				connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-				//my-sql(DB)ì—°ê²° 
+			preparedStatement.executeUpdate();
+			//preparedStatementÂüÁ¶º¯¼ö¾È µé¾îÀÖ´Â ÁÖ¼Ò°ªÀ» Ã£¾Æ°¡ ½ÇÇàÀ» ÇÕ´Ï´Ù.
+		}catch(ClassNotFoundException close) {
+			close.printStackTrace();
+		}catch(SQLException close) {
+			close.printStackTrace();
+		}finally {
+			if(preparedStatement != null) 
+				try{
+					preparedStatement.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(connection != null)
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+		}
+	}
+	
+	//¼öÁ¤Ã³¸®ÇÒ ÇàÀ» Ãâ·ÂÇÏ´Â ¸Ş¼­µåÀÔ´Ï´Ù.
+	public Member updateMemberSelect(int memberNo) {
+		
+		Member member = new Member();
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		ResultSet resultSet = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			//my-sql(DB)·ÎµùÀ» ÇØÁá½À´Ï´Ù
+			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
+			//¿¬°áÀ» À§ÇØ StringÅ¸ÀÔÀ¸·Î ¼±¾ğÇÑ º¯¼ö¾È¿¡ Æ÷Æ®¹øÈ£ ,µ¥ÀÌÅÍº£ÀÌ½º¸í ,EncodingÀ» ´ëÀÔÀ» Çß½À´Ï´Ù
+			String dbUser = "java";
+			//my-sql(DB) ID°ªÀÔ´Ï´Ù
+			String dbPassword = "java0000";
+			//my-sql(DB) Password°ªÀÔ´Ï´Ù
+			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
+			//my-sql(DB)DriverManagerÅ¬·¡½º¸¦ ÅëÇØ getConnection¸Ş¼­µå¿¡ µé¾îÀÖ´Â ¸Å°³º¯¼ö°ªÀ¸·Î ¿¬°áÀ» ½ÇÇàÇÏ°í ½ÇÇàÁÖ¼Ò°ªÀ» ÂüÁ¶º¯¼ö¿¡ ÇÒ´ç½ÃÄÑÁá½À´Ï´Ù.
+			
+			String selectQuery = "SELECT member_no ,member_name ,member_age FROM member WHERE member_no=?";
+			//SELECTQUERY¹®À» StringÀ¸·Î ¼±¾ğÇÑ º¯¼ö¿¡ ´ëÀÔÀ» ½ÃÄÑÁá½À´Ï´Ù.
+			preparedStatement = connection.prepareStatement(selectQuery);
+			preparedStatement.setInt(1, memberNo);
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				member.setMemberNo(resultSet.getInt("member_no"));
+				member.setMemberName(resultSet.getString("member_name"));
+				member.setMemberAge(resultSet.getInt("member_age"));
 				
-				String deleteQuery = "DELETE FROM member WHERE member_no=?";
-				//ì‚­ì œ ì²˜ë¦¬ Queryë¬¸ì„ Stringí˜•ì‹ìœ¼ë¡œ ì„ ì–¸ëœ deleteQueryë³€ìˆ˜ì— ëŒ€ì…í–ˆìŠµë‹ˆë‹¤.
-				preparedStatement = connection.prepareStatement(deleteQuery);
-				preparedStatement.setInt(1, memberNo);
-				
-				preparedStatement.executeUpdate();
-				//Queryë¬¸ ì‹¤í–‰ í–ˆìŠµë‹ˆë‹¤
-			}catch(ClassNotFoundException close) {
-				close.printStackTrace();
-			}catch(SQLException close) {
-				close.printStackTrace();
-			}finally {
-				if(preparedStatement != null) 
-					try{
-						preparedStatement.close();
-					}catch(SQLException close) {
-						close.printStackTrace();
-					}
-				if(connection != null)
-					try {
-						connection.close();
-					}catch(SQLException close) {
-						close.printStackTrace();
-					}
 			}
+			
+		}catch(ClassNotFoundException close) {
+			close.printStackTrace();
+		}catch(SQLException close) {
+			close.printStackTrace();
+		}finally {
+			if(resultSet != null) 
+				try {
+					resultSet.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(preparedStatement != null)
+				try {
+					preparedStatement.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(connection != null)
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+		}
+		
+		return member;
+	}
+	
+	//¼öÁ¤Ã³¸®¸¦ ÇÏ±âÀ§ÇÑ ¸Ş¼­µåÀÔ´Ï´Ù.
+	public ArrayList<Member> updateMember(int memberNo ,String memberName ,int memberAge) {
+		
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			//my-sql(DB)·ÎµùÀ» ÇØÁá½À´Ï´Ù
+			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
+			//¿¬°áÀ» À§ÇØ StringÅ¸ÀÔÀ¸·Î ¼±¾ğÇÑ º¯¼ö¾È¿¡ Æ÷Æ®¹øÈ£ ,µ¥ÀÌÅÍº£ÀÌ½º¸í ,EncodingÀ» ´ëÀÔÀ» Çß½À´Ï´Ù
+			String dbUser = "java";
+			//my-sql(DB) ID°ªÀÔ´Ï´Ù
+			String dbPassword = "java0000";
+			//my-sql(DB) Password°ªÀÔ´Ï´Ù
+			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
+			//my-sql(DB)DriverManagerÅ¬·¡½º¸¦ ÅëÇØ getConnection¸Ş¼­µå¿¡ µé¾îÀÖ´Â ¸Å°³º¯¼ö°ªÀ¸·Î ¿¬°áÀ» ½ÇÇàÇÏ°í ½ÇÇàÁÖ¼Ò°ªÀ» ÂüÁ¶º¯¼ö¿¡ ÇÒ´ç½ÃÄÑÁá½À´Ï´Ù.
+			
+			String updateQuery = "UPDATE member SET member_name=? ,member_age=? WHERE member_no=?";
+			preparedStatement = connection.prepareStatement(updateQuery);
+			preparedStatement.setString(1, memberName);
+			preparedStatement.setInt(2, memberAge);
+			preparedStatement.setInt(3, memberNo);
+			
+			preparedStatement.executeUpdate();
+			
+		}catch(ClassNotFoundException close) {
+			close.printStackTrace();
+		}catch(SQLException close) {
+			close.printStackTrace();
+		}finally {
+			if(preparedStatement != null)
+				try {
+					preparedStatement.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(connection != null)
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+		}
+		return null;
+	}
+	//memberÅ×ÀÌºí¿¡ µé¾îÀÖ´Â µ¥ÀÌÅÍ ÃÑ°¹¼ö¸¦ ±¸ÇÏ´Â ¸Ş¼­µåÀÔ´Ï´Ù.
+	public int CountMemberList(int pagePerRow) {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		int lastPage = 0;
+		int totalPage = 0;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			//my-sql(DB)·ÎµùÀ» ÇØÁá½À´Ï´Ù
+			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
+			//¿¬°áÀ» À§ÇØ StringÅ¸ÀÔÀ¸·Î ¼±¾ğÇÑ º¯¼ö¾È¿¡ Æ÷Æ®¹øÈ£ ,µ¥ÀÌÅÍº£ÀÌ½º¸í ,EncodingÀ» ´ëÀÔÀ» Çß½À´Ï´Ù
+			String dbUser = "java";
+			//my-sql(DB) ID°ªÀÔ´Ï´Ù
+			String dbPassword = "java0000";
+			//my-sql(DB) Password°ªÀÔ´Ï´Ù
+			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
+			//my-sql(DB)DriverManagerÅ¬·¡½º¸¦ ÅëÇØ getConnection¸Ş¼­µå¿¡ µé¾îÀÖ´Â ¸Å°³º¯¼ö°ªÀ¸·Î ¿¬°áÀ» ½ÇÇàÇÏ°í ½ÇÇàÁÖ¼Ò°ªÀ» ÂüÁ¶º¯¼ö¿¡ ÇÒ´ç½ÃÄÑÁá½À´Ï´Ù.
+			
+			String SelectQuery = "SELECT COUNT(member_no) AS memberNo FROM member";
+			preparedStatement = connection.prepareStatement(SelectQuery);
+			resultSet = preparedStatement.executeQuery();
+			
+			if (resultSet.next()) {
+				totalPage=resultSet.getInt("memberNO");
+			}
+			lastPage = (totalPage-1) / pagePerRow;
+			if((totalPage-1) % pagePerRow != 0) {
+				lastPage++;
+			}
+			
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(resultSet != null)
+				try {
+					resultSet.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(preparedStatement != null)
+				try {
+					preparedStatement.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(connection != null) 
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+		}
+		return lastPage;
+	} 
+	
+	//memberÅ×ÀÌºí¿¡ µé¾îÀÖ´Â µ¥ÀÌÅÍ¸¦ Ãâ·ÂÇÏ´Â ¸Ş¼­µåÀÔ´Ï´Ù.
+	public ArrayList<Member> selectMemberByPage(int currentPage, int pagePerRow ,String searchWord){
+		
+		ArrayList<Member> memberList = new ArrayList<Member>(); 
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		searchWord = "";
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			//my-sql(DB)·ÎµùÀ» ÇØÁá½À´Ï´Ù
+			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
+			//¿¬°áÀ» À§ÇØ StringÅ¸ÀÔÀ¸·Î ¼±¾ğÇÑ º¯¼ö¾È¿¡ Æ÷Æ®¹øÈ£ ,µ¥ÀÌÅÍº£ÀÌ½º¸í ,EncodingÀ» ´ëÀÔÀ» Çß½À´Ï´Ù
+			String dbUser = "java";
+			//my-sql(DB) ID°ªÀÔ´Ï´Ù
+			String dbPassword = "java0000";
+			//my-sql(DB) Password°ªÀÔ´Ï´Ù
+			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
+			//my-sql(DB)DriverManagerÅ¬·¡½º¸¦ ÅëÇØ getConnection¸Ş¼­µå¿¡ µé¾îÀÖ´Â ¸Å°³º¯¼ö°ªÀ¸·Î ¿¬°áÀ» ½ÇÇàÇÏ°í ½ÇÇàÁÖ¼Ò°ªÀ» ÂüÁ¶º¯¼ö¿¡ ÇÒ´ç½ÃÄÑÁá½À´Ï´Ù.
+			
+			int startRow = (currentPage-1)*pagePerRow; 
+			//½ÃÀÛÇà ±âÁØ
+			if(searchWord == "") {
+				String SelectQuery = "SELECT member_no ,member_name ,member_age FROM member ORDER BY member_no LIMIT ?,?";
+				preparedStatement = connection.prepareStatement(SelectQuery);
+				preparedStatement.setInt(1, startRow);
+				preparedStatement.setInt(2, pagePerRow);
+			}else {
+				String selectQuery = "SELECT member_no ,member_name ,member_age FROM member WHERE member_name LIKE ? ORDER BY member_no LIMIT ? ,?";
+				preparedStatement = connection.prepareStatement(selectQuery);
+				preparedStatement.setString(1, "%"+searchWord+"%");
+				preparedStatement.setInt(2, startRow);
+				preparedStatement.setInt(3, pagePerRow);
+			}
+			
+			resultSet = preparedStatement.executeQuery();
+			Member member = null;
+
+			while(resultSet.next()){ 
+				member = new Member();
+				member.setMemberNo(resultSet.getInt("member_no"));
+				member.setMemberName(resultSet.getString("member_name"));
+				member.setMemberAge(resultSet.getInt("member_age"));
+				
+				memberList.add(member);
+			}
+			
+		}catch(ClassNotFoundException close) {
+			close.printStackTrace();
+		}catch(SQLException close) {
+			close.printStackTrace();	
+		}finally {
+			if(resultSet != null)
+				try {
+					resultSet.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(preparedStatement != null) 
+				try {
+					preparedStatement.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(connection != null) 
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
 		}
 	
-		//ìˆ˜ì •í•  ë°ì´í„°ë¥¼ ê°€ì ¸ì˜¤ê¸°ìœ„í•œ SELECTQUERTYë¬¸ ì…ë‹ˆë‹¤.
-		public Member updateMemberSelect(int memberNo) {
-			
-			Member member = new Member();
-			PreparedStatement preparedStatement = null;
-			Connection connection = null;
-			ResultSet resultSet = null;
-			
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				//my-sql(DB)ë¡œë”© ì‹¤í–‰ ì…ë‹ˆë‹¤
-				String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-				String dbUser = "java";
-				String dbPassword = "java0000";
-				//my-sql(DB)ì—°ê²°í•˜ê¸° ìœ„í•´ my-sql í¬íŠ¸ë²ˆí˜¸ ,ë°ì´í„°ë² ì´ìŠ¤ëª… ,ì¸ì½”ë”© ,ID ,PW ê°’ì„ Stringí˜•ì‹ìœ¼ë¡œ ì„ ì–¸ëœ ë³€ìˆ˜ì— ëŒ€ì… ì…ë‹ˆë‹¤.
-				connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-				//my-sql(DB)ì—°ê²° ì‹¤í–‰ì…ë‹ˆë‹¤
-				
-				String selectQuery = "SELECT member_no ,member_name ,member_age FROM member WHERE member_no=?";
-				//SELECT QUERYë¬¸ì„ Stringí˜•ì‹ìœ¼ë¡œ ì„ ì–¸ëœ selectQueryë³€ìˆ˜ì— ëŒ€ì…í–ˆìŠµë‹ˆë‹¤.
-				preparedStatement = connection.prepareStatement(selectQuery);
-				preparedStatement.setInt(1, memberNo);
-				
-				resultSet = preparedStatement.executeQuery();
-				
-				if(resultSet.next()) {
-					member.setMemberNo(resultSet.getInt("member_no"));
-					member.setMemberName(resultSet.getString("member_name"));
-					member.setMemberAge(resultSet.getInt("member_age"));
-					
-				}
-				
-			}catch(ClassNotFoundException close) {
-				close.printStackTrace();
-			}catch(SQLException close) {
-				close.printStackTrace();
-			}finally {
-				if(resultSet != null) 
-					try {
-						resultSet.close();
-					}catch(SQLException close) {
-						close.printStackTrace();
-					}
-				if(preparedStatement != null)
-					try {
-						preparedStatement.close();
-					}catch(SQLException close) {
-						close.printStackTrace();
-					}
-				if(connection != null)
-					try {
-						connection.close();
-					}catch(SQLException close) {
-						close.printStackTrace();
-					}
-			}
-			
-			return member;
-		}
-		
-		//ìˆ˜ì •ì²˜ë¦¬ì—ì„œ ìˆ˜ì •í•œê°’ì„ ì²˜ë¦¬í•˜ëŠ” ë©”ì„œë“œì…ë‹ˆë‹¤
-		public ArrayList<Member> updateMember(int memberNo ,String memberName ,int memberAge) {
-			
-			PreparedStatement preparedStatement = null;
-			Connection connection = null;
-			
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				//my-sql(DB)ë¡œë”© ì…ë‹ˆë‹¤
-				String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-				String dbUser = "java";
-				String dbPassword = "java0000";
-				//my-sql(DB)ì—°ê²°í•˜ê¸°ìœ„í•œ ì¤€ë¹„ ì…ë‹ˆë‹¤
-				connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-				//my-sql(DB)ì—°ê²° ì‹œë„ ì…ë‹ˆë‹¤.
-				
-				String updateQuery = "UPDATE member SET member_name=? ,member_age=? WHERE member_no=?";
-				preparedStatement = connection.prepareStatement(updateQuery);
-				preparedStatement.setString(1, memberName);
-				preparedStatement.setInt(2, memberAge);
-				preparedStatement.setInt(3, memberNo);
-				
-				preparedStatement.executeUpdate();
-				
-			}catch(ClassNotFoundException close) {
-				close.printStackTrace();
-			}catch(SQLException close) {
-				close.printStackTrace();
-			}finally {
-				if(preparedStatement != null)
-					try {
-						preparedStatement.close();
-					}catch(SQLException close) {
-						close.printStackTrace();
-					}
-				if(connection != null)
-					try {
-						connection.close();
-					}catch(SQLException close) {
-						close.printStackTrace();
-					}
-			}
-			return null;
-		}
-		//ë§ˆì§€ë§‰ í˜ì´ì§€ë¥¼ êµ¬í•˜ê¸°ìœ„í•œ ë©”ì„œë“œ ì…ë‹ˆë‹¤
-		public int CountMemberList(int pagePerRow) {
-			
-			Connection connection = null;
-			PreparedStatement preparedStatement = null;
-			ResultSet resultSet = null;
-			
-			int lastPage = 0;
-			int totalPage = 0;
-			
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-				String dbUser = "java";
-				String dbPassword = "java0000";
-				
-				connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-				
-				String SelectQuery = "SELECT COUNT(member_no) AS memberNo FROM member";
-				preparedStatement = connection.prepareStatement(SelectQuery);
-				resultSet = preparedStatement.executeQuery();
-				
-				if (resultSet.next()) {
-					totalPage=resultSet.getInt("memberNO");
-				}
-				lastPage = (totalPage-1) / pagePerRow;
-				if((totalPage-1) % pagePerRow != 0) {
-					lastPage++;
-				}
-				
-			}catch(ClassNotFoundException e) {
-				e.printStackTrace();
-			}catch(SQLException e) {
-				e.printStackTrace();
-			} finally {
-				if(resultSet != null)
-					try {
-						resultSet.close();
-					}catch(SQLException close) {
-						close.printStackTrace();
-					}
-				if(preparedStatement != null)
-					try {
-						preparedStatement.close();
-					}catch(SQLException close) {
-						close.printStackTrace();
-					}
-				if(connection != null) 
-					try {
-						connection.close();
-					}catch(SQLException close) {
-						close.printStackTrace();
-					}
-			}
-			return lastPage;
-		} 
-		
-		//memberí…Œì´ë¸”ì— ì €ì¥ë˜ì–´ìˆëŠ” ê°’ë“¤ì„ ì „ì²´ ì¶œë ¥í•˜ëŠ” Selectë¬¸ì…ë‹ˆë‹¤.
-		public ArrayList<Member> selectMemberByPage(int currentPage, int pagePerRow){
-			
-			ArrayList<Member> memberList = new ArrayList<Member>(); 
-			Connection connection = null;
-			PreparedStatement preparedstatement = null;
-			ResultSet resultSet = null;
+		return memberList;
 
-			String SelectQuery = "SELECT member_no ,member_name ,member_age FROM member ORDER BY member_no LIMIT ?,?";
-			
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				String dbUrl = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-				String dbUser = "java";
-				String dbPassword = "java0000";
-				
-				connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-				
-				int startRow = (currentPage-1)*pagePerRow; 
-				
-				preparedstatement = connection.prepareStatement(SelectQuery);
-				preparedstatement.setInt(1, startRow);
-				preparedstatement.setInt(2, pagePerRow);
-				
-				resultSet = preparedstatement.executeQuery();
-				Member member = null;
-
-				while(resultSet.next()){ 
-					member = new Member();
-					member.setMemberNo(resultSet.getInt("member_no"));
-					member.setMemberName(resultSet.getString("member_name"));
-					member.setMemberAge(resultSet.getInt("member_age"));
-					
-					memberList.add(member);
-				}
-				
-			}catch(ClassNotFoundException close) {
-				close.printStackTrace();
-			}catch(SQLException close) {
-				close.printStackTrace();	
-			}finally {
-				if(resultSet != null)
-					try {
-						resultSet.close();
-					}catch(SQLException close) {
-						close.printStackTrace();
-					}
-				if(preparedstatement != null) 
-					try {
-						preparedstatement.close();
-					}catch(SQLException close) {
-						close.printStackTrace();
-					}
-				if(connection != null) 
-					try {
-						connection.close();
-					}catch(SQLException close) {
-						close.printStackTrace();
-					}
-			}
-		
-			return memberList;
-
-		}
-		
-	//ë©¤ë²„ ë“±ë¡í•˜ê¸° ìœ„í•œ ë©”ì„œë“œì…ë‹ˆë‹¤.
+	}
+	
+	//È­¸é¿¡¼­ ÀÔ·ÂÇÑ °ªÀ» µî·ÏÇÏ±â À§ÇÑ ¸Ş¼­µåÀÔ´Ï´Ù
 	public void insertMember(Member member) {
 		
 		PreparedStatement preparedStatement = null;
@@ -284,30 +307,32 @@ public class MemberDao {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			
+			//my-sql(DB)·ÎµùÀ» ÇØÁá½À´Ï´Ù
 			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
+			//¿¬°áÀ» À§ÇØ StringÅ¸ÀÔÀ¸·Î ¼±¾ğÇÑ º¯¼ö¾È¿¡ Æ÷Æ®¹øÈ£ ,µ¥ÀÌÅÍº£ÀÌ½º¸í ,EncodingÀ» ´ëÀÔÀ» Çß½À´Ï´Ù
 			String dbUser = "java";
-			String dbPassword ="java0000";
-			
+			//my-sql(DB) ID°ªÀÔ´Ï´Ù
+			String dbPassword = "java0000";
+			//my-sql(DB) Password°ªÀÔ´Ï´Ù
 			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			System.out.println(connection +"<- connection");
+			//my-sql(DB)DriverManagerÅ¬·¡½º¸¦ ÅëÇØ getConnection¸Ş¼­µå¿¡ µé¾îÀÖ´Â ¸Å°³º¯¼ö°ªÀ¸·Î ¿¬°áÀ» ½ÇÇàÇÏ°í ½ÇÇàÁÖ¼Ò°ªÀ» ÂüÁ¶º¯¼ö¿¡ ÇÒ´ç½ÃÄÑÁá½À´Ï´Ù.
 			
 			String insertQuery = "INSERT INTO member(member_name ,member_age) VALUES(? ,?)";
 			preparedStatement = connection.prepareStatement(insertQuery);
 			preparedStatement.setString(1, member.getMemberName());
 			preparedStatement.setInt(2, member.getMemberAge());
 			System.out.println(preparedStatement +"<- preparedStatement");
-			
+			//preparedStatement¿¡ µé¾îÀÖ´Â ÁÖ¼Ò°ªÀ» Ã£¾Æ°¡ memberÂüÁ¶º¯¼ö¿¡ settingµÇ¾î ÀÖ´Â °ªÀ» °¡Á®¿Í ?¿¡ ´ëÀÔÀ» ½ÃÄÑÁá½À´Ï´Ù.
 			preparedStatement.executeUpdate();
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.print(e.getMessage() +"<- connection&preparedStatementÅ¬ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½");
+			System.out.print(e.getMessage());
 			
 		}catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.print(e.getMessage() +"<- Class.forNameÅ¬ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½");
+			System.out.print(e.getMessage());
 			
 		}finally {
 			if(preparedStatement != null)try {
