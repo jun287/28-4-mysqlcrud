@@ -21,7 +21,7 @@ public class TeacherScoreDao {
 		ResultSet resultSet = null;
 		
 		ArrayList<TeacherAndScore> arraylist = new ArrayList<TeacherAndScore>();
-		String sql = "SELECT ts.teacher_score_no,ts.teacher_no,t.teacher_name,t.teacher_age,ts.score FROM teacher_score ts INNER JOIN teacher t ON ts.teacher_no=? = t.teacher_no";
+		String sql = "SELECT ts.teacher_score_no,ts.teacher_no,t.teacher_name,t.teacher_age,ts.score FROM teacher_score ts INNER JOIN teacher t ON ts.teacher_no = t.teacher_no";
 		
 		try {
 			
@@ -33,7 +33,6 @@ public class TeacherScoreDao {
 			connection = DriverManager.getConnection(URL, dbUser, dbPass);
 
 			statement = connection.prepareStatement(sql);
-			statement.setInt(1, teacherNo);
 			
 			resultSet = statement.executeQuery();
 			

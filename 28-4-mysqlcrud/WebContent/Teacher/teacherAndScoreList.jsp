@@ -25,7 +25,7 @@
 		TeacherScoreDao teacherScoreDao = new TeacherScoreDao();
 		ArrayList<TeacherAndScore> arrayList = teacherScoreDao.selectTeacherAndScored(teacherNo);	
 	%>
-		<h2>보고서</h2>	
+		<h2>교사 점수</h2>	
 			<table border="1">
 				<tr>
 					<th>번호</th>
