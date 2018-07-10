@@ -7,8 +7,71 @@ import service.MemberAndScore;
 
 public class MemberScoreDao {
 	
+	
+	//평균점보다 높은 사람의 수를 구하는 메서드입니다.
+	public int selectTotalList(int rowPerPage) {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		int lastPage = 0;
+		int totalList = 0;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			//my-sql(DB)로딩을 해줬습니다
+			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
+			//연결을 위해 String타입으로 선언한 변수안에 포트번호 ,데이터베이스명 ,Encoding을 대입을 했습니다
+			String dbUser = "java";
+			//my-sql(DB) ID값입니다
+			String dbPassword = "java0000";
+			//my-sql(DB) Password값입니다
+			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
+			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
+			
+			String SelectQuery = "SELECT count(score>=(SELECT avg(score) AS score FROM member_score)) AS totalList FROM member_score";
+			//서브쿼리를 사용하여 평균값보다 높은사람의 수를 구하는 Query입니다.
+			preparedStatement = connection.prepareStatement(SelectQuery);
+			resultSet = preparedStatement.executeQuery();
+			
+			if (resultSet.next()) {
+				totalList=resultSet.getInt("totalList");
+			}
+			lastPage = (totalList-1) / rowPerPage;
+			if((totalList-1) % rowPerPage != 0) {
+				lastPage++;
+			}
+			
+		}catch(ClassNotFoundException check) {
+			check.printStackTrace();
+		}catch(SQLException check) {
+			check.printStackTrace();
+		} finally {
+			if(resultSet != null)
+				try {
+					resultSet.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(preparedStatement != null)
+				try {
+					preparedStatement.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(connection != null) 
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+		}
+		return lastPage;
+	} 
+	
 	//평균점보다 높은 사람의 리스트를 출력하는 메서드입니다
-	public ArrayList<MemberAndScore> MemberAverageList() {
+	public ArrayList<MemberAndScore> MemberAverageList(int currentPage ,int pagePerRow) {
 		 
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
@@ -28,9 +91,12 @@ public class MemberScoreDao {
 			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
 			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
 			
-			String selectQuery = "SELECT member.member_name ,member.member_age ,member_score.member_no ,member_score.score FROM member_score INNER JOIN member ON member_score.member_no = member.member_no WHERE member_score.score >= (SELECT avg(score) AS score FROM member_score) ORDER BY member_no ASC";
+			int startRow = (currentPage-1)*pagePerRow;
+			String selectQuery = "SELECT member.member_name ,member.member_age ,member_score.member_no ,member_score.score FROM member_score INNER JOIN member ON member_score.member_no = member.member_no WHERE member_score.score >= (SELECT avg(score) AS score FROM member_score) ORDER BY member_no ASC LIMIT ? ,?";
 			//INNER JOIN문을 통해 평균점수를 낸 서브쿼리의 score값보다 같거나 더 높은 score값을 가진사람의 list를 출력하는 QUERY문 입니다.
 			preparedStatement = connection.prepareStatement(selectQuery);
+			preparedStatement.setInt(1, startRow);
+			preparedStatement.setInt(2, pagePerRow);
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {

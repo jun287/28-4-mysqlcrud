@@ -244,7 +244,7 @@ public class MemberDao {
 			
 			int startRow = (currentPage-1)*pagePerRow; 
 			//시작행 기준
-			if(searchWord == "") {
+			if(searchWord == null) {
 				String SelectQuery = "SELECT member_no ,member_name ,member_age FROM member ORDER BY member_no LIMIT ?,?";
 				preparedStatement = connection.prepareStatement(SelectQuery);
 				preparedStatement.setInt(1, startRow);

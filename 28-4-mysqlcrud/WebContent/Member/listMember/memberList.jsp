@@ -13,24 +13,23 @@
 		<%
 			request.setCharacterEncoding("euc-kr");
 		
-			String word = request.getParameter("searchWord");
-			System.out.println(word +"<- word");
+			
 			int currentPage = 1; //현재 페이지를 1로 설정했습니다.
 			System.out.println(currentPage +"<- currentPage");
 			if(request.getParameter("currentPage") != null) {
 				currentPage = Integer.parseInt(request.getParameter("currentPage"));
 			}
 			
-			
+			String word = request.getParameter("searchWord");
+			System.out.println(word +"<- word");
 			int pagePerRow = 5; //한 페이지에 나오는 갯수를 설정입니다.
 			System.out.println(pagePerRow +"<- pagePerRow");
 			MemberDao memberDao = new MemberDao();
-			ArrayList<Member> get_totalList = memberDao.selectMemberByPage(currentPage ,pagePerRow ,word);
-			System.out.println(get_totalList +"<- totalList");
+			ArrayList<Member> getTotalList = memberDao.selectMemberByPage(currentPage ,pagePerRow ,word);
+			System.out.println(getTotalList +"<- getTotalList");
 			//memberDao변수에 들어있는 주소값을 찾아가 selectMemberByPage메서드안에 들어있는 매게변수에 들어있는 값을 대입후 실행을 합니다
 			//실행후 return값을 Member클래스 타입의 ArrayList으로 선언을 한 get_list변수에 할당을 했습니다. 
 		%>
-		
 		<h2>멤버 리스트</h2>
 		<form action="./memberList.jsp" method="post">
 			<!-- 이름 :  -->
@@ -50,9 +49,9 @@
 				<th>수정하기</th>
 			</tr> 
 		<%
-			for(int i=0; i<get_totalList.size(); i++){
+			for(int i=0; i<getTotalList.size(); i++){
 			//int형식의 i변수가 get_totalList변수에 들어있는 index크기보다 작은값까지 반복을 설정했습니다.
-				Member member = get_totalList.get(i);
+				Member member = getTotalList.get(i);
 				//get_totalList번수에 있는 index값을 i변수에 들어있는 값으로 불러와  Member클래스를 통해 선언된 member변수에 대입을 한다.
 		%>
 				<tr>
