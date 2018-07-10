@@ -21,10 +21,6 @@
 						<td id="title">나이 </td>
 						<td><input type="text" name="member_age" maxlength="3"></td>
 					</tr>
-					<tr>
-						<td id="title">주소 </td>
-						<td><input type="text" name="memberAddr" maxlength="50"></td>
-					</tr>
 				</table>
 				<br><input type="submit" value="등록"> &nbsp;<input type="button" value="취소">
 			</form>

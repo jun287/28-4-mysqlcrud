@@ -249,20 +249,15 @@ public class MemberAddrDao {
 			//my-sql(DB)연결하기 위해 포트번호 ,데이터베이스명 ,ID ,PW값을 변수에 대입 입니다
 			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
 			//my-sql(DB)연결 입니다
-			if(memberAddrContent.equals("")) {
-				System.out.println("입력값이 없습니다");
-				//memberAddrConten변수에 들어있는 값이 공백일때 콘솔에 입력 됩니다
-			}else {
-				String insertQuery = "INSERT INTO member_addr(member_no ,memberAddr_content) VALUES(? ,?)";
-				preparedStatement = connection.prepareStatement(insertQuery);
-				preparedStatement.setInt(1, memberNo);
-				preparedStatement.setString(2, memberAddrContent);
-				System.out.println(preparedStatement +"<- preparedStatement");
-				
-				execution = preparedStatement.executeUpdate();
-				//memberAddrContent변수에 값이 있으면 query문을 실행을 하고 리턴값으로 보내기 위해 실행값을 execution변수에 대입합니다
-				
-			}
+			
+			String insertQuery = "INSERT INTO member_addr(member_no ,memberAddr_content) VALUES(? ,?)";
+			preparedStatement = connection.prepareStatement(insertQuery);
+			preparedStatement.setInt(1, memberNo);
+			preparedStatement.setString(2, memberAddrContent);
+			System.out.println(preparedStatement +"<- preparedStatement");
+			
+			execution = preparedStatement.executeUpdate();
+			//memberAddrContent변수에 값이 있으면 query문을 실행을 하고 리턴값으로 보내기 위해 실행값을 execution변수에 대입합니다
 			
 		}catch(ClassNotFoundException close) {
 			close.printStackTrace();
