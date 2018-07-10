@@ -52,6 +52,6 @@
 				%>
 			</tbody>
 		</table>
-		
+		<a href = "<%=request.getContextPath()%>/index.jsp">¿Œµ¶Ω∫∑Œ</a>
 	</body>
 </html>

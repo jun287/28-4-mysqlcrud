@@ -95,6 +95,6 @@
 							<%
 						}
 					%>
-				<a href = "<%=request.getContextPath()%>/index.jsp">¿Œµ¶Ω∫∑Œ</a>
+							<a href = "<%=request.getContextPath()%>/index.jsp">¿Œµ¶Ω∫∑Œ</a>
 	</body>
 </html>
