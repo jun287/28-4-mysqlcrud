@@ -16,12 +16,17 @@
 				<th>점수</th>
 			</tr>
 			<%
+				//피라미터값을 받아서 int형 변수 no에 대입한다.
 				int no=Integer.parseInt(request.getParameter("no"));
+			
+				//EmployeeScoreDao객체생성
 				EmployeeScoreDao employeeScoreDao=new EmployeeScoreDao();
 				
+				//employeeScoreDao의 주소를 찾아가서selectEmployeeAndScore메소드의 매개변수에 no값을대입한후  employeeAndScore의 주소값을 리턴받는다
 				EmployeeAndScore employeeAndScore=employeeScoreDao.selectEmployeeAndScore(no);
 			
 			%>
+			<!--리턴받은 employeeAndScore의 주소값을 찾아가서 메소드를 실행시켜 변수값을 받아온다 -->
 			<tr>
 				<td><%=employeeAndScore.getEmployee().getEmployeeNo() %></td>
 				<td><%=employeeAndScore.getEmployee().getEmployeeName() %></td>

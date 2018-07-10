@@ -14,7 +14,7 @@
 			employeeScore.setEmployee_no(Integer.parseInt(request.getParameter("no")));
 			employeeScore.setScore(Integer.parseInt(request.getParameter("score")));
 			
-			
+			//EmployeeScoreDao객체 생성후 insertScore메서드에employeeScore주소값을 대입하여 db에 저장
 			EmployeeScoreDao employeeScoreDao=new EmployeeScoreDao();
 			employeeScoreDao.insertScore(employeeScore);
 		%>
