@@ -4,6 +4,7 @@
 <%@ page import="service.EmployeeAndScore"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%request.setCharacterEncoding("euckr"); %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,22 +12,22 @@
 			<title>Insert title here</title>
 	</head>
 	<body>
-			<h1>ì ìˆ˜í‰ê· ê³¼ í‰ê· ì´ìƒì¸ì‚¬ëžŒ</h1>
+			<h1>Á¡¼öÆò±Õ°ú Æò±ÕÀÌ»óÀÎ»ç¶÷</h1>
 			
 			<%
-				//employeeScoreDaoê°ì²´ ìƒì„±
+				//employeeScoreDao°´Ã¼ »ý¼º
 			 	EmployeeScoreDao employeeScoreDao=new EmployeeScoreDao();
 			
-				//employeeScoreDaoì˜ ì£¼ì†Œê°’ì„ ì°¾ì•„ê°€ì„œ selectScoreAvg ë©”ì†Œë“œ ì‹¤í–‰í•˜ì—¬ í‰ê· ê°’ì„ ë¦¬í„´ë°›ì•„ì˜¨ë‹¤
+				//employeeScoreDaoÀÇ ÁÖ¼Ò°ªÀ» Ã£¾Æ°¡¼­ selectScoreAvg ¸Þ¼Òµå ½ÇÇàÇÏ¿© Æò±Õ°ªÀ» ¸®ÅÏ¹Þ¾Æ¿Â´Ù
 				int score=employeeScoreDao.selectScoreAvg();
 				System.out.println(score+"<--score");
 				
-				////employeeScoreDaoì˜ ì£¼ì†Œê°’ì„ ì°¾ì•„ê°€ì„œ selectmemberListAboveAvg ë©”ì†Œë“œ ì‹¤í–‰ í‰ê· ê°’ì´ìƒì¸ì‚¬ëžŒë“¤ì„ ArryaListì—ì €ìž¥í›„ ë¦¬í„´í•˜ì—¬ ë¦¬í„´ê°’ì„ ê°€ì ¸ì™€employeeAndScoreì— ì£¼ì†Œê°’ì„ì €ìž¥í•¨
+				////employeeScoreDaoÀÇ ÁÖ¼Ò°ªÀ» Ã£¾Æ°¡¼­ selectmemberListAboveAvg ¸Þ¼Òµå ½ÇÇà Æò±Õ°ªÀÌ»óÀÎ»ç¶÷µéÀ» ArryaList¿¡ÀúÀåÈÄ ¸®ÅÏÇÏ¿© ¸®ÅÏ°ªÀ» °¡Á®¿ÍemployeeAndScore¿¡ ÁÖ¼Ò°ªÀ»ÀúÀåÇÔ
 				ArrayList<EmployeeAndScore> employeeAndScore=employeeScoreDao.selectmemberListAboveAvg();
 			%>
 			
 			<div>
-				í‰ê· :<%=score %>ì 
+				Æò±Õ:<%=score %>Á¡
 			</div>
 			
 			<table border="1">
@@ -40,7 +41,7 @@
 					
 					<tbody>
 							<%
-								//ArrayListì— ì €ìž¥ë˜ì–´ ìžˆëŠ” ê°’ë“¤ì„ ê°€ì ¸ì™€ ì¶œë ¤ê°·ì¤€ë‹¤
+								//ArrayList¿¡ ÀúÀåµÇ¾î ÀÖ´Â °ªµéÀ» °¡Á®¿Í Ãâ·ÂÇØÁØ´Ù
 								for(int i=0;i<employeeAndScore.size();i++){
 									EmployeeAndScore result=employeeAndScore.get(i);
 							%>
