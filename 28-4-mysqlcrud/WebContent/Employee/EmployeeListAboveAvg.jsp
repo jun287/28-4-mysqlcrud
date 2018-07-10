@@ -21,7 +21,7 @@
 				int score=employeeScoreDao.selectScoreAvg();
 				System.out.println(score+"<--score");
 				
-				////employeeScoreDao의 주소값을 찾아가서 selectmemberListAboveAvg 메소드 실행 평균값이상인사람들을 ArryaList에저장후 리턴하여 리턴값을 가져와employeeAndScore에 주소값을저장
+				////employeeScoreDao의 주소값을 찾아가서 selectmemberListAboveAvg 메소드 실행 평균값이상인사람들을 ArryaList에저장후 리턴하여 리턴값을 가져와employeeAndScore에 주소값을저장함
 				ArrayList<EmployeeAndScore> employeeAndScore=employeeScoreDao.selectmemberListAboveAvg();
 			%>
 			
