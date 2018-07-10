@@ -1,4 +1,4 @@
-//2018. 07. 09. 28기 공세준
+//2018. 07. 10. 28기 공세준
 
 package service;
 
@@ -11,6 +11,115 @@ import java.util.ArrayList;
 
 public class TeacherScoreDao {
 	
+	// 설명 : 집합함수(Avg) 사용하여 teacher_score 테이블에 score 평균값을 구하는 메서드 선언
+	// 매개변수 : 매개변수는 없습니다.
+	// 리턴 : 평균값을 int 기본타입으로 리턴합니다.
+	public int selectScoreAvg() {
+		
+		// SELECT AVG(score) FROM teahcer_score;
+		Connection connection = null; 
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		int scoreAvg = 0;
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
+			String dbUser = "java";
+			String dbPass = "java0000";
+			
+			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			
+			statement = connection.prepareStatement("SELECT AVG(score) FROM teacher_score");
+			
+			resultSet = statement.executeQuery();
+			
+			if(resultSet.next()) {
+				scoreAvg = resultSet.getInt("AVG(score)");
+			}
+			
+		}catch(ClassNotFoundException ex) {
+			ex.printStackTrace();
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}finally{
+			if(statement != null)try{
+				statement.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+			if(connection != null)try{
+				connection.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+		}
+			
+		return scoreAvg;
+	}
+	
+	
+	// 설명: join + subquery 사용하여 score 점수가 평균보다 높은 사람을 구하는 메서드 선언
+	// 매개변수: 매개변수는 없습니다.
+	// 리턴값:	 ArrayList<TeacherAndScore> 클래스 타입으로 arrayList(teacher와 teacherScore 클래스객체에 쿼리 조회후 결과값이 담긴 주소값이 담긴 teacherAndScore 클래스객체의 주소값)주소값을 리턴합니다.
+	public ArrayList<TeacherAndScore> selectTeacherListAboveAvg(){
+		
+		Connection connection = null; 
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		
+		ArrayList<TeacherAndScore> arrayList = new ArrayList<TeacherAndScore>();
+		String sql = "SELECT ts.score, t.teacher_name, t.teacher_no FROM teacher_score ts INNER JOIN teacher t ON ts.teacher_no = t.teacher_no WHERE ts.score>=(select avg(score) from teacher_score) Order by ts.score DESC";
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
+			String dbUser = "java";
+			String dbPass = "java0000";
+			
+			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			
+			statement = connection.prepareStatement(sql);
+			resultSet = statement.executeQuery();
+			
+			while(resultSet.next()) {
+				
+				Teacher teacher = new Teacher();
+				teacher.setTeacherName(resultSet.getString("t.teacher_name"));
+				teacher.setTeacherNo(resultSet.getInt("t.teacher_no"));
+				
+				TeacherScore teacherScore = new TeacherScore();
+				teacherScore.setScore(resultSet.getInt("ts.score"));
+				
+				TeacherAndScore teacherAndScore = new TeacherAndScore();
+				teacherAndScore.setTeacher(teacher);
+				teacherAndScore.setTeacherScore(teacherScore);
+				
+				arrayList.add(teacherAndScore);
+				
+			}
+			
+		}catch(ClassNotFoundException ex) {
+			ex.printStackTrace();
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}finally{
+			if(statement != null)try{
+				statement.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+			if(connection != null)try{
+				connection.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+		}
+		return arrayList;
+	}
+	
 	// 설명 : 드라이버 로딩 , DB연결 , select 쿼리문 작성 실행해서  teacher테이블과 teacher_score테이블의 데이터를 조인하여 데이터를 조회하고 조회된 데이터를 ArrayList 클래스타입으로 객체들의 배열의 주소값들이 담긴 ArrayList객체의 주소값을 리턴하는 메서드 선언 
 	// 매개변수 : int 기본타입으로 teacherNo를 받아서 select 쿼리문에 teacher_no에 대입해서  조회하게합니다.
 	// 리턴값 : ArrayList<TeacherAndScore> 타입으로 Teacher와 TeacherScore 객체들의 주소값이 ArrayList에 add(TeacherAndSocre)메서드 호출해서 index(객체배열)에 추가 되고 주소값을 리턴합니다.
@@ -21,7 +130,7 @@ public class TeacherScoreDao {
 		ResultSet resultSet = null;
 		
 		ArrayList<TeacherAndScore> arraylist = new ArrayList<TeacherAndScore>();
-		String sql = "SELECT ts.teacher_score_no,ts.teacher_no,t.teacher_name,t.teacher_age,ts.score FROM teacher_score ts INNER JOIN teacher t ON ts.teacher_no = t.teacher_no";
+		String sql = "SELECT ts.teacher_score_no,ts.teacher_no,t.teacher_name,t.teacher_age,ts.score FROM teacher_score ts INNER JOIN teacher t ON t.teacher_no = ts.teacher_no WHERE t.teacher_no=?";
 		
 		try {
 			
@@ -33,6 +142,7 @@ public class TeacherScoreDao {
 			connection = DriverManager.getConnection(URL, dbUser, dbPass);
 
 			statement = connection.prepareStatement(sql);
+			statement.setInt(1, teacherNo);
 			
 			resultSet = statement.executeQuery();
 			

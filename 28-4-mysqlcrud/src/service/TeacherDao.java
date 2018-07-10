@@ -390,9 +390,9 @@ public class TeacherDao {
 	}
 	
 	//설명 : 마지막 페이지를 구하기 위해 메서드를 선언합니다.
-	//매개변수 : int 기본타입으로 rowPerPage 매개변수를 가지고 페이지당 갯수를 받습니다.
+	//매개변수 : int 기본타입으로 rowPerPage, String 참조타입으로 searchWord 매개변수를 가지고 페이지당 갯수와 검색 키워드를 받습니다.
 	//리턴값 : 리턴값은 totalRow로 teacher 테이블에 teacher_no의 갯수를 리턴합니다.
-	public int lastPageTeacher(int rowPerPage) {
+	public int lastPageTeacher(int rowPerPage , String searchWord) {
 		
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -412,8 +412,16 @@ public class TeacherDao {
 			
 			connection = DriverManager.getConnection(URL, dbUser, dbPass);
 			
+			// 검색 키워드가 없으면 전체 teacher_no의 수를 조회하고 키워드가 있으면 키워드가 들어간 조회된 결과의 teacher_no 수를 조회합니다.
+			if(searchWord.equals("")) {
+				statement = connection.prepareStatement(sql);
+			}else{
+				sql = "SELECT COUNT(teacher_no) FROM teacher WHERE teacher_name like ? ORDER BY teacher_no";
+				statement = connection.prepareStatement(sql);
+				statement.setString(1, "%"+searchWord+"%");
+
+			}
 			
-			statement = connection.prepareStatement(sql);
 			resultSet = statement.executeQuery();
 			
 			if (resultSet.next()) {
