@@ -39,8 +39,8 @@ window.addEventListener("load", function(){
 <title>학생 입력 폼</title>
 </head>
 <body>
-	<div id="insertStudentForm">학생등록
-		<form action="<%=request.getContextPath()%>/insertStudentAction.jsp" method="post" id="insertStudentForm">
+	<div>학생등록
+		<form action="<%=request.getContextPath()%>/Student/insertStudentAction.jsp" method="post" id="insertStudentForm">
 		<!-- placeholder속성 : 짧은 힌트나 짧은 구를 나타내 사용자가 데이터를 입력하는데 도움을 주기 위해 사용하는 속성 -->
 			<ul>
 				<li>
@@ -61,7 +61,7 @@ window.addEventListener("load", function(){
 					<input type="text" id="address" name="studentAddrContent" required>	
 				</li>
 				<li>	
-					<input type="button" id="signup" value="등록">
+					<button type="button" id="signup" >등록</button>
 				</li>	
 			</ul>	
 		</form>

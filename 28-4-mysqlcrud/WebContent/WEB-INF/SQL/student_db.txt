@@ -1,0 +1,114 @@
+----1. Student 테이블 생성 문장 ----
+CREATE TABLE `student` (
+	`student_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`student_name` VARCHAR(50) NOT NULL,
+	`student_age` INT(10) NOT NULL,
+	PRIMARY KEY (`student_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=24;
+
+----2. Student 테이블 Insert 문장 ----
+INSERT INTO `student` (`student_no`, `student_name`, `student_age`) VALUES
+	(1, '송원민', 25),
+	(2, '탁재은', 23),
+	(3, '최윤석', 25),
+	(4, '구해성', 20),
+	(5, '이광재', 31),
+	(6, '김준영', 25),
+	(7, '현희문', 26),
+	(8, '김진우', 25),
+	(9, '송유빈', 22),
+	(10, '김호순', 25),
+	(11, '이응빈', 24),
+	(12, '박원우', 26),
+	(13, '김정연', 17),
+	(14, '김지완', 26),
+	(15, '서연문', 26),
+	(16, '김소희', 26),
+	(17, '최지수', 25),
+	(18, '이경선', 26),
+	(19, '정규룡', 26),
+	(20, '전재현', 26),
+	(21, '이원상', 28),
+	(22, '공세준', 32),
+	(23, '정민수', 25);
+
+----3. Student_addr 테이블 생성문장----
+CREATE TABLE `student_addr` (
+	`student_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`student_no` INT(10) NOT NULL,
+	`student_addr_content` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`student_addr_no`),
+	INDEX `FK__student` (`student_no`),
+	CONSTRAINT `FK__student` FOREIGN KEY (`student_no`) REFERENCES `student` (`student_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=24;
+
+----4. Student_addr	테이블 Insert 문장----
+INSERT INTO `student_addr` (`student_addr_no`, `student_no`, `student_addr_content`) VALUES
+	(1, 1, '전북 전주시'),
+	(2, 2, '전북 전주'),
+	(3, 3, '한옥마을'),
+	(4, 4, '팔복동'),
+	(5, 5, '금암동'),
+	(6, 6, '삼례'),
+	(7, 7, '송천동'),
+	(8, 8, '금암동'),
+	(9, 9, '삼천동'),
+	(10, 10, '금암동'),
+	(11, 11, '효자동'),
+	(12, 12, '서신동'),
+	(13, 13, '진북동'),
+	(14, 14, '중앙동'),
+	(15, 15, '우아동'),
+	(16, 16, '익산'),
+	(17, 17, '군산'),
+	(18, 18, '서신동'),
+	(19, 19, '삼천동'),
+	(20, 20, '호성동'),
+	(21, 21, '평화동'),
+	(22, 22, '효자동'),
+	(23, 23, '팔복동');
+
+----5. Student_score 테이블 생성 문장----
+CREATE TABLE `student_score` (
+	`student_score_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`student_no` INT(10) NOT NULL DEFAULT '0',
+	`score` INT(10) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`student_score_no`),
+	INDEX `FK_student_scroe_student` (`student_no`),
+	CONSTRAINT `FK_student_scroe_student` FOREIGN KEY (`student_no`) REFERENCES `student` (`student_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=24;
+
+----6. Student_score 테이블 Insert 문장----
+INSERT INTO `student_score` (`student_score_no`, `student_no`, `score`) VALUES
+	(1, 1, 99),
+	(2, 2, 100),
+	(3, 3, 77),
+	(4, 4, 99),
+	(5, 5, 55),
+	(6, 6, 77),
+	(7, 7, 88),
+	(8, 8, 99),
+	(9, 9, 32),
+	(10, 10, 25),
+	(11, 11, 12),
+	(12, 12, 66),
+	(13, 13, 78),
+	(14, 14, 88),
+	(15, 15, 34),
+	(16, 16, 55),
+	(17, 17, 100),
+	(18, 18, 42),
+	(19, 19, 88),
+	(20, 20, 75),
+	(21, 21, 80),
+	(22, 22, 94),
+	(23, 23, 62);
