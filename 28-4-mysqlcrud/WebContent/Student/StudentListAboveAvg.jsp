@@ -65,15 +65,15 @@
 	<%
 		if(currentPage !=0 && currentPage != 1){
 	%>
-			<a href="<%=request.getContextPath() %>/Student/StudentListAboveAverage.jsp?currentPage=<%=currentPage-1 %>">이전</a>
+			<a href="<%=request.getContextPath() %>/Student/StudentListAboveAvg.jsp?currentPage=<%=currentPage-1 %>">이전</a>
 	<%
 		}for(int p=1; p<=lastPage; p++){
 	%>		
-			<a href="<%=request.getContextPath() %>/Student/StudentListAboveAverage.jsp?currentPage=<%=p%>"><%=p%></a>
+			<a href="<%=request.getContextPath() %>/Student/StudentListAboveAvg.jsp?currentPage=<%=p%>"><%=p%></a>
 	<%		
 		}if(currentPage < lastPage){
 	%>	
-			<a href="<%=request.getContextPath() %>/Student/StudentListAboveAverage.jsp?currentPage=<%=currentPage+1 %>">다음</a>
+			<a href="<%=request.getContextPath() %>/Student/StudentListAboveAvg.jsp?currentPage=<%=currentPage+1 %>">다음</a>
 	<%
 		}
 	%>		
