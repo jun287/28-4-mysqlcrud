@@ -1,11 +1,127 @@
 package service;
 import java.util.ArrayList;
+
 import java.sql.*;
 import service.MemberAndScore;
 //2018. 07.09. 28기 전재현
 
 public class MemberScoreDao {
 	
+	//평균점보다 높은 사람의 리스트를 출력하는 메서드입니다
+	public ArrayList<MemberAndScore> MemberAverageList() {
+		 
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		ResultSet resultSet = null;
+		ArrayList<MemberAndScore> averageTotalList = new ArrayList<MemberAndScore>();
+		MemberAndScore memberAndScore = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			//my-sql(DB)로딩을 해줬습니다
+			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
+			//연결을 위해 String타입으로 선언한 변수안에 포트번호 ,데이터베이스명 ,Encoding을 대입을 했습니다
+			String dbUser = "java";
+			//my-sql(DB) ID값입니다
+			String dbPassword = "java0000";
+			//my-sql(DB) Password값입니다
+			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
+			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
+			
+			String selectQuery = "SELECT member.member_name ,member.member_age ,member_score.member_no ,member_score.score FROM member_score INNER JOIN member ON member_score.member_no = member.member_no WHERE member_score.score >= (SELECT avg(score) AS score FROM member_score) ORDER BY member_no ASC";
+			//INNER JOIN문을 통해 평균점수를 낸 서브쿼리의 score값보다 같거나 더 높은 score값을 가진사람의 list를 출력하는 QUERY문 입니다.
+			preparedStatement = connection.prepareStatement(selectQuery);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				memberAndScore = new MemberAndScore();
+				memberAndScore.setMemberNo(resultSet.getInt("member_no"));
+				memberAndScore.setMemberName(resultSet.getString("member_name"));
+				memberAndScore.setMemberAge(resultSet.getInt("member_age"));
+				memberAndScore.setScore(resultSet.getInt("score"));
+				averageTotalList.add(memberAndScore);
+			}
+			//while문을 통해 resultSet변수에 들어있는 값이 false가 나올때까지 memberAndScore변수에 대입시켜줬습니다.
+		}catch(ClassNotFoundException check) {
+			check.printStackTrace();
+		}catch(Exception check) {
+			check.printStackTrace();
+		}finally {
+			if(resultSet != null)
+				try {
+					resultSet.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(preparedStatement != null)
+				try {
+					preparedStatement.close();
+				}catch(SQLException clsoe) {
+					clsoe.printStackTrace();
+				}
+			if(connection != null)
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+			}
+		}
+		return averageTotalList;
+	}
+	
+	//점수의 평균점을 내기 위한 메서드입니다.
+	public int MemberAverage() {
+		
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		ResultSet resultSet = null;
+		int average = 0;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			//my-sql(DB)로딩을 해줬습니다
+			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
+			//연결을 위해 String타입으로 선언한 변수안에 포트번호 ,데이터베이스명 ,Encoding을 대입을 했습니다
+			String dbUser = "java";
+			//my-sql(DB) ID값입니다
+			String dbPassword = "java0000";
+			//my-sql(DB) Password값입니다
+			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
+			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
+			
+			String selectQuery = "SELECT avg(Score) AS average FROM member_score";
+			preparedStatement = connection.prepareStatement(selectQuery);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				average = resultSet.getInt("average");
+			}
+		}catch(ClassNotFoundException check) {
+			check.printStackTrace();
+		}catch(Exception check) {
+			check.printStackTrace();
+		}finally {
+			if(resultSet != null)
+				try {
+					resultSet.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(preparedStatement != null)
+				try {
+					preparedStatement.close();
+				}catch(SQLException clsoe) {
+					clsoe.printStackTrace();
+				}
+			if(connection != null)
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+			}
+		}
+		
+		return average;
+	}
 	
 	//점수 등록하는 메서드 입니다
 	public int insertMember(int memberNo ,int memberScore) {
@@ -43,7 +159,7 @@ public class MemberScoreDao {
 				System.out.println(totalCount +"<- totalCount");
 			}
 			//실행후 결과값을 toatalCount변수에 대입을 했습니다
-			if(totalCount == 1) {
+			if(totalCount == 0) {
 				String insertQuery = "INSERT INTO member_score(member_no ,score) VALUES(? ,?)";
 				preparedStatement = connection.prepareStatement(insertQuery);
 				preparedStatement.setInt(1, memberNo);

@@ -19,10 +19,10 @@
 			int insertCheck = memberScoreDao.insertMember(memberNo ,memberScore);
 			System.out.println(insertCheck +"<- insertCheck");
 			if(insertCheck != 0) {
-				System.out.println(insertCheck +"<- 수정 완료 되었습니다");
+				System.out.println(insertCheck +"<- 저장 완료 되었습니다");
 				
 			}else {
-				System.out.println(insertCheck +"<- 저장 완료 되었습니다");
+				System.out.println(insertCheck +"<- 수정 완료 되었습니다");
 				
 			}
 			response.sendRedirect("../listMember/memberList.jsp");

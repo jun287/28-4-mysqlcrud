@@ -6,6 +6,7 @@ public class MemberAndScore {
 	private String memberName;
 	private int memberScoreNo;
 	private int score;
+	private int memberAge;
 	
 	public int getMemberNo() {
 		return memberNo;
@@ -30,5 +31,11 @@ public class MemberAndScore {
 	}
 	public void setScore(int score) {
 		this.score = score;
+	}
+	public int getMemberAge() {
+		return memberAge;
+	}
+	public void setMemberAge(int memberAge) {
+		this.memberAge = memberAge;
 	}
 }
