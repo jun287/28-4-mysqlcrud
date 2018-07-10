@@ -26,9 +26,9 @@
 						<td>
 							<a href="<%= request.getContextPath() %>/Member/insertMember/insertMemberForm.jsp">멤버 등록</a>
 							<a href="<%= request.getContextPath() %>/Member/listMember/memberList.jsp">멤버 목록</a>
-							<a href="<%= request.getContextPath() %>/Member/MemberListAboveAvg.jsp">멤버점수 평균이상 목록</a>
+							<a href="<%= request.getContextPath() %>/Member/listMember/memberListAboveAvg.jsp">멤버점수 평균이상 목록</a>
 						</td>
-					<tr>
+					</tr>
 					<tr>
 						<td>2. 이원상</td>
 						<td>
@@ -36,7 +36,7 @@
 							<a href="<%= request.getContextPath() %>/Student/studentList.jsp">학생 목록</a>
 							<a href="<%= request.getContextPath() %>/Student/StudentListAboveAvg.jsp">학생점수 평균이상 목록</a>
 						</td>
-					<tr>
+					</tr>
 					<tr>
 						<td>3. 공세준</td>
 						<td>
@@ -44,7 +44,7 @@
 							<a href="<%= request.getContextPath() %>/Teacher/teacherList.jsp">교사 목록</a>
 							<a href="<%= request.getContextPath() %>/Teacher/teacherListAboveAvg.jsp">교사점수 평균이상 목록</a>
 						</td>		
-					<tr>
+					</tr>
 					<tr>
 						<td>4. 정민수</td>
 						<td>
@@ -52,7 +52,7 @@
 							<a href="<%= request.getContextPath() %>/Employee/EmployeeList.jsp">고용 목록</a>
 							<a href="<%= request.getContextPath() %>/Employee/EmployeeListAboveAvg.jsp">고용점수 평균이상 목록</a>
 						</td>
-					<tr>
+					</tr>
 				</tbody>
 			</table>
 		</form>

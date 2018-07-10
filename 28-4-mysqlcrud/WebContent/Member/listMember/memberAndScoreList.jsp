@@ -44,6 +44,9 @@
 						}
 					%>
 				</table>
+				<div class="text-center">
+					<a href="./memberList.jsp" class="btn">&nbsp;&nbsp;리스트페이지로</a>
+				</div>
 			</div>
 	</body>
 </html>

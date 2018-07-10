@@ -8,6 +8,7 @@
 	<html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+		<link rel="stylesheet" type="text/css" href="../../css/member/css/bootstrap.css">
 		<title>주소 목록 리스트</title>
 	</head>
 	<body>
@@ -25,30 +26,32 @@
 			
 				
 		%>
-		<h2><%=memberName%>님 주소 리스트</h2>
-		<table>
-			<tr>
-				<td>번호</td>
-				<td>주소</td>
-				<td>수정</td>
-				<td>삭제</td>
-			</tr> 
-		<%
-			for(int i=0; i<totalMemberAddrList.size(); i++) {
-				MemberAddr memberAddr = totalMemberAddrList.get(i);
-		%>
+		<div class="container">
+			<h2><%=memberName%>님 주소 리스트</h2>
+			<table class="table table-hover">
 				<tr>
-					<td><%=memberAddr.getMemberAddrNo()%></td>
-					<td><%=memberAddr.getMemberAddrContent()%></td>
-					<td><a href="../updateMember/updateMemberAddrForm.jsp?memberAddrNo=<%=memberAddr.getMemberAddrNo()%>">수정</a></td>
-					<td><a href="../deleteMember/deleteMemberAddrAction.jsp?memberAddrNo=<%=memberAddr.getMemberAddrNo()%>">삭제</a></td>
-				</tr>
-		<%
-			}
-		%>
-			<tr>
-				<td><a href="./memberList.jsp">목록으로</a></td>
-			</tr>
-		</table>
+					<td>번호</td>
+					<td>주소</td>
+					<td>수정</td>
+					<td>삭제</td>
+				</tr> 
+				<%
+					for(int i=0; i<totalMemberAddrList.size(); i++) {
+						MemberAddr memberAddr = totalMemberAddrList.get(i);
+				%>
+						<tr>
+							<td><%=memberAddr.getMemberAddrNo()%></td>
+							<td><%=memberAddr.getMemberAddrContent()%></td>
+							<td><a href="../updateMember/updateMemberAddrForm.jsp?memberAddrNo=<%=memberAddr.getMemberAddrNo()%>">수정</a></td>
+							<td><a href="../deleteMember/deleteMemberAddrAction.jsp?memberAddrNo=<%=memberAddr.getMemberAddrNo()%>">삭제</a></td>
+						</tr>
+				<%
+					}
+				%>
+			</table>
+			<div class="text-center">
+				<a href="./memberList.jsp">목록으로</a>
+			</div>
+		</div>
 	</body>
 </html>

@@ -38,8 +38,8 @@ public class MemberScoreDao {
 			if (resultSet.next()) {
 				totalList=resultSet.getInt("totalList");
 			}
-			lastPage = (totalList-1) / rowPerPage;
-			if((totalList-1) % rowPerPage != 0) {
+			lastPage = (totalList) / rowPerPage;
+			if((totalList) % rowPerPage != 0) {
 				lastPage++;
 			}
 			

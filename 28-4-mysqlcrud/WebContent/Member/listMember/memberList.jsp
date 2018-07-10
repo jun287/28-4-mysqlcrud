@@ -7,6 +7,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+		<link rel="stylesheet" type="text/css" href="../../css/member/css/bootstrap.css">
 		<title>회원 정보 리스트 출력창</title>
 	</head>
 	<body>
@@ -30,63 +31,68 @@
 			//memberDao변수에 들어있는 주소값을 찾아가 selectMemberByPage메서드안에 들어있는 매게변수에 들어있는 값을 대입후 실행을 합니다
 			//실행후 return값을 Member클래스 타입의 ArrayList으로 선언을 한 get_list변수에 할당을 했습니다. 
 		%>
-		<h2>멤버 리스트</h2>
-		<form action="./memberList.jsp" method="post">
-			<!-- 이름 :  -->
-			<input type="text" name="searchWord">
-			<button type="submit">검색</button>
-			<a href="../../index.jsp">홈페이지로</a>
-		</form>
-		<table>
-			<tr>
-				<th>번호 </th>
-				<th>이름 </th>
-				<th>나이 </th>
-				<th>주소입력</th>
-				<th>점수 입력</th>
-				<th>점수 보기</th>
-				<th>삭제하기</th>
-				<th>수정하기</th>
-			</tr> 
-		<%
-			for(int i=0; i<getTotalList.size(); i++){
-			//int형식의 i변수가 get_totalList변수에 들어있는 index크기보다 작은값까지 반복을 설정했습니다.
-				Member member = getTotalList.get(i);
-				//get_totalList번수에 있는 index값을 i변수에 들어있는 값으로 불러와  Member클래스를 통해 선언된 member변수에 대입을 한다.
-		%>
+		<div class="container">
+			<h2>멤버 리스트</h2>
+			<form action="./memberList.jsp" method="post">
+				<!-- 이름 :  -->
+				<input type="text" name="searchWord" placeholder="Search...">
+				<!-- placeholder=>text안 글씨가 보이도록 설정 -->
+				<button type="submit">검색</button>
+			</form><br>
+			<table class="table table-hover">
 				<tr>
-					<td><%=member.getMemberNo()%></td>
-					<td><a href="./memberAddrList.jsp?memberNo=<%=member.getMemberNo()%>"><%=member.getMemberName()%></a></td>
-					<td><%=member.getMemberAge()%></td>
-					<td><a href="../insertMember/insertMemberAddrForm.jsp?memberNo=<%=member.getMemberNo()%>">주소입력</a></td>
-					<td><a href="../insertMember/insertMemberScoreForm.jsp?memberNo=<%=member.getMemberNo()%>">점수 등록</a></td>
-					<td><a href="../listMember/memberAndScoreList.jsp?memberNo=<%=member.getMemberNo()%>">점수 보기</a></td>
-					<td><a href="../deleteMember/deleteMember.jsp?memberNo=<%=member.getMemberNo()%>">삭제</a></td>
-					<td><a href="../updateMember/updateMemberForm.jsp?memberNo=<%=member.getMemberNo()%>">수정</a></td>
-				</tr>
-				<!-- member변수에 들어있는 주소값을 찾아가 getMemberXx()메서드를 실행을해 값을 가져와 대입을 시켰습니다. -->
-		<%
-			}
+					<th>번호 </th>
+					<th>이름 </th>
+					<th>나이 </th>
+					<th>주소입력</th>
+					<th>점수 입력</th>
+					<th>점수 보기</th>
+					<th>삭제하기</th>
+					<th>수정하기</th>
+				</tr> 
+				<%
+					for(int i=0; i<getTotalList.size(); i++){
+					//int형식의 i변수가 get_totalList변수에 들어있는 index크기보다 작은값까지 반복을 설정했습니다.
+						Member member = getTotalList.get(i);
+						//get_totalList번수에 있는 index값을 i변수에 들어있는 값으로 불러와  Member클래스를 통해 선언된 member변수에 대입을 한다.
+				%>
+						<tr>
+							<td><%=member.getMemberNo()%></td>
+							<td><a href="./memberAddrList.jsp?memberNo=<%=member.getMemberNo()%>"><%=member.getMemberName()%></a></td>
+							<td><%=member.getMemberAge()%></td>
+							<td><a href="../insertMember/insertMemberAddrForm.jsp?memberNo=<%=member.getMemberNo()%>">주소입력</a></td>
+							<td><a href="../insertMember/insertMemberScoreForm.jsp?memberNo=<%=member.getMemberNo()%>">점수 등록</a></td>
+							<td><a href="../listMember/memberAndScoreList.jsp?memberNo=<%=member.getMemberNo()%>">점수 보기</a></td>
+							<td><a href="../deleteMember/deleteMember.jsp?memberNo=<%=member.getMemberNo()%>">삭제</a></td>
+							<td><a href="../updateMember/updateMemberForm.jsp?memberNo=<%=member.getMemberNo()%>">수정</a></td>
+						</tr>
+						<!-- member변수에 들어있는 주소값을 찾아가 getMemberXx()메서드를 실행을해 값을 가져와 대입을 시켰습니다. -->
+				<%
+					}
+					
+				%>
+			</table>
+			<div class="text-center">
+				<%
+					int lastPage = memberDao.CountMemberList(pagePerRow);
+					// memberDao변수에 들어있는 주소값을 찾아가 CountMemberList()메서드안에 pagePerRow변수값을 가지고 실행을 하고 결과값을 int형식으로 선언한 lsatPage변수에 대입했습니다.
+					
+					if(currentPage>1){
+				%>
+						<a href = "./memberList.jsp?currentPage=<%=currentPage-1%>" class="btn">◀ 이전</a>
+				<%
+					}
+					//currentPage가 1보다 크면 이전 a link태그가 나오도록 설정 했습니다.
 			
-		%>
-		</table>
-		<%
-			int lastPage = memberDao.CountMemberList(pagePerRow);
-			// memberDao변수에 들어있는 주소값을 찾아가 CountMemberList()메서드안에 pagePerRow변수값을 가지고 실행을 하고 결과값을 int형식으로 선언한 lsatPage변수에 대입했습니다.
-			
-			if(currentPage>1){
-		%>
-				<a href = "./memberList.jsp?currentPage=<%=currentPage-1%>">◀ 이전</a>
-		<%
-			}
-			//currentPage가 1보다 크면 이전 a link태그가 나오도록 설정 했습니다.
-
-			if(currentPage<lastPage){
-		%>
-				<a href = "./memberList.jsp?currentPage=<%=currentPage+1%>">다음 ▶</a>
-		<%
-			}
-			//currentPage가 lastPage보다 작으면 a link태그가 나오도록 설정했습니다 
-		%>
+					if(currentPage<lastPage){
+				%>
+						<a href = "./memberList.jsp?currentPage=<%=currentPage+1%>" class="btn">다음 ▶</a>
+				<%
+					}
+					//currentPage가 lastPage보다 작으면 a link태그가 나오도록 설정했습니다 
+				%>
+				<a href="../../index.jsp" class="btn">&nbsp;&nbsp;홈페이지로</a>
+			</div>
+		</div>
 	</body>
 </html>

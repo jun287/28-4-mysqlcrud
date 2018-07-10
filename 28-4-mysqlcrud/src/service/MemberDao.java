@@ -134,6 +134,7 @@ public class MemberDao {
 			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
 			
 			String updateQuery = "UPDATE member SET member_name=? ,member_age=? WHERE member_no=?";
+			//member_no값에 있는 행을 수정처리 합니다
 			preparedStatement = connection.prepareStatement(updateQuery);
 			preparedStatement.setString(1, memberName);
 			preparedStatement.setInt(2, memberAge);
@@ -190,8 +191,8 @@ public class MemberDao {
 			if (resultSet.next()) {
 				totalPage=resultSet.getInt("memberNO");
 			}
-			lastPage = (totalPage-1) / pagePerRow;
-			if((totalPage-1) % pagePerRow != 0) {
+			lastPage = (totalPage) / pagePerRow;
+			if((totalPage) % pagePerRow != 0) {
 				lastPage++;
 			}
 			
