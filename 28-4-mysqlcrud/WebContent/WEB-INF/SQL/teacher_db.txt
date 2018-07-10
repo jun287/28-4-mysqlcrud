@@ -18,3 +18,14 @@ CREATE TABLE `teacheraddr` (
 )
 COLLATE='euckr_korean_ci'
 ENGINE=InnoDB;
+
+CREATE TABLE `teacher_score` (
+	`teacher_score_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`teacher_no` INT(10) NOT NULL,
+	`score` INT(10) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`teacher_score_no`),
+	INDEX `FK1` (`teacher_no`),
+	CONSTRAINT `FK1` FOREIGN KEY (`teacher_no`) REFERENCES `teacher` (`teacher_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
