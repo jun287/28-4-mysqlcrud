@@ -255,6 +255,46 @@ public class TeacherDao {
 		return teacher;
 	}
 	
+	
+	// 설명 : 드라이버 로딩 , DB연결 , delete 쿼리문 작성 실행해서 teacher_score 테이블에 데이터 삭제하는 메서드 선언
+	// 매개변수 : int 기본타입으로 teacherNo 매개변수를 선언하고 등록된 번호를 받습니다.
+	// 리턴값 : void로 업습니다.
+	public void deleteTeacherScore(int teacherNo) {
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
+			String dbUser = "java";
+			String dbPass = "java0000";
+			
+			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			
+			statement = connection.prepareStatement("DELETE FROM teacher_score WHERE teacher_no=?");
+			statement.setInt(1, teacherNo);
+			statement.executeUpdate();
+			
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally{
+			if(statement != null)try{
+				statement.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+			if(connection != null)try{
+				connection.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+		}
+	}
 	// 설명 : 드라이버 로딩 , DB연결 , delete 쿼리문 작성 실행해서 teacher 테이블에 데이터 삭제하는 메서드 선언
 	// 매개변수 : int 기본타입으로 teacherNo 매개변수를 선언하고 등록된 번호를 받습니다.
 	// 리턴값 : void로 업습니다.
@@ -313,7 +353,7 @@ public class TeacherDao {
 			
 			connection = DriverManager.getConnection(URL, dbUser, dbPass);
 			
-			statement = connection.prepareStatement("DELETE FROM teacheraddr WHERE teacher_addr_no=?");
+			statement = connection.prepareStatement("DELETE FROM teacheraddr WHERE teacher_no=?");
 			statement.setInt(1, teacherNo);
 			statement.executeUpdate();
 			
