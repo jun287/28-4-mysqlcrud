@@ -237,6 +237,7 @@ public class EmployeeScoreDao {
 				employeeScore.setScore(resultSet.getInt("score"));
 				employeeAndScore.setEmployeescore(employeeScore);	
 			}
+			
 		}catch(ClassNotFoundException e) {
 	
 			e.printStackTrace();
