@@ -13,7 +13,7 @@
 	<body>
 		<h1 align="center">28기 4조 프로젝트</h1><br>
 		<form>
-			<table border="1" width="50%" align ="center">
+			<table border="1" align ="center">
 				<thead>
 					<tr>
 						<td>이름</td>
