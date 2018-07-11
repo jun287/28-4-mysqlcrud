@@ -18,7 +18,7 @@
 				<table>
 					<tr>
 						<td id="title">점수 </td>
-						<td><input type="text" name="memberScore" maxlength="5"></td>
+						<td><input type="text" name="memberScore"  placeholder="score..." maxlength="5"></td>
 					</tr>
 				</table>
 				<br><input type="submit" value="등록"> &nbsp;<input type="button" value="취소">
