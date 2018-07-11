@@ -1,3 +1,4 @@
+<!-- 28기 이원상 2018. 7. 10(화) studentAndScoreList.jsp  -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="service.StudentAndScore" %>
 <%@ page import="service.StudentScore" %>
@@ -15,7 +16,6 @@
 	<table>
 		<tr>
 			<th>학생번호</th><th>학생이름</th><th>학생나이</th><th>점수번호</th><th>점수</th>
-			<!-- 점수는 한번만 입력, join문 연습, 학생의 정보까지  -->
 		</tr>
 <%
 	request.setCharacterEncoding("euc-kr");
@@ -37,6 +37,6 @@
 	}
 %>			
 	</table>
-	
+	<div><a href="<%=request.getContextPath()%>/Student/studentList.jsp">학생 목록으로</a></div>
 </body>
 </html>

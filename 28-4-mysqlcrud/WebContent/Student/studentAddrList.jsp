@@ -1,3 +1,4 @@
+<!-- 28기 이원상 studentAddrList.jsp -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "java.util.ArrayList" %>
 <%@ page import = "service.StudentAddrDao" %>
@@ -35,5 +36,6 @@ tb, tr, th, td{
 	}
 %>
 	</table>
+	<div><a href="<%=request.getContextPath()%>/Student/studentList.jsp">학생 목록으로</a></div>
 </body>
 </html>

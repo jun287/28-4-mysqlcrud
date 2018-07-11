@@ -436,4 +436,49 @@ public class StudentScoreDao {
 		return lastPage;
 		
 	}
+	
+	/*
+	메소드 설명	
+	1. 용도 : 학생의 1명의 점수를 삭제하는 메소드임(Database내 Student_Score테이블의 특정 student_no컬럼을 삭제하는 메소드).
+	2. 매개변수 : int studentNo(list에서 get방식으로 넘겨받은 값을 int data로 변환 받은 후 대입)
+	3. 리턴값 : void
+	4. StudentScore Class 프로퍼티
+		- 접근지정자는 모두 private임. int studentScoreNumber,int studentNumber,int score
+	*/			
+	public void deleteStudentScore(int studentNo) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
+			String dbUser = "java";
+			String dbPass = "java0000";
+			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			preparedStatement = connection.prepareStatement("DELETE FROM student_score WHERE student_no=?");
+			preparedStatement.setInt(1, studentNo);
+			preparedStatement.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }

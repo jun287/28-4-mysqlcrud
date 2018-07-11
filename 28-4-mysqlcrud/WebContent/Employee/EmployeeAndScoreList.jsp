@@ -6,6 +6,13 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>Insert title here</title>
+		<script>
+			var resultno=document.getElementById("id");
+			id.addEventListener("load", function() {
+				resultno.innerHTML="점수를 입력하세요.";
+				
+			});
+		</script>
 	</head>
 	<body>
 	<table border="1">
@@ -24,15 +31,25 @@
 				
 				//employeeScoreDao의 주소를 찾아가서selectEmployeeAndScore메소드의 매개변수에 no값을대입한후  employeeAndScore의 주소값을 리턴받는다
 				EmployeeAndScore employeeAndScore=employeeScoreDao.selectEmployeeAndScore(no);
-			
+				
+				System.out.println(employeeAndScore.getEmployee().getEmployeeNo()+"<---employeeAndScore.getEmployee().getEmployeeNo()");
+				
+			if(true){	
 			%>
-			<!--리턴받은 employeeAndScore의 주소값을 찾아가서 메소드를 실행시켜 변수값을 받아온다 -->
-			<tr>
-				<td><%=employeeAndScore.getEmployee().getEmployeeNo() %></td>
-				<td><%=employeeAndScore.getEmployee().getEmployeeName() %></td>
-				<td><%=employeeAndScore.getEmployee().getEmployeeAge()%></td>
-				<td><%=employeeAndScore.getEmployeescore().getScore() %></td>
-			</tr>
+					<!--리턴받은 employeeAndScore의 주소값을 찾아가서 메소드를 실행시켜 변수값을 받아온다 -->
+					<tr>
+						<td><%=employeeAndScore.getEmployee().getEmployeeNo() %></td>
+						<td><%=employeeAndScore.getEmployee().getEmployeeName() %></td>
+						<td><%=employeeAndScore.getEmployee().getEmployeeAge()%></td>
+						<td><%=employeeAndScore.getEmployeescore().getScore() %></td>
+					</tr>
+			<%
+			}else{
+			%>
+			<div id="resultno"></div>
+			<%	
+			}
+			%>
 	</table>
 	</body>
 </html>
