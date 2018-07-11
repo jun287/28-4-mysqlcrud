@@ -17,7 +17,7 @@
 				<table>
 					<tr>
 						<td id="title">주소 </td>
-						<td><input type="text" name="sendContent" maxlength="50"></td>
+						<td><input type="text" name="sendContent"  placeholder="address..." maxlength="50"></td>
 					</tr>
 				</table>
 				<br><input type="submit" value="등록"> &nbsp;<input type="button" value="취소">
