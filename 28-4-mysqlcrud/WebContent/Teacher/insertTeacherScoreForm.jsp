@@ -81,7 +81,7 @@
 					<li>
 						<ul class="cols">
 							<li class="col1">Á¡¼ö :</li>
-							<li class="col2"><input type="text" name="score"></li>
+							<li class="col2"><input type="number" name="score" min="1" max="100" maxlength="3" autocomplete="off" required></li>
 						</ul>
 					</li>
 					<li>

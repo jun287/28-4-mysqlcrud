@@ -64,13 +64,13 @@
 					<li>
 						<ul class="cols">
 							<li class="col1">이름 :</li>
-							<li class="col2"><input type="text" name="teacherName"></li>
+							<li class="col2"><input type="text" name="teacherName" maxlength="5" autocomplete="off" placeholder="이름 입력(5자 내외)" required></li>
 						</ul>
 					</li>
 					<li>
 						<ul class="cols">
 							<li class="col1">나이 :</li>
-							<li class="col2"><input type="text" name="teacherAge"></li>
+							<li class="col2"><input type="number" name="teacherAge" min="1" max="100" maxlength="3" autocomplete="off" required></li>
 						</ul>
 					</li>
 					<li>

@@ -64,7 +64,7 @@
 					<li>
 						<ul class="cols">
 							<li class="col1">林家 :</li>
-							<li class="col2"><input type="text" name="teacherAddrContent"></li>
+							<li class="col2"><input type="text" name="teacherAddrContent" placeholder="林家 涝仿" required></li>
 						</ul>
 					</li>
 					<li>

@@ -69,6 +69,13 @@
 			TeacherDao teacherDao = new TeacherDao();
 			Teacher teacher = teacherDao.updateSelectTeacher(teacherNo);
 			TeacherAddr teacherAddr = teacherDao.updateSelectTeacherAddr(teacherNo);
+			String teacherAddress = null;
+			
+			if(teacherAddr.getTeacherAddrContent() == null){
+				teacherAddress = "주소를 입력해주세요.";
+			}else{
+				teacherAddress = teacherAddr.getTeacherAddrContent();
+			}
 		
 		%>
 			<h3>정보 수정</h3>
@@ -77,19 +84,19 @@
 					<li>
 						<ul class="cols">
 							<li class="col1">이름 :</li>
-							<li class="col2"><input type="text" name="teacherName" value="<%=teacher.getTeacherName()%>"></li>
+							<li class="col2"><input type="text" name="teacherName" maxlength="5" value="<%=teacher.getTeacherName()%>" required></li>
 						</ul>
 					</li>
 					<li>
 						<ul class="cols">
 							<li class="col1">나이 :</li>
-							<li class="col2"><input type="text" name="teacherAge" value="<%=teacher.getTeacherAge()%>"></li>
+							<li class="col2"><input type="number" name="teacherAge" min="1" max="100" maxlength="3" value="<%=teacher.getTeacherAge()%>" required></li>
 						</ul>
 					</li>
 					<li>
 						<ul class="cols">
 							<li class="col1">주소 :</li>
-							<li class="col2"><input type="text" name="teacherAddrContent" value="<%=teacherAddr.getTeacherAddrContent()%>"></li>
+							<li class="col2"><input type="text" name="teacherAddrContent" value="<%=teacherAddress%>" required></li>
 						</ul>
 					</li>
 					<li>
