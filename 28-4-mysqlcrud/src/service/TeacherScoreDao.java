@@ -120,16 +120,19 @@ public class TeacherScoreDao {
 		return arrayList;
 	}
 	
-	// 설명 : 드라이버 로딩 , DB연결 , select 쿼리문 작성 실행해서  teacher테이블과 teacher_score테이블의 데이터를 조인하여 데이터를 조회하고 조회된 데이터를 ArrayList 클래스타입으로 객체들의 배열의 주소값들이 담긴 ArrayList객체의 주소값을 리턴하는 메서드 선언 
+	// 설명 : 드라이버 로딩 , DB연결 , select 쿼리문 작성 실행해서  teacher테이블과 teacher_score테이블의 데이터를 조인하여 데이터를 조회하고 조회된 데이터를  TeacherAndScore 클래스타입으로 Teacher와 Teacher_score객체들의 주소값들이 담긴 객체의 주소값을 리턴하는 메서드 선언 
 	// 매개변수 : int 기본타입으로 teacherNo를 받아서 select 쿼리문에 teacher_no에 대입해서  조회하게합니다.
-	// 리턴값 : ArrayList<TeacherAndScore> 타입으로 Teacher와 TeacherScore 객체들의 주소값이 ArrayList에 add(TeacherAndSocre)메서드 호출해서 index(객체배열)에 추가 되고 주소값을 리턴합니다.
-	public ArrayList<TeacherAndScore> selectTeacherAndScored(int teacherNo) {
+	// 리턴값 : TeacherAndScore 클래스 타입으로 Teacher와 TeacherScore 객체들의 주소값이 담긴 주소값을 리턴합니다.
+	public TeacherAndScore selectTeacherAndScored(int teacherNo) {
 		
 		Connection connection = null; 
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		
-		ArrayList<TeacherAndScore> arraylist = new ArrayList<TeacherAndScore>();
+		TeacherAndScore teacherAndScore = new TeacherAndScore();
+		Teacher teacher = new Teacher();
+		TeacherScore teacherScore = new TeacherScore();
+		
 		String sql = "SELECT ts.teacher_score_no,ts.teacher_no,t.teacher_name,t.teacher_age,ts.score FROM teacher_score ts INNER JOIN teacher t ON t.teacher_no = ts.teacher_no WHERE t.teacher_no=?";
 		
 		try {
@@ -146,21 +149,23 @@ public class TeacherScoreDao {
 			
 			resultSet = statement.executeQuery();
 			
-			while(resultSet.next()){
+			
+			if(resultSet.next()){
 				
-				Teacher teacher = new Teacher();
 				teacher.setTeacherName(resultSet.getString("t.teacher_name"));
 				teacher.setTeacherAge(resultSet.getInt("t.teacher_age"));
-				
-				TeacherScore teacherScore = new TeacherScore();
 				teacherScore.setTeacherNo(resultSet.getInt("ts.teacher_no"));
 				teacherScore.setScore(resultSet.getInt("ts.score"));
 				
-				TeacherAndScore teacherAndScore = new TeacherAndScore();
+				
 				teacherAndScore.setTeacher(teacher);
 				teacherAndScore.setTeacherScore(teacherScore);
 				
-				arraylist.add(teacherAndScore);
+				
+			}else {
+				
+				teacherAndScore.setTeacher(teacher);
+				teacherAndScore.setTeacherScore(teacherScore);
 				
 			}
 			// Class 클래스 객체에 forName 메서드를 호출하여 드라이버 로딩시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.
@@ -186,7 +191,7 @@ public class TeacherScoreDao {
 					ex.printStackTrace();
 				}
 			}
-			return arraylist;
+			return teacherAndScore;
 	}
 	
 	// 설명 : 드라이버 로딩 , DB연결 , select 쿼리문 작성 실행해서 결과값이 있으면 "입력완료" 없으면 "입력요망"을 리턴하는 메서드 선언 

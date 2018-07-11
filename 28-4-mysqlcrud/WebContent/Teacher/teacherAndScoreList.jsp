@@ -22,37 +22,42 @@
 		int teacherNo = Integer.parseInt(request.getParameter("no"));
 		System.out.println(teacherNo);
 		
+		
 		TeacherScoreDao teacherScoreDao = new TeacherScoreDao();
-		ArrayList<TeacherAndScore> arrayList = teacherScoreDao.selectTeacherAndScored(teacherNo);	
+		TeacherAndScore teacherAndScore = teacherScoreDao.selectTeacherAndScored(teacherNo);
+		
+		Teacher teacher = teacherAndScore.getTeacher();
+		TeacherScore teacherScore = teacherAndScore.getTeacherScore();
+
+		int result = teacherScore.getScore();
+		System.out.println(result);
+		
+		if(result == 0) {
 	%>
-		<h2>교사 점수</h2>	
-			<table border="1">
-				<tr>
-					<th>번호</th>
-					<th>이름</th>
-					<th>나이</th>
-					<th>점수</th>
-				</tr>
-				<%
-					for(int i=0;i<arrayList.size();i++){
-						TeacherAndScore teacherAndScore = arrayList.get(i);
-						Teacher teacher = teacherAndScore.getTeacher();
-						TeacherScore teacherScore = teacherAndScore.getTeacherScore();
-						System.out.println(teacherScore.getTeacherNo());
-						System.out.println(teacher.getTeacherName());
-						System.out.println(teacher.getTeacherAge());
-						System.out.println(teacherScore.getScore());
-						
-				%>
-						<tr>
-							<td><%=teacherScore.getTeacherNo()%></td>
-							<td><%=teacher.getTeacherName()%></td>
-							<td><%=teacher.getTeacherAge()%></td>
-							<td><%=teacherScore.getScore()%></td>
-						</tr>
-				<%
-					}
-				%>
-			</table>
+			<h2>점수를 입력해주세요!</h2>
+			<a href = "<%=request.getContextPath()%>/Teacher/teacherList.jsp">목록으로</a>
+	<%
+		}else{
+	%>
+			<h2>교사 점수</h2>	
+				<table border="1">
+					<tr>
+						<th>번호</th>
+						<th>이름</th>
+						<th>나이</th>
+						<th>점수</th>
+					</tr>
+					<tr>
+						<td><%=teacherScore.getTeacherNo()%></td>
+						<td><%=teacher.getTeacherName()%></td>
+						<td><%=teacher.getTeacherAge()%></td>
+						<td><%=teacherScore.getScore()%></td>
+					</tr>
+				</table>
+			
+	<%		
+		}
+	%>
+			
 	</body>
 </html>
