@@ -89,6 +89,11 @@
 						<a href = "./memberList.jsp?currentPage=<%=currentPage-1%>" class="btn">◀ 이전</a>
 				<%
 					}
+					for(int j=1; j<=totalList; j++) {
+				%>
+						<a href = "./memberList.jsp?currentPage=<%=j%>" class="btn"><%=j%></a>
+				<%
+					}
 					if(currentPage<totalList){
 				%>
 						<a href = "./memberList.jsp?currentPage=<%=currentPage+1%>" class="btn">다음 ▶</a>

@@ -61,7 +61,11 @@
 				<%
 					}
 					//currentPage가 1보다 크면 이전 a link태그가 나오도록 설정 했습니다.
-		
+					for(int j=1; j<=lastPage; j++) {
+				%>
+						<a href = "./memberListAboveAvg.jsp?currentPage=<%=j%>"><%=j%></a>
+				<%
+					}
 					if(currentPage<lastPage){
 				%>
 						<a href = "./memberListAboveAvg.jsp?currentPage=<%=currentPage+1%>">다음 ▶</a>
