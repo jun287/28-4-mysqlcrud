@@ -31,11 +31,7 @@
 						</tr>
 						<tr>
 							<td id="title">林家 </td>
-							<td><input type="text" name="sendContent" value="<%=memberAddr.getMemberAddrContent()%>"></td>
-						</tr>
-						<tr>
-							<td id="title">林家 </td>
-							<td><input type="text" name="memberAddr" maxlength="50"></td>
+							<td><input type="text" name="sendContent" value="<%=memberAddr.getMemberAddrContent()%>" maxlength="50"></td>
 						</tr>
 					</table>
 					<br><input type="submit" value="荐沥"> &nbsp;<input type="button" value="秒家">
