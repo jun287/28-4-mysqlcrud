@@ -1,3 +1,4 @@
+<!-- 28기 이원상 studentAddrList.jsp -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "java.util.ArrayList" %>
 <%@ page import = "service.StudentAddrDao" %>

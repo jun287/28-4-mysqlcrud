@@ -1,3 +1,4 @@
+<!-- 28기 이원상 2018. 7. 10(화) insertStudentScoreForm.jsp -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="service.StudentScore" %>
 <%@ page import="service.StudentDao" %>
