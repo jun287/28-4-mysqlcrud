@@ -203,6 +203,7 @@ public class EmployeeDao {
 		Connection connection=null;
 		PreparedStatement statement=null;
 		PreparedStatement statement1=null;
+		PreparedStatement statement2=null;
 		
 		//ip주소,포트번호,db명,사용자id,패스워드를 각각 String data type으로 선언된 변수에 담아라
 		String dbname="jdbc:mysql://localhost:3306/284db?"+"useUnicode=true&characterEncoding=euckr";
@@ -218,10 +219,17 @@ public class EmployeeDao {
 		//employee table에서 employee_addr가?인 행을 삭제하여라
 		String sql1="delete from employee_addr where employee_no=?";
 		
+		String sql2="delete from employee_score where employee_no=?";
+		
 		try {
 			Class.forName(dbDriver);
 			
 			connection=DriverManager.getConnection(dbname, userid, userpw);
+			
+			statement2=connection.prepareStatement(sql2);
+			statement2.setString(1, no);
+			
+			statement2.executeUpdate();
 			
 			statement1=connection.prepareStatement(sql1);
 			statement1.setString(1, no);

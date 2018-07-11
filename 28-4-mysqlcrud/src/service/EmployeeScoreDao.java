@@ -147,8 +147,8 @@ public class EmployeeScoreDao {
 		//db 연결 쿼리 실행 결과 조회 관련 변수들을 생성
 		Connection connection=null;
 		PreparedStatement statement=null;
-		PreparedStatement statement1=null;
-		ResultSet resultset=null;
+		
+		
 		
 		//ip주소,포트번호,db명,사용자id,패스워드를 각각 String data type으로 선언된 변수에 담아라
 		String dbname="jdbc:mysql://localhost:3306/284db?"+"useUnicode=true&characterEncoding=euckr";
@@ -171,12 +171,15 @@ public class EmployeeScoreDao {
 			connection=DriverManager.getConnection(dbname, userid, userpw);
 			
 			//쿼리 실행준비
-			statement1=connection.prepareStatement(sql);
-			statement1.setInt(1, employeeScore.getEmployee_no());
-			statement1.setInt(2, employeeScore.getScore());
+			statement=connection.prepareStatement(sql);
+			statement.setInt(1, employeeScore.getEmployee_no());
+			statement.setInt(2, employeeScore.getScore());
 			
+			System.out.println(statement+"<--statement");
 			//쿼리 실행
-			statement1.executeUpdate();
+			statement.executeUpdate();
+			
+			System.out.println(statement+"<--statement");
 		
 		}catch(ClassNotFoundException e) {
 			
@@ -211,12 +214,13 @@ public class EmployeeScoreDao {
 		EmployeeScore employeeScore=new EmployeeScore();
 		Employee employee=new Employee();
 		
-	
+		
 		String dbDriver="com.mysql.jdbc.Driver";
 		
 		try {
 			//Driver로딩
 			Class.forName(dbDriver);
+			
 			//db연결
 			connection=DriverManager.getConnection(dbname, userid, userpw);
 			//employee_score.employee_no가 ?일때 employee와employee_score에서 employee_no컬럼에 있는 값들이 같으면 employee_no,employee_name,employee_age,score칼럼에 있는 값들을 보여줘라
@@ -225,7 +229,7 @@ public class EmployeeScoreDao {
 			resultSet=statement.executeQuery();
 			
 			
-			//만약결과가 있으면 안에 있는 실행문을 실행하여라
+			//만약결과가 있으면 안에 있는 실행문을 실행 결과가 없으면 employeeName에 값이 없습니다 문자열 저장
 			if(resultSet.next()) {
 				
 				//EmployeeAndScore에 최종 저장하기위해서 객체를 선언하고 저장한다음 EmployeeAndScore에 Employee,EmployeeScore의 주소들을 저장한다.
@@ -236,6 +240,9 @@ public class EmployeeScoreDao {
 				
 				employeeScore.setScore(resultSet.getInt("score"));
 				employeeAndScore.setEmployeescore(employeeScore);	
+			}else {
+				employee.setEmployeeName("값이 없습니다.");
+				employeeAndScore.setEmployee(employee);
 			}
 			
 		}catch(ClassNotFoundException e) {

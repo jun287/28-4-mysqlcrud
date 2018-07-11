@@ -90,5 +90,6 @@
 		<%
 			}
 		%>
+		<a href="<%=request.getContextPath()%>/index.jsp">¸ñ·Ï</a>
 	</body>
 </html>
