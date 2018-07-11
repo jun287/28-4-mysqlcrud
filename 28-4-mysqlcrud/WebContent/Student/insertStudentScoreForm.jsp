@@ -23,7 +23,7 @@
 		<input type="text" id="name" name="studentName" value="<%=student.getStudentName() %>" readonly>
 		<input type="hidden" id="studentNo" name="studentNo" value="<%=student.getStudentNo() %>">
 		<label for="score">점수</label>
-		<input type="text" id="score" name="score">
+		<input type="text" id="score" name="score" required>
 		<input type="submit" value="등록">
 	</form>	
 </body>

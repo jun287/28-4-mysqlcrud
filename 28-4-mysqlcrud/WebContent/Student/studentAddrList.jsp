@@ -36,5 +36,6 @@ tb, tr, th, td{
 	}
 %>
 	</table>
+	<div><a href="<%=request.getContextPath()%>/Student/studentList.jsp">학생 목록으로</a></div>
 </body>
 </html>

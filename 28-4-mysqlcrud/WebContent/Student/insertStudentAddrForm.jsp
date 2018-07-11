@@ -19,7 +19,12 @@
 window.addEventListener("load", function(){
 	var insertButton = document.getElementById("insertButton");
 	insertButton.addEventListener("click", function(){
-		document.getElementById("insertForm").submit();
+		if(document.getElementById("address").value == "" || document.getElementById("address").value == null){
+			document.getElementById("addressHelper").innerHTML = "주소를 입력하여 주세요."
+		}else{
+			document.getElementById("insertForm").submit();
+		}
+		
 	});
 });
 </script>
@@ -41,7 +46,8 @@ window.addEventListener("load", function(){
 				</li>
 				<li>	
 					<label for="address">주소</label>	
-					<input type="text" id="address" name="studentAddrContent">
+					<input type="text" id="address" name="studentAddrContent" required>
+					<span id="addressHelper"></span>
 				</li>
 				<li>	
 					<input type="button" id="insertButton" value="등록">

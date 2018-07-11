@@ -11,5 +11,5 @@
 	
 	StudentAddrDao studentAddrDao = new StudentAddrDao();
 	studentAddrDao.insertStudentAddress(studentAddr);
-	response.sendRedirect(request.getContextPath()+"/Student/studentAddrList.jsp");
+	response.sendRedirect(request.getContextPath()+"/Student/studentAddrList.jsp?studentNo="+studentAddr.getStudentNO());
 %>
