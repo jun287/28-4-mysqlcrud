@@ -17,6 +17,13 @@
 		int teacherNo = Integer.parseInt(request.getParameter("no"));
 		TeacherDao teacherDao = new TeacherDao();
 		TeacherAddr teacherAddr = teacherDao.selectTeacherAddr(teacherNo);
+		String teacherAddress= null;
+		
+		if(teacherAddr.getTeacherAddrContent() == null){
+			teacherAddress = "林家甫 涝仿秦林技夸.";
+		}else{
+			teacherAddress = teacherAddr.getTeacherAddrContent();
+		}
 	%>
 		<h2>林家 格废</h2>
 		<table border="1">
@@ -26,7 +33,7 @@
 			</tr>
 			<tr>
 				<td><%=teacherAddr.getTeacherNo()%></td>
-				<td><%=teacherAddr.getTeacherAddrContent() %></td>
+				<td><%=teacherAddress%></td>
 			</tr>
 		</table>
 	</body>
