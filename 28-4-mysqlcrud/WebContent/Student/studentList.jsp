@@ -1,4 +1,4 @@
-<!-- 2018. 7. 2(월) 28기 이원상, studentList.jsp -->
+<!-- 2018. 7. 12(목)수정 28기 이원상, studentList.jsp -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "java.util.ArrayList" %>
 <%@ page import = "service.StudentDao" %>
