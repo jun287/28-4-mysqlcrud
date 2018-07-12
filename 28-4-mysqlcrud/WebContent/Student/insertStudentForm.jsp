@@ -1,40 +1,11 @@
-<!-- 28기 이원상 2018. 6. 25(월)insertStudentForm.jsp -->
+<!-- 28기 이원상 2018. 7. 12(목) 최종수정, insertStudentForm.jsp -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel= "stylesheet" type= "text/css" href="<%=request.getContextPath() %>/css/studentForm.css">
-<script type="text/javascript">
-window.addEventListener("load", function(){
-	// 원칙은 아니지만 자바스크립트 코드가 head에 위치하게 하기위해 이벤트처리를 통해서 문서가 읽히고(load) 나서 자바스크립트 코드가 읽히도록 하기 위한 코드임.
-		console.log("window load");		// test code
-		var signup = document.getElementById("signup");				//signup이라는 id를 가진 html태그를 signup변수에 대입하였음.
-		signup.addEventListener("click", function(){				//signupd이라는 변수에 담긴 태그를 클릭했을때 이벤트가 발생한다.
-			console.log("signup button click event");
-			
-			// helper
-			var namehelper = document.getElementById("namehelper");	//namehelper라는 id를 가진 html태그를 namehelper변수에 대입하였음.
-			// helper 끝
-			var nameValue =  document.getElementById("name").value;	//name라는 id를 가진 html태그의 value의 담긴 값을 nameValue변수에 대입하였음
-			var ageValue = document.getElementById("age").value;	//age라는 id를 가진 html태그의 value의 담긴 값을 ageValue변수에 대입하였음
-			var birthValue = document.getElementById("birth").value;//birth라는 id를 가진 html태그의 value의 담긴 값을 birthValue변수에 대입하였음
-			console.log(typeof ageValue);
-			if(nameValue.length = 0 || nameValue.length > 5){
-				namehelper.innerHTML ="이름이 너무나 짧거나 깁니다."
-				return;
-			}else{
-				var birthYear = birthValue.substring(0, 4);				// birth의 값 2000-00-00을 0번째(2) 문자 포함 4번째(-) 미포함 가져오는 메소드
-				console.log(birthYear+"<--birthYear");
-				var today = new Date();
-				var thisYear = today.getFullYear();
-				console.log(thisYear+"<--thisYear");
-				document.getElementById("age").value = ((thisYear+1)-birthYear);
-				console.log(document.getElementById("age").value+"<--value");
-				document.getElementById("insertStudentForm").submit();
-			}				
-		})
-})
+<script type="text/javascript" src="<%=request.getContextPath() %>/script/insertStudentForm.js">
 </script>
 <title>학생 입력 폼</title>
 </head>
@@ -45,12 +16,13 @@ window.addEventListener("load", function(){
 			<ul>
 				<li>
 					<label for="name">이름</label>	
-					<input type="text" id="name" name="studentName" placeholder="한글 2자 이상, 5자 이하" required>
+					<input type="text" id="name" name="studentName" placeholder="한글 2자 이상, 6자 이하" required>
 					<span id="namehelper" class="helper"></span>
 				</li>
 				<li>	
 					<label for="birth">생년월일</label>	
 					<input type="date" id="birth" name="studentBirth" required>
+					<span id="birthhelper" class="helper"></span>
 				</li>
 				<li>	
 					<label for="age">나이</label>	
@@ -62,6 +34,7 @@ window.addEventListener("load", function(){
 				</li>
 				<li>	
 					<button type="button" id="signup" >등록</button>
+					<button type="button" id="list">목록으로</button>
 				</li>	
 			</ul>	
 		</form>

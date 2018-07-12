@@ -19,7 +19,7 @@ public class StudentScoreDao {
 	3. 리턴값 : StudentAndScore클래스로 생성된 객체참조변수 참조값을 담은 리스트.
 		- StudentAndScore클래스 프로퍼티 : private Student student, private StudentScore studentScore;
 	*/
-	public ArrayList<StudentAndScore> selectStudentAndScore(){
+	public ArrayList<StudentAndScore> selectStudentAndScore(int studentNo){
 		ArrayList<StudentAndScore> studentAndScoreList = new ArrayList<StudentAndScore>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -31,7 +31,8 @@ public class StudentScoreDao {
 			String dbPass = "java0000";
 			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			System.out.println(connection + "<-- connection");
-			preparedStatement = connection.prepareStatement("select student.student_no, student.student_name, student.student_age, studentscore.student_score_no, studentscore.score from student student inner join student_score studentscore on student.student_no = studentscore.student_no");
+			preparedStatement = connection.prepareStatement("select student.student_no, student.student_name, student.student_age, studentscore.student_score_no, studentscore.score from student student inner join student_score studentscore on student.student_no = studentscore.student_no where student.student_no=?");
+			preparedStatement.setInt(1, studentNo);
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				Student student = new Student();
