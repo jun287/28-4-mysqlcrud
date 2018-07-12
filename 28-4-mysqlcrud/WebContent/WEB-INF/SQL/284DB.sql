@@ -96,18 +96,15 @@ INSERT INTO `member` (`member_no`, `member_name`, `member_age`) VALUES
 
 
 -- 테이블 284db의 구조를 덤프합니다. member_addr
-CREATE TABLE IF NOT EXISTS `member_addr` (
-  `memberAddr_no` int(10) NOT NULL AUTO_INCREMENT,
-  `member_no` int(10) NOT NULL,
-  `memberAddr_content` varchar(50) NOT NULL,
-  PRIMARY KEY (`memberAddr_no`),
-  KEY `member_no` (`member_no`),
-  CONSTRAINT `member_no` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=euckr;
-
--- Dumping data for table 284db.member_addr: ~5 rows (대략적)
-/*!40000 ALTER TABLE `member_addr` DISABLE KEYS */;
-INSERT INTO `member_addr` (`memberAddr_no`, `member_no`, `memberAddr_content`) VALUES
+	`memberAddr_content` VARCHAR(50) NOT NULL,
+	`memberAddr_date` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`memberAddr_no`),
+	INDEX `member_no` (`member_no`),
+	CONSTRAINT `member_no` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=4;
 	(1, 1, '전주시 덕진구'),
 	(2, 2, '금암동'),
 	(3, 3, '서신동'),
