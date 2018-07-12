@@ -1,8 +1,8 @@
 <!-- 2018.07.02 28기 전재현 -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="memberDto.Member" %>
-<%@ page import="memberDao.MemberDao" %>
+<%@ page import="memberDTO.Member" %>
+<%@ page import="memberDAO.MemberDao" %>
 <!DOCTYPE html>
 <html>
 	<head>

@@ -1,8 +1,8 @@
 <!-- 28±â Á¤¹Î¼ö 2018. 7.3(È­)insertEmployee.jsp -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
-<%@ page import="service.EmployeeDao" %>
-<%@ page import="service.Employee" %>
+<%@ page import="EmployeeDAO.EmployeeDao" %>
+<%@ page import="EmployeeDTO.Employee" %>
 <%@ page import="java.util.ArrayList" %>
 
 <% request.setCharacterEncoding("euckr"); %>

@@ -1,7 +1,7 @@
 <!-- 28±â Á¤¹Î¼ö 2018. 6. 25(¿ù)insertEmployeeAction.jsp -->
-<%@page import="service.EmployeeDao"%>
-<%@page import="service.Employee"%>
-<%@page import="service.EmployeeAddr"%>
+<%@page import="EmployeeDAO.EmployeeDao"%>
+<%@page import="EmployeeDTO.Employee"%>
+<%@page import="EmployeeDTO.EmployeeAddr"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 

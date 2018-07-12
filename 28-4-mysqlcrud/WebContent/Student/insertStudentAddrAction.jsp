@@ -1,7 +1,7 @@
 <!-- 2018. 7. 3(화) 이원상 insertStudentAddrAction.jsp -->
 <%@ page language = "java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import = "service.StudentAddrDao" %>
-<%@ page import = "service.StudentAddr" %>
+<%@ page import = "StudentDAO.StudentAddrDao" %>
+<%@ page import = "StudentDTO.StudentAddr" %>
 <%
 	request.setCharacterEncoding("euc-kr");
 	StudentAddr studentAddr = new StudentAddr();

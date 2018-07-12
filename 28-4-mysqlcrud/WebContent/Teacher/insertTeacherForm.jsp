@@ -29,9 +29,7 @@
 					<li>
 						<ul class="cols">
 							<li class="col1"></li>
-							<li class="col2">
-								<input type="submit" value="등록">	
-							</li>
+							<li class="col2"><input type="submit" value="등록"></li>
 						</ul>
 					</li>
 				</ul>

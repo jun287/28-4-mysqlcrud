@@ -2,10 +2,10 @@
 
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
-<%@ page import = "service.Teacher" %>
-<%@ page import = "service.TeacherAddr" %>
-<%@ page import = "service.TeacherDao" %>
-<%@ page import = "service.TeacherScoreDao" %>
+<%@ page import = "TeacherDTO.Teacher" %>
+<%@ page import = "TeacherDTO.TeacherAddr" %>
+<%@ page import = "TeacherDAO.TeacherDao" %>
+<%@ page import = "TeacherDAO.TeacherScoreDao" %>
 
 <!DOCTYPE html>
 

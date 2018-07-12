@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="memberDao.MemberScoreDao"%>
-<%@ page import="memberDto.MemberAndScore"%>
+<%@ page import="memberDAO.MemberScoreDao"%>
+<%@ page import="memberDTO.MemberAndScore"%>
 <%@ page import="java.util.ArrayList"%>
 <!-- 2018.07.09 28기 전재현 -->
 <!DOCTYPE html>

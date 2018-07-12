@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="memberDao.MemberDao" %>
+<%@ page import="memberDAO.MemberDao" %>
 <!DOCTYPE html>
 <html>
 	<head>

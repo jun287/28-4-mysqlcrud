@@ -1,8 +1,8 @@
 <!-- 28기 이원상 studentAddrList.jsp -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "java.util.ArrayList" %>
-<%@ page import = "service.StudentAddrDao" %>
-<%@ page import = "service.StudentAddr" %>
+<%@ page import = "StudentDAO.StudentAddrDao" %>
+<%@ page import = "StudentDTO.StudentAddr" %>
 <!DOCTYPE html>
 <html>
 <head>

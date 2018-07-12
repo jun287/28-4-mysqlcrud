@@ -70,8 +70,7 @@ h3 { /* h3태그의 여백을 설정합니다. */
 	text-align: left;
 }
 
-.cols li.col2 input.hp {
-	/* cols 클래스에 li.col2중 input 클래스 hp의 크기를 35px로 합니다. */
+.cols li.col2 input.hp {/* cols 클래스에 li.col2중 input 클래스의 크기를 35px로 합니다. */
 	width: 35px;
 }
 

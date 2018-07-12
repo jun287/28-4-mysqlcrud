@@ -2,7 +2,7 @@
 
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
-<%@ page import = "service.TeacherScoreDao" %>
+<%@ page import = "TeacherDAO.TeacherScoreDao" %>
 
 <!DOCTYPE html>
 <html>

@@ -1,9 +1,9 @@
 <!-- 28기 이원상 2018. 7. 10(화) studentAndScoreList.jsp  -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="service.StudentAndScore" %>
-<%@ page import="service.StudentScore" %>
-<%@ page import="service.Student" %>
-<%@ page import="service.StudentScoreDao" %>
+<%@ page import="StudentDTO.StudentAndScore" %>
+<%@ page import="StudentDTO.StudentScore" %>
+<%@ page import="StudentDTO.Student" %>
+<%@ page import="StudentDAO.StudentScoreDao" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>

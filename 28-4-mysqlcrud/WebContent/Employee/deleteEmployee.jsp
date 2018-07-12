@@ -1,6 +1,6 @@
 <!-- 28±â Á¤¹Î¼ö 2018. 7. 3(È­)insertEmployeeAction.jsp -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="service.EmployeeDao" %>
+<%@ page import="EmployeeDAO.EmployeeDao" %>
 <!DOCTYPE html>
 <html>
 	<head>

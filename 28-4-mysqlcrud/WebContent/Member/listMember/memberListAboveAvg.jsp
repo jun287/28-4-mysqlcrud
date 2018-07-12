@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="memberDto.MemberAndScore"%>
-<%@ page import="memberDao.MemberScoreDao"%>
+<%@ page import="memberDTO.MemberAndScore"%>
+<%@ page import="memberDAO.MemberScoreDao"%>
 <%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>

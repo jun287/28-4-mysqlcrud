@@ -1,6 +1,6 @@
 <!-- 2018. 7. 9(월) 28기 이원상 insertStudentScoreAction.jsp -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="service.StudentScoreDao"%>
+<%@ page import="StudentDAO.StudentScoreDao"%>
 <%
 	request.setCharacterEncoding("euc-kr");
 	int studentNo = Integer.parseInt(request.getParameter("studentNo"));

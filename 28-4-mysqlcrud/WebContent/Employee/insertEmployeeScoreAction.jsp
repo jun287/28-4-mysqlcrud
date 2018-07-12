@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="service.EmployeeScoreDao" %>
-<%@ page import="service.EmployeeScore" %>
+<%@ page import="EmployeeDAO.EmployeeScoreDao" %>
+<%@ page import="EmployeeDTO.EmployeeScore" %>
 <!DOCTYPE html>
 <html>
 	<head>

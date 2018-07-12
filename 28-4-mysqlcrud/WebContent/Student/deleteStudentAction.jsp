@@ -1,8 +1,8 @@
 <!-- 2018. 7. 3(화) 이원상 deleteStudentAction.jsp -->
 <%@ page language = "java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import = "service.StudentDao" %>
-<%@ page import = "service.StudentAddrDao" %>
-<%@ page import = "service.StudentScoreDao" %>
+<%@ page import = "StudentDAO.StudentDao" %>
+<%@ page import = "StudentDAO.StudentAddrDao" %>
+<%@ page import = "StudentDAO.StudentScoreDao" %>
 <%
 	request.setCharacterEncoding("euc-kr");
 	int studentNo = Integer.parseInt(request.getParameter("studentNo"));

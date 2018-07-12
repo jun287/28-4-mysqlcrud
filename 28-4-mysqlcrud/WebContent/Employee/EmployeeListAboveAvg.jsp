@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
-<%@ page import="service.EmployeeScoreDao"%>
-<%@ page import="service.EmployeeScore"%>
-<%@ page import="service.EmployeeDao"%>
-<%@ page import="service.EmployeeAndScore"%>
+<%@ page import="EmployeeDAO.EmployeeScoreDao"%>
+<%@ page import="EmployeeDTO.EmployeeScore"%>
+<%@ page import="EmployeeDAO.EmployeeDao"%>
+<%@ page import="EmployeeDTO.EmployeeAndScore"%>
 <%@ page import="java.util.ArrayList" %>
 
 <%request.setCharacterEncoding("euckr"); %>

@@ -1,7 +1,7 @@
 <!-- 28기 이원상 2018. 7. 10(화) StudentListAboveAverage.jsp -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="service.StudentScoreDao" %>
-<%@ page import="service.StudentAndScore" %>
+<%@ page import="StudentDAO.StudentScoreDao" %>
+<%@ page import="StudentDTO.StudentAndScore" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>

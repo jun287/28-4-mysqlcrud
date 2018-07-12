@@ -1,7 +1,7 @@
 <!-- 2018. 7. 3(화) 이원상 updateStudentForm.jsp -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import = "service.StudentDao" %>
-<%@ page import = "service.Student" %>
+<%@ page import = "StudentDAO.StudentDao" %>
+<%@ page import = "StudentDTO.Student" %>
 <%
 	request.setCharacterEncoding("euc-kr");
 	int studentNo = Integer.parseInt(request.getParameter("studentNo"));

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
-<%@ page import="service.EmployeeAddr" %>
+<%@ page import="EmployeeDTO.EmployeeAddr" %>
 <%@ page import="java.util.ArrayList" %>
-<%@page import="service.EmployeeDao"%>
+<%@page import="EmployeeDAO.EmployeeDao"%>
 
 <!DOCTYPE html>
 <html>
