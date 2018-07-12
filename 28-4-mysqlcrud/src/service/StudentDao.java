@@ -66,12 +66,12 @@ public class StudentDao {
 	/*
 	메소드 설명	
 	1. 용도 : 학생 pagePerRow(?)명을 조회하는 메소드임(Database내 Student테이블의 특정 개의 행을 조회하는 메소드).
-	2. 매개변수는 int data type이고 매개변수명은 currentPage(시작할 페이지), pagePerRow(페이지당 화면에 출력할 행의 수)임.
+	2. 매개변수명 currentPage(시작할 페이지), pagePerRow(페이지당 화면에 출력할 행의 수), searchWord(검색어), ageSelect(나이정렬방법) 임.
 	3. 리턴값 : ArrayList<Student>임. <--Arraylist를 통해 생성된 배열리스트이며 각각의 인덱스는 Student클래스를 통해 생성된 객체의 참조값을 가르킨다.
 	4. Student Class 프로퍼티
 		- 접근지정자는 모두 private임. int studentNO,String studentName,int studentAge
 	*/		
-	public ArrayList<Student> selectStudentByPage(int currentPage, int pagePerRow, String searchWord){
+	public ArrayList<Student> selectStudentByPage(int currentPage, int pagePerRow, String searchWord, String ageSelect){
 		ArrayList<Student> studentList = new ArrayList<>();
 		Student student = new Student();
 		Connection connection = null;
@@ -84,18 +84,46 @@ public class StudentDao {
 			String dbPass = "java0000";
 			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			int startRow = (currentPage-1)*pagePerRow;
-			if(searchWord.equals("")) {
+			if(searchWord.equals("") && ageSelect.equals("")) {
+				System.out.println("01조건. 검색어가 없고, 나이순 정렬이 없다.");
 				String sql = "select student_no,student_name,student_age from student order by student_no asc limit ?,?";
 				preparedStatement = connection.prepareStatement(sql);
 				preparedStatement.setInt(1, startRow);
 				preparedStatement.setInt(2, pagePerRow);	
-			}else {
+			}else if(!searchWord.equals("") && ageSelect.equals("")) {
+				System.out.println("02조건. 검색어가 있고, 나이순 정렬이 없다.");
 				String sql = "select student_no,student_name,student_age from student where student_name like ? order by student_no asc limit ?,?";
 				preparedStatement = connection.prepareStatement(sql);
 				preparedStatement.setString(1, "%"+searchWord+"%");
 				preparedStatement.setInt(2, startRow);
 				preparedStatement.setInt(3, pagePerRow);
-			}	
+			}else if(searchWord.equals("") && ageSelect.equals("youngAge")) {
+				System.out.println("03조건. 검색어가 없고, 나이순 정렬이 낮은나이순이다.");
+				String sql = "select student_no,student_name,student_age from student order by student_age asc limit ?,?";
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setInt(1, startRow);
+				preparedStatement.setInt(2, pagePerRow);		
+			}else if(searchWord.equals("") && ageSelect.equals("oldAge")) {
+				System.out.println("04조건. 검색어가 없고, 나이순 정렬이 높은나이순이다.");
+				String sql = "select student_no,student_name,student_age from student order by student_age desc limit ?,?";
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setInt(1, startRow);
+				preparedStatement.setInt(2, pagePerRow);
+			}else if(!searchWord.equals("") && ageSelect.equals("youngAge")) {
+				System.out.println("05조건. 검색어가 있고, 나이순 정렬이 낮은나이순이다.");
+				String sql = "select student_no,student_name,student_age from student where student_name like ? order by student_age asc limit ?,?";
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setString(1, "%"+searchWord+"%");
+				preparedStatement.setInt(2, startRow);
+				preparedStatement.setInt(3, pagePerRow);
+			}else if(!searchWord.equals("") && ageSelect.equals("oldAge")) {
+				System.out.println("06조건. 검색어가 있고, 나이순 정렬이 높은나이순이다.");
+				String sql = "select student_no,student_name,student_age from student where student_name like ? order by student_age desc limit ?,?";
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setString(1, "%"+searchWord+"%");
+				preparedStatement.setInt(2, startRow);
+				preparedStatement.setInt(3, pagePerRow);
+			}
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				student = new Student();

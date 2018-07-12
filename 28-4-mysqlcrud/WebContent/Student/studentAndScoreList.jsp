@@ -19,10 +19,11 @@
 		</tr>
 <%
 	request.setCharacterEncoding("euc-kr");
+	int studentNo = Integer.parseInt(request.getParameter("studentNo"));
 	StudentScoreDao studentScoreDao = new StudentScoreDao();
 	StudentAndScore studentAndScore = new StudentAndScore();
 	ArrayList<StudentAndScore> studentAndScoreList = new ArrayList<StudentAndScore>();
-	studentAndScoreList = studentScoreDao.selectStudentAndScore();
+	studentAndScoreList = studentScoreDao.selectStudentAndScore(studentNo);
 	for(int i=0; i<studentAndScoreList.size(); i++){
 		studentAndScore=studentAndScoreList.get(i);
 %>

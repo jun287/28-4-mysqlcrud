@@ -17,7 +17,10 @@
 	request.setCharacterEncoding("euc-kr");
 	StudentDao studentDao = new StudentDao();
 	Student student = new Student();
-	
+	String ageSelect =(request.getParameter("ageSelect") == null) ? "" : request.getParameter("ageSelect");  
+	// 삼항연산자 : (조건) ? 참인경우 : 거짓인경우
+	// ageSelect변수는 form에서 받아온 ageSelect Parameter의 값이 null이 참인 경우 ""을 대입하고,
+	// ageSelect변수는 form에서 받아온 ageSelect Parameter의 값이 null이 거짓인 경우 받아온 parameter값을 대입한다.
 	int currentPage = 1;
 	if(request.getParameter("currentPage") != null){
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -33,21 +36,83 @@
 		searchWord = request.getParameter("searchWord");
 	}
 	System.out.println(searchWord+"<--searchWord");
-	ArrayList<Student> studentList = studentDao.selectStudentByPage(currentPage, pagePerRow, searchWord); 
+	ArrayList<Student> studentList = studentDao.selectStudentByPage(currentPage, pagePerRow, searchWord, ageSelect); 
 %>
+
 	<form action="<%=request.getContextPath() %>/Student/studentList.jsp" method="post" id="selectForm">
+<%
+	if(pagePerRow == 3){
+%>
 		<select id="pagePerRow" name="pagePerRow">
-			<option value="3">3개씩 보기</option>
+			<option value="3" selected>3개씩 보기</option>
 			<option value="5">5개씩 보기</option>
 			<option value="7">7개씩 보기</option>
 			<option value="10">10개씩 보기</option>
 		</select>
+		<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
+<%		
+	}else if(pagePerRow == 5){
+%>
+		<select id="pagePerRow" name="pagePerRow">
+			<option value="3">3개씩 보기</option>
+			<option value="5" selected>5개씩 보기</option>
+			<option value="7">7개씩 보기</option>
+			<option value="10">10개씩 보기</option>
+		</select>
+		<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
+<%		
+	}else if(pagePerRow == 7){
+%>
+		<select id="pagePerRow" name="pagePerRow">
+			<option value="3">3개씩 보기</option>
+			<option value="5">5개씩 보기</option>
+			<option value="7" selected>7개씩 보기</option>
+			<option value="10">10개씩 보기</option>
+		</select>
+		<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
+<%		
+	}else if(pagePerRow == 10){
+%>
+		<select id="pagePerRow" name="pagePerRow">
+			<option value="3">3개씩 보기</option>
+			<option value="5">5개씩 보기</option>
+			<option value="7">7개씩 보기</option>
+			<option value="10" selected>10개씩 보기</option>
+		</select>
+		<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
+<%
+	}
+%>	
 		<button type="button" id="pagePerRowButton">보기설정</button>	
 	</form>
-	<table>
+	<form id="oldAgeForm" style="float:left">
+		<button type="button" name="oldAge" id="old">높은 나이순</button>
+		<input hidden="text" value="oldAge" name="ageSelect">
+		<input hidden="text" name="pagePerRow" value="<%=pagePerRow%>">
+	</form>
+	<form id="youngAgeForm" style="float:left">
+		<button type="button" name="youngAge" id="young">낮은 나이순</button>
+		<input hidden="text" value="youngAge" name="ageSelect">
+		<input hidden="text" name="pagePerRow" value="<%=pagePerRow%>">
+	</form>
+<%
+	if(ageSelect.equals("")){
+%>
+		<span></span>
+<%
+	}else if(ageSelect.equals("oldAge")){
+%>
+		<span>나이 오름차순 정렬 중</span>
+<%		
+	}else if(ageSelect.equals("youngAge")){
+%>
+		<span>나이 내림차순 정렬 중</span>
+<%		
+	}
+%>	
+	<table style="clear:both">
 		<tr>
 			<th>학생번호</th><th>학생이름</th><th>학생나이</th><th>주소입력</th><th>삭제</th><th>수정</th><th>점수입력</th><th>점수보기</th>
-			<!-- 점수는 한번만 입력, join문 연습, 학생의 정보까지  -->
 		</tr>
 <%
 	for(int i=0; i<studentList.size(); i++){
@@ -78,15 +143,15 @@
 <%
 	if(currentPage !=0 && currentPage != 1){
 %>
-		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=currentPage-1 %>">이전</a>
+		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=currentPage-1 %>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>">이전</a>
 <%
 	}for(int p=1; p<=lastPage; p++){
 %>		
-		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=p%>"><%=p%></a>
+		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=p%>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>"><%=p%></a>
 <%		
 	}if(currentPage < lastPage){
 %>	
-		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=currentPage+1 %>">다음</a>
+		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=currentPage+1 %>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>">다음</a>
 <%
 	}
 %>		
