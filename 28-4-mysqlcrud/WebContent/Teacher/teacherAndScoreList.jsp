@@ -15,6 +15,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>teacherAndScoreList</title>
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 	</head>
 	<body>
 		<div align="center">
@@ -41,7 +42,7 @@
 	%>
 		
 			<h2>교사 점수</h2><br>
-			<table border="1">
+			<table>
 				<tr>
 					<th>번호</th>
 					<th>이름</th>

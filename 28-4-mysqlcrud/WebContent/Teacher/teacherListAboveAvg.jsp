@@ -13,6 +13,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>teacherListAboveAvg</title>
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 	</head>
 	<body>
 		<div align="center">
@@ -26,7 +27,7 @@
 				
 			%>
 			평균 : <%=scoreAvg %>점
-			<table border="1">
+			<table>
 				<thead>
 					<tr>
 						<th>번호</th>

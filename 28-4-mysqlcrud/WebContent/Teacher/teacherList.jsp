@@ -13,6 +13,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>Insert title here</title>
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 	</head>
 	<body>
 		<div align="center">
@@ -38,7 +39,7 @@
 			
 		%>
 			<h2>교사 목록</h2><br>
-				<table border="1">
+				<table>
 					<tr>
 						<th>번호</th>
 						<th>이름</th>
@@ -80,13 +81,13 @@
 						
 						if(currentPage>1){
 							%>
-							<a href = "./teacherList.jsp?currentPage=<%=currentPage-1%>">◀ 이전</a>
+							<a href = "./teacherList.jsp?currentPage=<%=currentPage-1%>&searchWord=<%=searchWord%>">◀ 이전</a>
 							<%
 						}
 			
 						if(currentPage<lastPage){
 							%>
-							<a href = "./teacherList.jsp?currentPage=<%=currentPage+1%>">다음 ▶</a>
+							<a href = "./teacherList.jsp?currentPage=<%=currentPage+1%>&searchWord=<%=searchWord%>">다음 ▶</a>
 							<%
 						}else{
 							%>

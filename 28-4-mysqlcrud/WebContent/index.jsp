@@ -5,16 +5,13 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>Insert title here</title>
-		<style>
-
-		
-		</style>
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 	</head>
 	<body>
 		<div align="center">
 			<h1>28기 4조 프로젝트</h1><br>
 			<form>
-				<table border="1">
+				<table>
 					<thead>
 						<tr>
 							<td>이름</td>

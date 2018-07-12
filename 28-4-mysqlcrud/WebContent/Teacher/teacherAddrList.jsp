@@ -11,6 +11,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>Insert title here</title>
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 	</head>
 	<body>
 	<%	
@@ -27,7 +28,7 @@
 	%>
 		<div align="center" >
 			<h2>주소 목록</h2><br>
-			<table border="1">
+			<table>
 				<tr>
 					<th>번호</th>
 					<th>주소</th>
