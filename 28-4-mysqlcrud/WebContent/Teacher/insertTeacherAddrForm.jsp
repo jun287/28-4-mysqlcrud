@@ -45,6 +45,7 @@
 			
 			.cols li.col2 { /* cols 클래스에 li.col2 태그의 크기를 350px로 합니다. */
 				width:350px;
+				text-align:left;
 			}
 			
 			.cols li.col2 input.hp { /* cols 클래스에 li.col2중 input 클래스 hp의 크기를 35px로 합니다. */
@@ -58,7 +59,8 @@
 		</style>
 	</head>
 	<body>
-		<h3>주소 등록</h3>
+		<div align="center">
+			<h3>주소 등록</h3>
 			<form action="<%= request.getContextPath()%>/Teacher/insertTeacherAddrAction.jsp?no=<%=request.getParameter("no")%>" method="post">
 				<ul id="mem_form">
 					<li>
@@ -77,5 +79,6 @@
 					</li>
 				</ul>
 			</form>
+		</div>
 	</body>
 </html>

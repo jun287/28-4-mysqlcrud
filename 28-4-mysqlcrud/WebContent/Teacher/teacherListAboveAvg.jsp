@@ -15,41 +15,43 @@
 		<title>teacherListAboveAvg</title>
 	</head>
 	<body>
-		<h1>교사점수 목록(평균이상)</h1><br>
-		<%
-			TeacherScoreDao teacherScoreDao = new TeacherScoreDao();
-			int scoreAvg = teacherScoreDao.selectScoreAvg();
-			
-			ArrayList<TeacherAndScore> arrayList = new ArrayList<TeacherAndScore>();
-			arrayList = teacherScoreDao.selectTeacherListAboveAvg();
-			
-		%>
-		평균 : <%=scoreAvg %>점
-		<table border="1">
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>교사 이름</th>
-					<th>점수</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-					for(int i=0; i<arrayList.size(); i++){
-						TeacherAndScore teacherAndScore = arrayList.get(i);
-						Teacher teacher = teacherAndScore.getTeacher();
-						TeacherScore teacherScore = teacherAndScore.getTeacherScore();
-				%>
-						<tr>
-							<td><%=teacher.getTeacherNo()%></td>
-							<td><%=teacher.getTeacherName()%></td>
-							<td><%=teacherScore.getScore()%></td>
-						</tr>
-				<%
-					}
-				%>
-			</tbody>
-		</table>
-		<a href = "<%=request.getContextPath()%>/index.jsp">인덱스로</a>
+		<div align="center">
+			<h1>교사점수 목록(평균이상)</h1><br>
+			<%
+				TeacherScoreDao teacherScoreDao = new TeacherScoreDao();
+				int scoreAvg = teacherScoreDao.selectScoreAvg();
+				
+				ArrayList<TeacherAndScore> arrayList = new ArrayList<TeacherAndScore>();
+				arrayList = teacherScoreDao.selectTeacherListAboveAvg();
+				
+			%>
+			평균 : <%=scoreAvg %>점
+			<table border="1">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>교사 이름</th>
+						<th>점수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						for(int i=0; i<arrayList.size(); i++){
+							TeacherAndScore teacherAndScore = arrayList.get(i);
+							Teacher teacher = teacherAndScore.getTeacher();
+							TeacherScore teacherScore = teacherAndScore.getTeacherScore();
+					%>
+							<tr>
+								<td><%=teacher.getTeacherNo()%></td>
+								<td><%=teacher.getTeacherName()%></td>
+								<td><%=teacherScore.getScore()%></td>
+							</tr>
+					<%
+						}
+					%>
+				</tbody>
+			</table>
+			<a href = "<%=request.getContextPath()%>/index.jsp">인덱스로</a>
+		</div>
 	</body>
 </html>

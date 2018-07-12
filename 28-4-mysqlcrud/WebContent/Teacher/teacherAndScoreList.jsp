@@ -17,6 +17,7 @@
 		<title>teacherAndScoreList</title>
 	</head>
 	<body>
+		<div align="center">
 	<%		
 		request.setCharacterEncoding("EUC-KR");
 		int teacherNo = Integer.parseInt(request.getParameter("no"));
@@ -33,10 +34,9 @@
 		System.out.println(result);
 		
 		if(result == 0) {
-	%>
-			<h2>점수를 입력해주세요!</h2>
-			<a href = "<%=request.getContextPath()%>/Teacher/teacherList.jsp">목록으로</a>
-	<%
+			
+			response.sendRedirect(request.getContextPath()+"/Teacher/insertTeacherScoreForm.jsp?no="+teacherNo);
+			
 		}else{
 	%>
 		
@@ -45,21 +45,19 @@
 				<tr>
 					<th>번호</th>
 					<th>이름</th>
-					<th>나이</th>
 					<th>점수</th>
 				</tr>
 				<tr>
 					<td><%=teacherScore.getTeacherNo()%></td>
 					<td><%=teacher.getTeacherName()%></td>
-					<td><%=teacher.getTeacherAge()%></td>
 					<td><%=teacherScore.getScore()%></td>
 				</tr>
 			</table>
-			
 	<%		
 		}
 	%>
 			
-			<a href="<%=request.getContextPath()%>/Teacher/teacherList.jsp">목록으로</a>
+			<a href = "<%=request.getContextPath()%>/Teacher/teacherList.jsp">목록으로</a>
+		</div>
 	</body>
 </html>

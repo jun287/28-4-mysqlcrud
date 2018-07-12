@@ -25,17 +25,19 @@
 			teacherAddress = teacherAddr.getTeacherAddrContent();
 		}
 	%>
-		<h2>林家 格废</h2><br>
-		<table class="table table-hover">
-			<tr>
-				<th>锅龋</th>
-				<th>林家</th>
-			</tr>
-			<tr>
-				<td><%=teacherAddr.getTeacherNo()%></td>
-				<td><%=teacherAddress%></td>
-			</tr>
-		</table>
-		<a href="<%=request.getContextPath()%>/Teacher/teacherList.jsp">格废栏肺</a>
+		<div align="center" >
+			<h2>林家 格废</h2><br>
+			<table border="1">
+				<tr>
+					<th>锅龋</th>
+					<th>林家</th>
+				</tr>
+				<tr>
+					<td><%=teacherAddr.getTeacherNo()%></td>
+					<td><%=teacherAddress%></td>
+				</tr>
+			</table>
+			<a href="<%=request.getContextPath()%>/Teacher/teacherList.jsp">格废栏肺</a>
+		</div>
 	</body>
 </html>
