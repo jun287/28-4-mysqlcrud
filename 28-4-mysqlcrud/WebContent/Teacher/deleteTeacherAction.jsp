@@ -5,6 +5,7 @@
 <%@ page import = "service.Teacher" %>
 <%@ page import = "service.TeacherAddr" %>
 <%@ page import = "service.TeacherDao" %>
+<%@ page import = "service.TeacherScoreDao" %>
 
 <!DOCTYPE html>
 
@@ -17,8 +18,9 @@
 		<%
 			int teacherNo = Integer.parseInt(request.getParameter("no"));
 			TeacherDao teacherDao = new TeacherDao();
+			TeacherScoreDao teacherScoreDao = new TeacherScoreDao();
 			
-			teacherDao.deleteTeacherScore(teacherNo);
+			teacherScoreDao.deleteTeacherScore(teacherNo);
 			teacherDao.deleteTeacherAddr(teacherNo);
 			teacherDao.deleteTeacher(teacherNo);
 			
