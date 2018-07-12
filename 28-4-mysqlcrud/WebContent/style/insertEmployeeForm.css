@@ -27,6 +27,26 @@ form{
 	margin:5px 15px 0 0;
 	float: right;
 }
+#update{
+	width: 350px;
+	height:100px;
+	background-color: black;
+	border-radius: 10px;
+	position: relative;
+	top:100px;
+	left:600px;
+}
+#updateok{
+	position:relative;
+	left:0px;
+	bottom:60px;
+	width: 80px;
+	height:80px;
+	background-color: #ffffff;
+	border-radius: 10px;
+	margin:5px 15px 0 0;
+	float: right;
+}
 #addrok{
 	position:relative;
 	bottom:30px;

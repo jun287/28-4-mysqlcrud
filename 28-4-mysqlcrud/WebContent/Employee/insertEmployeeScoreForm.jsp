@@ -1,3 +1,5 @@
+<%@page import="EmployeeDTO.EmployeeAndScore"%>
+<%@page import="EmployeeDAO.EmployeeScoreDao"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <!DOCTYPE html>
@@ -6,27 +8,18 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>Insert title here</title>
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
-		<script>
-			//로딩 되었을 때 안에 있는 문장들을 실행 시켜라
-			window.addEventListener("load", function() {
-	
-		 	 	var btn=document.getElementById("btn");
-				var score=document.getElementById("score").value;
-				
-				btn.addEventListener("click", function() {
-					if(score>=100){
-						document.getElementById("result").innerHTML="100이상금지";
-					}else{
-						document.getElementById("scoreFrom").submit();
-					}
-				});
-			});
-		</script>
 	</head>
 	<body>
 		<%
 			int no=Integer.parseInt(request.getParameter("no"));
 			System.out.println(no+"<--no");
+			
+			EmployeeScoreDao employeeAndScoreDao=new EmployeeScoreDao();
+			EmployeeAndScore employeeAndScore=employeeAndScoreDao.selectEmployeeAndScore(no);
+			String result=employeeAndScore.getEmployee().getEmployeeName();
+			System.out.println(result+"<--result");
+			
+			if(result.equals("값이 없습니다.")){
 		%>
 			<div align="center">
 				<form action="<%=request.getContextPath()%>/Employee/insertEmployeeScoreAction.jsp?no=<%=no %>" method="post" id="scoreFrom">
@@ -36,5 +29,12 @@
 					<span id="result"></span>
 				</form>
 			</div>
+			
+		<%
+			}else{
+				
+				
+			}
+		%>
 	</body>
 </html>

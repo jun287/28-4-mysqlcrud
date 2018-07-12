@@ -16,7 +16,7 @@ public class EmployeeDao {
 	
 	//db에 있는 회원 정보를 가져오기위한 메스드 
 	//매개변수에는  현재  페이지와 몇개를 출력할것인지나타내는 매개변수를 대입한다
-	public ArrayList<Employee> selectEmployeeAll(int currentPage,int StartRow,String word){
+	public ArrayList<Employee> selectEmployeeAll(int currentPage,int StartRow,String searchWord){
 		
 		System.out.println("selectEmployeeAll()");
 		
@@ -35,7 +35,7 @@ public class EmployeeDao {
 		String dbDriver="com.mysql.jdbc.Driver";
 		
 		//Employee table을 오름차순으로 ?부터 ?개를 employee_no,employee_name,employee_age 조회하여라
-	
+		
 		
 		int start=(currentPage-1)*StartRow;
 		
@@ -47,15 +47,15 @@ public class EmployeeDao {
 			connection=DriverManager.getConnection(dbname, userid, userpw);
 			
 			//쿼리 실행준비
-			if(word==null) {
-				statement=connection.prepareStatement("SELECT employee_no,employee_name,employee_age FROM Employee ORDER BY employee_no asc LIMIT ?,?");
+			if(searchWord==null) {
+				statement=connection.prepareStatement("SELECT employee_no,employee_name,employee_age FROM Employee ORDER BY employee_no desc LIMIT ?,?");
 				statement.setInt(1, start);
 				statement.setInt(2, StartRow);
 			}else {
 				statement=connection.prepareStatement("SELECT employee_no,employee_name,employee_age FROM Employee where employee_name like ? order by employee_no asc LIMIT ?,?");
-				statement.setString(1, "%"+word+"%");
-				statement.setInt(2, start);	
-				statement.setInt(3, StartRow);	
+				statement.setString(1, "%"+searchWord+"%");
+				statement.setInt(2, start);
+				statement.setInt(3, StartRow);
 			}
 			//쿼리실행
 			resultset=statement.executeQuery();

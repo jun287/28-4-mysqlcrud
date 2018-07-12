@@ -18,7 +18,7 @@
 			Employee employee=employeeDao.updateSelectEmployee(no);
 		%>
 		<!-- 회원 가입폼 -->
-		<form action="./updateEmployeeAction.jsp?no=<%=no %>" method="post">
+		<form action="./updateEmployeeAction.jsp?no=<%=no %>" method="post" id="update">
 			<div id="name">
 				이름&nbsp;:&nbsp;
 				<input type='text' name="name" value=<%=employee.getEmployeeName() %>>
@@ -28,7 +28,7 @@
 				<input type='text' name="age" value=<%=employee.getEmployeeAge() %>>
 			</div>
 			<div>
-				<input type="submit" value="수정완료" id="ok">
+				<input type="submit" value="수정완료" id="updateok">
 			</div>
 		</form>
 	</body>

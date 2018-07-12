@@ -25,12 +25,11 @@
 					<th>주소</th>
 					<th>삭제</th>
 					<th>수정</th>
-					<th>점수입력</th>
 					<th>점수보기</th>
 				</tr>
 				<%
-					String word=request.getParameter("searchWord");
-					System.out.println(word+"<--word");
+					String searchWord=request.getParameter("searchWord");
+					System.out.println(searchWord+"<--searchWord");
 					//화면에 몇개씩 출력할건지 변수에 갯수를 저장함
 					int StartRow=5;
 				
@@ -46,7 +45,7 @@
 					
 					EmployeeDao employeedao=new EmployeeDao();
 					//employee의 주소를 찾아가서 메서드에 현재페이지 값과 몇개를 출력할 것인지를 매개변수에 대입하고 호출하여 주소값을 resultList에 대입한다
-					ArrayList<Employee> resultList=employeedao.selectEmployeeAll(currentPage,StartRow,word);
+					ArrayList<Employee> resultList=employeedao.selectEmployeeAll(currentPage,StartRow,searchWord);
 					
 					//ArryaList에 저장되어있는 갯수만큼 출력하고 dto주소를 찾아가서 값들을 가져와 화면에 출력한다
 					for(int i=0;i<resultList.size();i++){
@@ -58,11 +57,10 @@
 							<td><a href="<%=request.getContextPath() %>/Employee/EmployeeAddrList.jsp?no=<%=employee.getEmployeeNo() %>"><%=employee.getEmployeeName() %></a></td>
 							<td><%=employee.getEmployeeAge() %></td>
 							<!--주소입력을 눌렀을시  insertEmployeeAddrForm.jsp,삭제를 눌렀을시 deleteEmployee.jsp,수정을 눌렀을시 updateEmployeeForm.jsp에 각각 no변수에 employee.getEmployeeNo()값을 담아 넘긴다-->
-							<td><a href="<%=request.getContextPath() %>/Employee/insertEmployeeAddrForm.jsp?no=<%=employee.getEmployeeNo() %>">주소보기</a></td>
+							<td><a href="<%=request.getContextPath() %>/Employee/insertEmployeeAddrForm.jsp?no=<%=employee.getEmployeeNo() %>">주소입력</a></td>
 							<td><a href="<%=request.getContextPath() %>/Employee/deleteEmployee.jsp?no=<%=employee.getEmployeeNo() %>">삭제</a></td>
 							<td><a href="<%=request.getContextPath() %>/Employee/updateEmployeeForm.jsp?no=<%=employee.getEmployeeNo() %>">수정</a></td>						
-							<td><a href="<%=request.getContextPath() %>/Employee/insertEmployeeScoreForm.jsp?no=<%=employee.getEmployeeNo() %>">점수입력</a></td>						
-							<td><a href="<%=request.getContextPath() %>/Employee/EmployeeAndScoreList.jsp?no=<%=employee.getEmployeeNo() %>">점수보기</a></td>						
+							<td><a href="<%=request.getContextPath() %>/Employee/insertEmployeeScoreForm.jsp?no=<%=employee.getEmployeeNo() %>">점수보기</a></td>						
 						</tr>
 				<%
 					}
@@ -71,7 +69,7 @@
 			</table>
 			<form action="./EmployeeList.jsp" method="post">
 				이름 :<input type="text" name="searchWord">
-					<button type="button">검색</button>
+					<button type="submit">검색</button>
 			</form>
 		
 			<%
