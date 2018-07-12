@@ -25,12 +25,8 @@ public class StudentScoreDao {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-			System.out.println(connection + "<-- connection");
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
 			preparedStatement = connection.prepareStatement("select student.student_no, student.student_name, student.student_age, studentscore.student_score_no, studentscore.score from student student inner join student_score studentscore on student.student_no = studentscore.student_no where student.student_no=?");
 			preparedStatement.setInt(1, studentNo);
 			resultSet = preparedStatement.executeQuery();
@@ -48,9 +44,6 @@ public class StudentScoreDao {
 				studentAndScore.setStudentScore(studentScore);
 				studentAndScoreList.add(studentAndScore);
 			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,19 +89,12 @@ public class StudentScoreDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-			System.out.println(connection + "<-- connection");
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
 			preparedStatement = connection.prepareStatement("INSERT INTO student_score (student_no, score) VALUES (?, ?)");
 			preparedStatement.setInt(1, studentNo);
 			preparedStatement.setInt(2, score);
 			preparedStatement.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -146,21 +132,14 @@ public class StudentScoreDao {
 		ResultSet resultSet = null;
 		int count = 0;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-			System.out.println(connection + "<-- connection");
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
 			preparedStatement = connection.prepareStatement("select count(student_no) as count from student_score where student_no = ?");
 			preparedStatement.setInt(1, studentNo);
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
 				count=resultSet.getInt(1);
 			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -204,19 +183,12 @@ public class StudentScoreDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-			System.out.println(connection + "<-- connection");
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
 			preparedStatement = connection.prepareStatement("UPDATE student_score SET score=? WHERE student_no=?");
 			preparedStatement.setInt(1, score);
 			preparedStatement.setInt(2, studentNo);
 			preparedStatement.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -254,20 +226,13 @@ public class StudentScoreDao {
 		ResultSet resultSet = null;
 		double studentScoreAverage=0;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-			System.out.println(connection + "<-- connection");
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
 			preparedStatement = connection.prepareStatement("select avg(score) as averageStudentScore from student_score");
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
 				studentScoreAverage = resultSet.getDouble("averageStudentScore");
 			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -311,12 +276,8 @@ public class StudentScoreDao {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-			System.out.println(connection + "<-- connection");
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
 			preparedStatement = connection.prepareStatement("select student.student_no, student.student_name, student.student_age, studentscore.student_score_no, studentscore.score "
 					+ "from student student inner join student_score studentscore on student.student_no = studentscore.student_no "
 					+ "where score >= (select avg(score) from student_score) order by score desc limit ?,?");
@@ -338,13 +299,10 @@ public class StudentScoreDao {
 				studentAndScore.setStudentScore(studentScore);
 				StudentAndScoreAboveAverageList.add(studentAndScore);
 			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			if(resultSet != null) {
 				try {
 					resultSet.close();
@@ -387,11 +345,8 @@ public class StudentScoreDao {
 		ResultSet resultSet = null;
 		int lastPage = 0;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
 			preparedStatement = connection.prepareStatement("select count(student.student_no) as count from student student "
 					+ "inner join student_score studentscore on student.student_no = studentscore.student_no "
 					+ "where score >= (select avg(score) from student_score)");
@@ -403,9 +358,6 @@ public class StudentScoreDao {
 				if(totalRow%pagePerRow!=0){
 					lastPage++;
 				}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -450,17 +402,11 @@ public class StudentScoreDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
 			preparedStatement = connection.prepareStatement("DELETE FROM student_score WHERE student_no=?");
 			preparedStatement.setInt(1, studentNo);
 			preparedStatement.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
