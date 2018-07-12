@@ -40,20 +40,23 @@
 			
 		}else{
 	%>
-		
-			<h2>교사 점수</h2><br>
-			<table>
-				<tr>
-					<th>번호</th>
-					<th>이름</th>
-					<th>점수</th>
-				</tr>
-				<tr>
-					<td><%=teacherScore.getTeacherNo()%></td>
-					<td><%=teacher.getTeacherName()%></td>
-					<td><%=teacherScore.getScore()%></td>
-				</tr>
-			</table>
+			<form action="<%= request.getContextPath()%>/Teacher/insertTeacherScoreAction.jsp?no=<%=request.getParameter("no")%>" method="post">
+				<h2>교사 점수</h2><br>
+				<table>
+					<tr>
+						<th>번호</th>
+						<th>이름</th>
+						<th>점수</th>
+						<th>수정</th>
+					</tr>
+					<tr>
+						<td><%=teacherScore.getTeacherNo()%></td>
+						<td><%=teacher.getTeacherName()%></td>
+						<td><input type="number" name="score" min="1" max="100" maxlength="3" autocomplete="off" value="<%=teacherScore.getScore()%>" required></td>
+						<td><input type="submit" value="수정"></td>
+					</tr>
+				</table>
+			</form>
 	<%		
 		}
 	%>

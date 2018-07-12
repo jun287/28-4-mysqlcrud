@@ -213,6 +213,9 @@ public class TeacherScoreDao {
 			
 		Connection connection = null; 
 		PreparedStatement statement = null;
+		PreparedStatement statement2 = null;
+		PreparedStatement statement3 = null;
+		ResultSet resultSet = null;
 
 		// 프로그램 실행중 발생하는 문제적인 상황을 예외 처리 하기 위해 try를 사용합니다.
 		try {
@@ -222,12 +225,28 @@ public class TeacherScoreDao {
 			
 			System.out.println(teacherScore.getTeacherNo());
 			System.out.println(teacherScore.getScore());
-
-			statement = connection.prepareStatement("INSERT INTO teacher_score(teacher_no, score) VALUES (?,?)");
-			statement.setInt(1, teacherScore.getTeacherNo());
-			statement.setInt(2, teacherScore.getScore());
 			
-			statement.executeUpdate();
+			statement = connection.prepareStatement("SELECT * FROM teacher_score WHERE teacher_no=?");
+			statement.setInt(1, teacherScore.getTeacherNo());
+			
+			resultSet = statement.executeQuery();
+			
+			if(resultSet.next()) {
+				
+				statement2 = connection.prepareStatement("UPDATE teacher_score SET score=? WHERE teacher_no=?");
+				statement2.setInt(1, teacherScore.getScore());
+				statement2.setInt(2, teacherScore.getTeacherNo());
+				
+				statement2.executeUpdate();
+				
+			}else {
+			
+				statement3 = connection.prepareStatement("INSERT INTO teacher_score(teacher_no, score) VALUES (?,?)");
+				statement3.setInt(1, teacherScore.getTeacherNo());
+				statement3.setInt(2, teacherScore.getScore());
+				
+				statement3.executeUpdate();
+			}
 		/* DriverManager클래스객체에 getConnection 메서드를 호출
 		Connection 클래스 타입의 connection객체참조변수에 대입하고 DB연결 및 Connection클래스 객체의 prepareStatement 메서드에 쿼리문을 대입하고 호출하여
 		statement(PreparedStatement클래스객체)에 executeUpdate 메서드로 쿼리문 실행시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.

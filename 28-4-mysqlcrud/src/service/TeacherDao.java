@@ -65,17 +65,38 @@ public class TeacherDao {
 			
 		Connection connection = null;
 		PreparedStatement statement = null;
+		PreparedStatement statement2 = null;
+		PreparedStatement statement3 = null;
+		ResultSet resultSet = null;
 		
 		try {
 			
 			DBconnection dbConnection = new DBconnection();
 			connection = dbConnection.getConnection();
 			
-			statement = connection.prepareStatement("UPDATE teacherAddr SET teacher_addr_content=? WHERE teacher_no=?");
-			statement.setString(1, teacherAddr.getTeacherAddrContent());
-			statement.setInt(2, teacherAddr.getTeacherNo());
+			statement= connection.prepareStatement("SELECT * FROM teacherAddr WHERE teacher_no=?");
+			statement.setInt(1, teacherAddr.getTeacherNo());
 			
-			statement.executeUpdate();
+			resultSet = statement.executeQuery();
+			
+			if(resultSet.next()) {
+				
+				statement2 = connection.prepareStatement("UPDATE teacherAddr SET teacher_addr_content=? WHERE teacher_no=?");
+				statement2.setString(1, teacherAddr.getTeacherAddrContent());
+				statement2.setInt(2, teacherAddr.getTeacherNo());
+				
+				statement2.executeUpdate();
+				
+			}else {
+				
+				statement3 = connection.prepareStatement("INSERT INTO teacheraddr(teacher_no, teacher_addr_content) VALUES (?,?)");
+				statement3.setInt(1, teacherAddr.getTeacherNo());
+				statement3.setString(2, teacherAddr.getTeacherAddrContent());
+				
+				statement3.executeUpdate();
+			}
+			
+			
 
 		}catch(SQLException e) {
 			e.printStackTrace();
