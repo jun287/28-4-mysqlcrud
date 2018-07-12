@@ -25,16 +25,23 @@
 			}
 			
 			String searchWord = "";
-			System.out.println(searchWord);
 			if(request.getParameter("searchWord")!=null) {
 				searchWord = request.getParameter("searchWord");
 				System.out.println(searchWord);
 			}
 			
+			String ageOrder = "";
+			if(request.getParameter("ageOrder")!=null) {
+				ageOrder = request.getParameter("ageOrder");
+				System.out.println(ageOrder);
+			}
+			System.out.println(ageOrder);
+			
 			// 페이지당 10개의 데이터를 보여줍니다.
 			int rowPerPage = 10;
 			TeacherDao teacherDao = new TeacherDao();
-			ArrayList<Teacher> teacherList = teacherDao.selectTeacherByPage(currentPage, rowPerPage, searchWord);
+
+			ArrayList<Teacher> teacherList = teacherDao.selectTeacherByPage(currentPage, rowPerPage, searchWord, ageOrder);
 			
 		%>
 			<div align="center">
@@ -43,7 +50,10 @@
 					<tr>
 						<th>번호</th>
 						<th>이름</th>
-						<th>나이</th>
+						<th>나이
+							<a href="<%=request.getContextPath()%>/Teacher/teacherList.jsp?ageOrder=DESC&searchWord=<%=searchWord%>">△</a>
+							<a href="<%=request.getContextPath()%>/Teacher/teacherList.jsp?ageOrder=ASC&searchWord=<%=searchWord%>">▽</a>
+						</th>
 						<th>주소입력</th><!-- 다수 -->
 						<th>삭제</th>
 						<th>수정</th>

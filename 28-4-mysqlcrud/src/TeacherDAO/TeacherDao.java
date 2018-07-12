@@ -429,12 +429,12 @@ public class TeacherDao {
 			}
 		}
 		return lastPage;
-	} 
+	}
 	
 	// 설명 : 드라이버 로딩 , DB연결 , select 쿼리문 작성 실행해서  teacher 테이블에 교사 데이터를 조회하고 조회된 데이터를 ArrayList 클래스타입으로 객체들의 배열의 주소값들이 담긴 ArrayList객체의 주소값을 리턴하는 메서드 선언 
-	// 매개변수 : int 기본타입으로 currentPage,와 pagePerRow를 받아서 select 쿼리문에 limit를 써서 조회하게합니다.
+	// 매개변수 : int 기본타입으로 currentPage,와 pagePerRow, String 참조타입으로 searchWord,ageOrder를 받아서 select 쿼리문에 대입하여 limit를 써서 조회하게합니다.
 	// 리턴값 : ArrayList<Teacher> 타입으로 Teacher 객체들의 주소값이 ArrayList에 add(Teacher)메서드 호출해서 index(객체배열)에 추가 되고 주소값을 리턴합니다.
-	public ArrayList<Teacher> selectTeacherByPage(int currentPage, int pagePerRow, String searchWord){
+	public ArrayList<Teacher> selectTeacherByPage(int currentPage, int pagePerRow, String searchWord, String ageOrder){
 		
 		ArrayList<Teacher> teacherlist = new ArrayList<Teacher>(); // 객체들의 주소값들을 받기위해 ArrayList 클래스를 import 하고 객체를 생성합니다.
 		Connection connection = null;
@@ -442,18 +442,36 @@ public class TeacherDao {
 		ResultSet resultSet = null;
 		
 		int startRow = (currentPage-1)*pagePerRow; //currentPage, pagePerRow 매개변수를 받아서 시작하는 데이터열을 구하고 starRow 변수에 대입합니다.
-		String sql = "SELECT * FROM teacher ORDER BY teacher_no DESC LIMIT ?,?";
+		String sql = "";
 		
 		try {
 			
 			DBconnection dbConnection = new DBconnection();
 			connection = dbConnection.getConnection();
 			
-			if(searchWord.equals("")) {
-				sql = "SELECT * FROM teacher ORDER BY teacher_no DESC LIMIT ?,?";
+			// 검색 키워드 혹은 나이 차순정렬 조건을 받아서 각각의 쿼리를 실행합니다.
+			if(searchWord.equals("") && ageOrder.equals("DESC")) {
+				sql = "SELECT * FROM teacher ORDER BY teacher_age DESC LIMIT ?,?";
 				statement = connection.prepareStatement(sql);
 				statement.setInt(1, startRow);
 				statement.setInt(2, pagePerRow);
+			}else if(searchWord.equals("") && ageOrder.equals("ASC")){
+				sql = "SELECT * FROM teacher ORDER BY teacher_age ASC LIMIT ?,?";
+				statement = connection.prepareStatement(sql);
+				statement.setInt(1, startRow);
+				statement.setInt(2, pagePerRow);
+			}else if(!searchWord.equals("") && ageOrder.equals("DESC")){
+				sql = "SELECT * FROM teacher WHERE teacher_name like ? ORDER BY teacher_age DESC LIMIT ?,?";
+				statement = connection.prepareStatement(sql);
+				statement.setString(1, "%"+searchWord+"%");
+				statement.setInt(2, startRow);
+				statement.setInt(3, pagePerRow);
+			}else if(!searchWord.equals("") && ageOrder.equals("ASC")){
+				sql = "SELECT * FROM teacher WHERE teacher_name like ? ORDER BY teacher_age ASC LIMIT ?,?";
+				statement = connection.prepareStatement(sql);
+				statement.setString(1, "%"+searchWord+"%");
+				statement.setInt(2, startRow);
+				statement.setInt(3, pagePerRow);
 			}else {
 				sql = "SELECT * FROM teacher WHERE teacher_name like ? ORDER BY teacher_no DESC LIMIT ?,?";
 				statement = connection.prepareStatement(sql);
@@ -461,6 +479,7 @@ public class TeacherDao {
 				statement.setInt(2, startRow);
 				statement.setInt(3, pagePerRow);
 			}
+			
 			
 			resultSet = statement.executeQuery();
 			// 반복문을 사용해 데이터값들을 Teacher 클래스 객체를 생성후 객체내에 메서드(setTeacherNo)를 이용해 쿼리실행후 데이터들을 저장합니다.
