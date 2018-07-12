@@ -24,12 +24,8 @@ public class TeacherScoreDao {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
 			statement = connection.prepareStatement("SELECT AVG(score) FROM teacher_score");
 			
@@ -39,8 +35,6 @@ public class TeacherScoreDao {
 				scoreAvg = resultSet.getInt("AVG(score)");
 			}
 			
-		}catch(ClassNotFoundException ex) {
-			ex.printStackTrace();
 		}catch(SQLException ex){
 			ex.printStackTrace();
 		}finally{
@@ -74,12 +68,8 @@ public class TeacherScoreDao {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
 			statement = connection.prepareStatement(sql);
 			resultSet = statement.executeQuery();
@@ -101,8 +91,6 @@ public class TeacherScoreDao {
 				
 			}
 			
-		}catch(ClassNotFoundException ex) {
-			ex.printStackTrace();
 		}catch(SQLException ex){
 			ex.printStackTrace();
 		}finally{
@@ -137,12 +125,8 @@ public class TeacherScoreDao {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, teacherNo);
@@ -168,9 +152,6 @@ public class TeacherScoreDao {
 				teacherAndScore.setTeacherScore(teacherScore);
 				
 			}
-			// Class 클래스 객체에 forName 메서드를 호출하여 드라이버 로딩시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.
-			}catch(ClassNotFoundException ex) {
-				ex.printStackTrace();
 			/* DriverManager클래스객체에 getConnection 메서드를 호출
 			Connection 클래스 타입의 connection객체참조변수에 대입하고 DB연결 및 Connection클래스 객체의 prepareStatement 메서드에 쿼리문을 대입하고 호출하여
 			statement(PreparedStatement클래스객체)에 executeUpdate 메서드로 쿼리문 실행시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.
@@ -206,12 +187,8 @@ public class TeacherScoreDao {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 
 			statement = connection.prepareStatement("SELECT * FROM teacher_score WHERE teacher_no=?");
 			statement.setInt(1, teacherNo);
@@ -223,10 +200,6 @@ public class TeacherScoreDao {
 			}else {
 				result = "입력요망";
 			}
-			
-			// Class 클래스 객체에 forName 메서드를 호출하여 드라이버 로딩시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.
-			}catch(ClassNotFoundException ex) {
-				ex.printStackTrace();
 			/* DriverManager클래스객체에 getConnection 메서드를 호출
 			Connection 클래스 타입의 connection객체참조변수에 대입하고 DB연결 및 Connection클래스 객체의 prepareStatement 메서드에 쿼리문을 대입하고 호출하여
 			statement(PreparedStatement클래스객체)에 executeUpdate 메서드로 쿼리문 실행시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.
@@ -261,14 +234,9 @@ public class TeacherScoreDao {
 		// 프로그램 실행중 발생하는 문제적인 상황을 예외 처리 하기 위해 try를 사용합니다.
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
-			
-			System.out.println("DB연결");
 			System.out.println(teacherScore.getTeacherNo());
 			System.out.println(teacherScore.getScore());
 
@@ -277,10 +245,6 @@ public class TeacherScoreDao {
 			statement.setInt(2, teacherScore.getScore());
 			
 			statement.executeUpdate();
-		
-		// Class 클래스 객체에 forName 메서드를 호출하여 드라이버 로딩시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.
-		}catch(ClassNotFoundException ex) {
-			ex.printStackTrace();
 		/* DriverManager클래스객체에 getConnection 메서드를 호출
 		Connection 클래스 타입의 connection객체참조변수에 대입하고 DB연결 및 Connection클래스 객체의 prepareStatement 메서드에 쿼리문을 대입하고 호출하여
 		statement(PreparedStatement클래스객체)에 executeUpdate 메서드로 쿼리문 실행시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.

@@ -17,6 +17,7 @@
 		<%
 			int teacherNo = Integer.parseInt(request.getParameter("no"));
 			TeacherDao teacherDao = new TeacherDao();
+			
 			teacherDao.deleteTeacherScore(teacherNo);
 			teacherDao.deleteTeacherAddr(teacherNo);
 			teacherDao.deleteTeacher(teacherNo);

@@ -48,9 +48,9 @@
 					<tr>
 						<td>4. 정민수</td>
 						<td>
-							<a href="<%= request.getContextPath() %>/Employee/insertEmployeeForm.jsp">고용 등록</a>
-							<a href="<%= request.getContextPath() %>/Employee/EmployeeList.jsp">고용 목록</a>
-							<a href="<%= request.getContextPath() %>/Employee/EmployeeListAboveAvg.jsp">고용점수 평균이상 목록</a>
+							<a href="<%= request.getContextPath() %>/Employee/insertEmployeeForm.jsp">직원 등록</a>
+							<a href="<%= request.getContextPath() %>/Employee/EmployeeList.jsp">직원 목록</a>
+							<a href="<%= request.getContextPath() %>/Employee/EmployeeListAboveAvg.jsp">직원점수 평균이상 목록</a>
 						</td>
 					</tr>
 				</tbody>

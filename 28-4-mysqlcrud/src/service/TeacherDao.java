@@ -28,13 +28,8 @@ public class TeacherDao {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
 			statement = connection.prepareStatement("SELECT * FROM teacheraddr WHERE teacher_no=?");
 			statement.setInt(1, teacherNo);
@@ -46,8 +41,6 @@ public class TeacherDao {
 				teacherAddr.setTeacherAddrContent(resultSet.getString("teacher_addr_content"));
 			}
 			
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -76,13 +69,8 @@ public class TeacherDao {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
 			statement = connection.prepareStatement("UPDATE teacherAddr SET teacher_addr_content=? WHERE teacher_no=?");
 			statement.setString(1, teacherAddr.getTeacherAddrContent());
@@ -90,9 +78,6 @@ public class TeacherDao {
 			
 			statement.executeUpdate();
 
-			
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -119,13 +104,8 @@ public class TeacherDao {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
 			statement = connection.prepareStatement("UPDATE teacher SET teacher_name=?, teacher_age=? WHERE teacher_no=?");
 			statement.setString(1, teacher.getTeacherName());
@@ -134,8 +114,6 @@ public class TeacherDao {
 			
 			statement.executeUpdate();
 			
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -164,13 +142,8 @@ public class TeacherDao {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
 			statement = connection.prepareStatement("SELECT * FROM teacheraddr WHERE teacher_no=?");
 			statement.setInt(1, teacherNo);
@@ -182,8 +155,6 @@ public class TeacherDao {
 				teacherAddr.setTeacherAddrContent(resultSet.getString("teacher_addr_content"));
 			}
 			
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -215,13 +186,8 @@ public class TeacherDao {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
 			statement = connection.prepareStatement("SELECT * FROM teacher WHERE teacher_no=?");
 			statement.setInt(1, teacherNo);
@@ -235,8 +201,6 @@ public class TeacherDao {
 				teacher.setTeacherAge(resultSet.getInt("teacher_age"));
 			}
 			
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -266,20 +230,13 @@ public class TeacherDao {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
 			statement = connection.prepareStatement("DELETE FROM teacher_score WHERE teacher_no=?");
 			statement.setInt(1, teacherNo);
 			statement.executeUpdate();
 			
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -305,20 +262,13 @@ public class TeacherDao {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
 			statement = connection.prepareStatement("DELETE FROM teacher WHERE teacher_no=?");
 			statement.setInt(1, teacherNo);
 			statement.executeUpdate();
-			
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
+
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -345,20 +295,13 @@ public class TeacherDao {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
 			statement = connection.prepareStatement("DELETE FROM teacheraddr WHERE teacher_no=?");
 			statement.setInt(1, teacherNo);
 			statement.executeUpdate();
 			
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -387,12 +330,8 @@ public class TeacherDao {
 		// 프로그램 실행중 발생하는 문제적인 상황을 예외 처리 하기 위해 try를 사용합니다.
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
 			System.out.println("DB연결");
 			System.out.println(teacherAddr.getTeacherNo());
@@ -403,10 +342,7 @@ public class TeacherDao {
 			statement.setString(2, teacherAddr.getTeacherAddrContent());
 			
 			statement.executeUpdate();
-		
-		// Class 클래스 객체에 forName 메서드를 호출하여 드라이버 로딩시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.
-		}catch(ClassNotFoundException ex) {
-			ex.printStackTrace();
+			
 		/* DriverManager클래스객체에 getConnection 메서드를 호출
 		Connection 클래스 타입의 connection객체참조변수에 대입하고 DB연결 및 Connection클래스 객체의 prepareStatement 메서드에 쿼리문을 대입하고 호출하여
 		statement(PreparedStatement클래스객체)에 executeUpdate 메서드로 쿼리문 실행시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.
@@ -443,15 +379,11 @@ public class TeacherDao {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
 			String sql = "SELECT COUNT(teacher_no) FROM teacher";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
-			
+
 			// 검색 키워드가 없으면 전체 teacher_no의 수를 조회하고 키워드가 있으면 키워드가 들어간 조회된 결과의 teacher_no 수를 조회합니다.
 			if(searchWord.equals("")) {
 				statement = connection.prepareStatement(sql);
@@ -473,8 +405,6 @@ public class TeacherDao {
 				lastPage++;
 			}
 			
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -507,12 +437,8 @@ public class TeacherDao {
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
 			if(searchWord.equals("")) {
 				sql = "SELECT * FROM teacher ORDER BY teacher_no LIMIT ?,?";
@@ -540,8 +466,6 @@ public class TeacherDao {
 				teacherlist.add(teacher); // 객체들의 주소값을 add메서드로 ArrayList 클래스 객체에 대입합니다. 
 			}
 			
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();	
 		}finally {
@@ -576,14 +500,8 @@ public class TeacherDao {
 		// 프로그램 실행중 발생하는 문제적인 상황을 예외 처리 하기 위해 try를 사용합니다.
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
-			
-			System.out.println("DB연결");
+			DBconnection dbConnection = new DBconnection();
+			connection = dbConnection.getConnection();
 			
 			statement = connection.prepareStatement("INSERT INTO teacher(teacher_name, teacher_age) VALUES (?,?)");
 			statement.setString(1, teacher.getTeacherName());
@@ -591,9 +509,6 @@ public class TeacherDao {
 			
 			statement.executeUpdate();
 		
-		// Class 클래스 객체에 forName 메서드를 호출하여 드라이버 로딩시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.
-		}catch(ClassNotFoundException ex) {
-			ex.printStackTrace();
 		/* DriverManager클래스객체에 getConnection 메서드를 호출
 		Connection 클래스 타입의 connection객체참조변수에 대입하고 DB연결 및 Connection클래스 객체의 prepareStatement 메서드에 쿼리문을 대입하고 호출하여
 		statement(PreparedStatement클래스객체)에 executeUpdate 메서드로 쿼리문 실행시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.
