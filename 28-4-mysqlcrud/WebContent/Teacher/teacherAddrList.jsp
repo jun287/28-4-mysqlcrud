@@ -20,7 +20,7 @@
 		String teacherAddress= null;
 		
 		if(teacherAddr.getTeacherAddrContent() == null){
-			teacherAddress = "주소를 입력해주세요.";
+			response.sendRedirect(request.getContextPath()+"/Teacher/insertTeacherAddrForm.jsp?no="+teacherNo);
 		}else{
 			teacherAddress = teacherAddr.getTeacherAddrContent();
 		}

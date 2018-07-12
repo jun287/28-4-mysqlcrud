@@ -174,55 +174,6 @@ public class TeacherScoreDao {
 			}
 			return teacherAndScore;
 	}
-	
-	// 설명 : 드라이버 로딩 , DB연결 , select 쿼리문 작성 실행해서 결과값이 있으면 "입력완료" 없으면 "입력요망"을 리턴하는 메서드 선언 
-	// 매개변수 : int 기본타입으로 teacherNo를 받아서 select 쿼리문에 teacher_no 컬럼에 대입해서 조회하게합니다.
-	// 리턴값 : String 타입으로 "입력완료" 또는 "입력요망"을 리턴합니다.
-	public String selectTeacherScore(int teacherNo) {
-		
-		Connection connection = null; 
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		String result = null;
-		
-		try {
-			
-			DBconnection dbConnection = new DBconnection();
-			connection = dbConnection.getConnection();
-
-			statement = connection.prepareStatement("SELECT * FROM teacher_score WHERE teacher_no=?");
-			statement.setInt(1, teacherNo);
-			
-			resultSet = statement.executeQuery();
-			
-			if(resultSet.next()){
-				result = "입력완료";
-			}else {
-				result = "입력요망";
-			}
-			/* DriverManager클래스객체에 getConnection 메서드를 호출
-			Connection 클래스 타입의 connection객체참조변수에 대입하고 DB연결 및 Connection클래스 객체의 prepareStatement 메서드에 쿼리문을 대입하고 호출하여
-			statement(PreparedStatement클래스객체)에 executeUpdate 메서드로 쿼리문 실행시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.
-			 */ 
-			}catch(SQLException ex){
-				ex.printStackTrace();
-			// 드라이버로딩, DB연결, 쿼리문 작성 및 실행이 끝나거나 혹은 작동이 안되었을때 종료해주기 위해 finally를 쓰고 if조건문으로 객체참조변수의 값이 null 이 아닐시 close 메서드로 종료시킵니다.
-			// 이때도 마찬가지로 예외처리를 해줍니다.
-			}finally{
-				if(statement != null)try{
-					statement.close(); 
-				}catch(SQLException ex){
-					ex.printStackTrace();
-				}
-				if(connection != null)try{
-					connection.close(); 
-				}catch(SQLException ex){
-					ex.printStackTrace();
-				}
-			}
-			return result;
-	}
-	
 	// 설명 : 드라이버 로딩 , DB연결 , insert 쿼리문에 teacherScore 클래스객체에 받은 값들을  teacher_score 테이블에 교사 데이터를 입력하는 메서드 선언
 	// 매개변수 : TeacherScore 클래스 타입으로 teacherScore 객체 주소값을 받습니다.
 	// 리턴값 : void 로 없습니다.

@@ -68,37 +68,26 @@
 			int teacherNo = Integer.parseInt(request.getParameter("no"));
 			System.out.println(teacherNo);
 			
-			TeacherScoreDao teacherScoreDao = new TeacherScoreDao();
-			String result = teacherScoreDao.selectTeacherScore(teacherNo);
-			System.out.println(result);
-			
-			if(result.equals("입력완료")){
-				System.out.println("점수 입력이 완료 되었습니다.");
-				response.sendRedirect(request.getContextPath()+"/Teacher/teacherList.jsp");	
-			}else if(result.equals("입력요망")){
 		%>
-				<h3>점수 입력</h3>
-				<form action="<%= request.getContextPath()%>/Teacher/insertTeacherScoreAction.jsp?no=<%=request.getParameter("no")%>" method="post">
-					<ul id="mem_form">
-						<li>
-							<ul class="cols">
-								<li class="col1">점수 :</li>
-								<li class="col2"><input type="number" name="score" min="1" max="100" maxlength="3" autocomplete="off" required></li>
-							</ul>
-						</li>
-						<li>
-							<ul class="cols">
-								<li class="col1"></li>
-								<li class="col2">
-									<input type="submit" value="입력">	
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</form>
-		<%
-			}
-		%>
+			<h3>점수 입력</h3>
+			<form action="<%= request.getContextPath()%>/Teacher/insertTeacherScoreAction.jsp?no=<%=request.getParameter("no")%>" method="post">
+				<ul id="mem_form">
+					<li>
+						<ul class="cols">
+							<li class="col1">점수 :</li>
+							<li class="col2"><input type="number" name="score" min="1" max="100" maxlength="3" autocomplete="off" required></li>
+						</ul>
+					</li>
+					<li>
+						<ul class="cols">
+							<li class="col1"></li>
+							<li class="col2">
+								<input type="submit" value="입력">	
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</form>
 		</div>
 	</body>
 </html>
