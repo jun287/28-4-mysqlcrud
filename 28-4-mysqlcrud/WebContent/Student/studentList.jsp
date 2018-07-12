@@ -29,12 +29,15 @@
 	if(request.getParameter("pagePerRow") != null){
 		pagePerRow = Integer.parseInt(request.getParameter("pagePerRow"));
 	}
-	int lastPage = studentDao.countStudent(pagePerRow);
-	
 	String searchWord = "";
 	if(request.getParameter("searchWord")!=null){
 		searchWord = request.getParameter("searchWord");
 	}
+	int lastPage = studentDao.countStudent(pagePerRow);
+	if(!searchWord.equals("")){
+		lastPage = studentDao.countStudent(pagePerRow, searchWord);
+	}	
+	
 	System.out.println(searchWord+"<--searchWord");
 	ArrayList<Student> studentList = studentDao.selectStudentByPage(currentPage, pagePerRow, searchWord, ageSelect); 
 %>
@@ -50,6 +53,7 @@
 			<option value="10">10개씩 보기</option>
 		</select>
 		<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
+		<input hidden="text" name="searchWord" value="<%=searchWord%>">
 <%		
 	}else if(pagePerRow == 5){
 %>
@@ -60,6 +64,7 @@
 			<option value="10">10개씩 보기</option>
 		</select>
 		<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
+		<input hidden="text" name="searchWord" value="<%=searchWord%>">
 <%		
 	}else if(pagePerRow == 7){
 %>
@@ -70,6 +75,7 @@
 			<option value="10">10개씩 보기</option>
 		</select>
 		<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
+		<input hidden="text" name="searchWord" value="<%=searchWord%>">
 <%		
 	}else if(pagePerRow == 10){
 %>
@@ -80,6 +86,7 @@
 			<option value="10" selected>10개씩 보기</option>
 		</select>
 		<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
+		<input hidden="text" name="searchWord" value="<%=searchWord%>">
 <%
 	}
 %>	
@@ -89,11 +96,13 @@
 		<button type="button" name="oldAge" id="old">높은 나이순</button>
 		<input hidden="text" value="oldAge" name="ageSelect">
 		<input hidden="text" name="pagePerRow" value="<%=pagePerRow%>">
+		<input hidden="text" name="searchWord" value="<%=searchWord%>">
 	</form>
 	<form id="youngAgeForm" style="float:left">
 		<button type="button" name="youngAge" id="young">낮은 나이순</button>
 		<input hidden="text" value="youngAge" name="ageSelect">
 		<input hidden="text" name="pagePerRow" value="<%=pagePerRow%>">
+		<input hidden="text" name="searchWord" value="<%=searchWord%>">
 	</form>
 <%
 	if(ageSelect.equals("")){
@@ -137,21 +146,23 @@
 			이름 :
 			<input type="text" name="searchWord">
 			<input type="submit" id="nameSearch" value="검색">
+			<input hidden="text" name="pagePerRow" value="<%=pagePerRow%>">
+			<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
 		</div>	
 	</form>
 	<div>
 <%
 	if(currentPage !=0 && currentPage != 1){
 %>
-		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=currentPage-1 %>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>">이전</a>
+		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=currentPage-1 %>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>&searchWord=<%=searchWord%>">이전</a>
 <%
 	}for(int p=1; p<=lastPage; p++){
 %>		
-		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=p%>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>"><%=p%></a>
+		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=p%>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>&searchWord=<%=searchWord%>"><%=p%></a>
 <%		
 	}if(currentPage < lastPage){
 %>	
-		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=currentPage+1 %>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>">다음</a>
+		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=currentPage+1 %>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>&searchWord=<%=searchWord%>">다음</a>
 <%
 	}
 %>		

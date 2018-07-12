@@ -17,14 +17,8 @@ public class StudentDao {
 		
 		// 예외를 조사할 문장(try)
 		try {
-			// DB Connection
-			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-			System.out.println(connection + "<-- connection");
-			// DB Connection 끝
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
 			
 			// preparedStatement쿼리문 준비 및 실행
 			preparedStatement = connection.prepareStatement("INSERT INTO student (student_name, student_age)	VALUES (?, ?)");
@@ -35,10 +29,6 @@ public class StudentDao {
 			// preparedStatement쿼리문 준비 및 실행 끝
 
 		// 예외처리	
-		}catch (ClassNotFoundException e) {
-			// ClassNotFoundException예외가 발생시 실행시킬 코드
-			e.printStackTrace();
-			//printStackTrace 에러메세지의 발생 근원츨 찾아서 단계별 에러를 출력한다.
 		} catch (SQLException e) {
 			// SQLException예외가 발생시 실행시킬 코드
 			e.printStackTrace();
@@ -78,11 +68,8 @@ public class StudentDao {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
 			int startRow = (currentPage-1)*pagePerRow;
 			if(searchWord.equals("") && ageSelect.equals("")) {
 				System.out.println("01조건. 검색어가 없고, 나이순 정렬이 없다.");
@@ -132,9 +119,6 @@ public class StudentDao {
 				student.setStudentAge(resultSet.getInt("student_age"));
 				studentList.add(student);
 			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -169,8 +153,8 @@ public class StudentDao {
 	/*
 	메소드 설명	
 	1. 용도 : 학생의 총 명수를 조회하는 메소드임(Database내 Student테이블의 전체 행의 갯수를 조회하는 메소드).
-	2. 매개변수, 매개변수명은 없음.
-	3. 리턴값 : int datatype으로 쿼리문의 실행결과 student table의 총 행의 갯수임.
+	2. 매개변수 : pagePerRow페이지당 볼 행의 개수
+	3. 리턴값 : int datatype으로 쿼리문의 실행결과 student table의 총 행의 갯수를 페이지당 볼 행의 개수로 나눠 총 페이지의 수를 구해 리턴
 	4. Student Class 프로퍼티
 		- 접근지정자는 모두 private임. int studentNO,String studentName,int studentAge
 	*/		
@@ -180,11 +164,8 @@ public class StudentDao {
 		ResultSet resultSet = null;
 		int lastPage = 0;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
 			preparedStatement = connection.prepareStatement("select count(student_no) as count from student");
 			resultSet = preparedStatement.executeQuery();
 			resultSet.next();
@@ -194,9 +175,66 @@ public class StudentDao {
 				if(totalRow%pagePerRow!=0){
 					lastPage++;
 				}
-		} catch (ClassNotFoundException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			if(resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		return lastPage;
+		
+	}
+	
+	/*
+	메소드 설명	
+	1. 용도 : 검색조건이 있을시 검색조건에 맞는 학생의 총 명수를 조회하는 메소드임(Database내 Student테이블의 특정검색조건에 맞는 행의 갯수를 조회하는 메소드).
+	2. 매개변수 : pagePerRow페이지당 볼 행의 개수, searchWord : List페이지에서 검색어
+	3. 리턴값 : int datatype으로 쿼리문의 실행결과 student table의 총 행의 갯수를 페이지당 볼 행의 개수로 나눠 총 페이지의 수를 구해 리턴
+	4. Student Class 프로퍼티
+		- 접근지정자는 모두 private임. int studentNO,String studentName,int studentAge
+	*/		
+	public int countStudent(int pagePerRow, String searchWord) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int lastPage = 0;
+		int totalRow = 0;
+		try {
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
+			preparedStatement = connection.prepareStatement("select student_no,student_name,student_age from student where student_name like ?");
+			preparedStatement.setString(1, "%"+searchWord+"%");
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				totalRow++;
+			}
+			System.out.println(totalRow+"<--DB내 student 테이블 총 행의 갯수");
+			lastPage = totalRow/pagePerRow;
+				if(totalRow%pagePerRow!=0){
+					lastPage++;
+				}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -241,17 +279,11 @@ public class StudentDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
 			preparedStatement = connection.prepareStatement("delete from student where student_no=?");
 			preparedStatement.setInt(1, studentNo);
 			preparedStatement.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -286,19 +318,13 @@ public class StudentDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
 			preparedStatement = connection.prepareStatement("UPDATE student SET student_name=?, student_age=? WHERE student_no=?");
 			preparedStatement.setString(1, student.getStudentName());
 			preparedStatement.setInt(2, student.getStudentAge());
 			preparedStatement.setInt(3, student.getStudentNo());
 			preparedStatement.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -335,11 +361,8 @@ public class StudentDao {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String jdbcDriver = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			connection = new DBconnection().getConnection();
+			//DBconnection클래스의 기본 생성자를 호출하여 객체생성 후 getConnection메소드 호출하여 리턴값을 connection에 대입.
 			preparedStatement = connection.prepareStatement("select student_no,student_name,student_age from student where student_no=?");
 			preparedStatement.setInt(1, student.getStudentNo());
 			System.out.println(preparedStatement+"<--preparedStatement");
@@ -348,9 +371,6 @@ public class StudentDao {
 			student.setStudentNo(resultSet.getInt("student_no"));
 			student.setStudentName(resultSet.getString("student_name"));
 			student.setStudentAge(resultSet.getInt("student_age"));
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
