@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<link rel="stylesheet" type="text/css" href="../../css/member/insertMemberForm.css">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 		<title>수정 화면</title>
 	</head>
 	<body>
@@ -16,17 +16,17 @@
 			MemberDao memberDao = new MemberDao();
 			Member member = memberDao.updateMemberSelect(getMemberNo);
 		%>
-		<div id="wrap">
+		<div align="center">
 			<br><br><br>
 			<h3>멤버 수정 </h3>
 			<form action="./updateMemberAction.jsp?memberNo=<%=getMemberNo%>" method="post">
 				<table>
 					<tr>
-						<td id="title">이름 </td>
+						<td>이름 </td>
 						<td><input type="text" name="memberName" value="<%=member.getMemberName()%>" maxlength="10" readonly></td>
 					</tr>
 					<tr>
-						<td id="title">나이 </td>
+						<td>나이 </td>
 						<td><input type="text" name="memberAge" value="<%=member.getMemberAge()%>" maxlength="3"></td>
 					</tr>
 				</table>

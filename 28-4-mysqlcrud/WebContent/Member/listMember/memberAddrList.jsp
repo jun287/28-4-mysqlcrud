@@ -8,7 +8,7 @@
 	<html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<link rel="stylesheet" type="text/css" href="../../css/member/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 		<title>주소 목록 리스트</title>
 	</head>
 	<body>
@@ -26,9 +26,9 @@
 			
 				
 		%>
-		<div class="container">
+		<div align="center">
 			<h2><%=memberName%>님 주소 리스트</h2>
-			<table class="table table-hover">
+			<table>
 				<tr>
 					<td>번호</td>
 					<td>주소</td>
@@ -51,9 +51,7 @@
 					}
 				%>
 			</table>
-			<div class="text-center">
 				<a href="./memberList.jsp">목록으로</a>
-			</div>
 		</div>
 	</body>
 </html>

@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<link rel="stylesheet" type="text/css" href="../../css/member/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 		<title>회원 정보 리스트 출력창</title>
 	</head>
 	<body>
@@ -40,16 +40,9 @@
 			System.out.println(getTotalList +"<- getTotalList");
 			
 		%>
-		<div class="container">
-			<h2>멤버 리스트</h2>
-			<form action="./memberList.jsp" method="post" class="text-right">
-			
-				<!-- placeholder=>text 박스안 글씨가 보이도록 설정 -->
-				<input type="text" name="searchWord" placeholder="Search...">
-				
-				<button type="submit">검색</button>
-			</form><br>
-			<table class="table table-hover">
+		<div align="center">
+			<h2>멤버 리스트</h2><br>
+			<table>
 				<tr>
 					<th>번호 </th>
 					<th>이름 </th>
@@ -80,7 +73,12 @@
 					
 				%>
 			</table>
-			<div class="text-center">
+			<form action="./memberList.jsp" method="post">
+				<!-- placeholder=>text 박스안 글씨가 보이도록 설정 -->
+				<input type="text" name="searchWord" placeholder="Search...">
+				
+				<button type="submit">검색</button>
+			</form>
 				<%
 					int totalList = memberDao.countMemberList(pagePerRow ,searchWord);
 					System.out.println(totalList +"<- totalList");
@@ -101,7 +99,6 @@
 					}
 				%>
 				<a href="../../index.jsp" class="btn btn-default">&nbsp;&nbsp;홈페이지로</a>
-			</div>
 		</div>
 	</body>
 </html>

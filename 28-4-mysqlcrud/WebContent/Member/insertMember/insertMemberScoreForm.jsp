@@ -4,20 +4,20 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<link rel="stylesheet" type="text/css" href="../../css/member/insertMemberForm.css">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 		<title>Score입력 화면</title>
 	</head>
 	<body>
 		<%
 			int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		%>
-		<div id="wrap">
+		<div align="center">
 			<br><br><br>
 			<h3>점수 등록 </h3>
 			<form action="./insertMemberScoreAction.jsp?memberNo=<%=memberNo%>" method="post">
 				<table>
 					<tr>
-						<td id="title">점수 </td>
+						<td>점수 </td>
 						<td><input type="text" name="memberScore"  placeholder="score..." maxlength="5"></td>
 					</tr>
 				</table>

@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<link rel="stylesheet" type="text/css" href="../../css/member/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 		<title>평균값 출력</title>
 	</head>
 	<body>
@@ -27,15 +27,15 @@
 			ArrayList<MemberAndScore> totalAverage = memberScoreDao.MemberAverageList(currentPage ,pagePerRow);
 			
 		%>
-		<div class="container">
+		<div align="center">
 			<h3>점수 목록</h3>
-			<table class="table table-hover">
+			<table>
 				<thead>
 					<tr>
-						<td>번호</td>
-						<td>이름</td>
-						<td>점수</td>
-						<td>평균점수 :<%=average%></td>
+						<th>번호</th>
+						<th>이름</th>
+						<th>점수</th>
+						<th>평균점수 :<%=average%></th>
 					</tr>
 				</thead>
 				<%
@@ -54,7 +54,6 @@
 					}
 				%>
 			</table>
-			<div class="text-center">
 				<%
 					int lastPage = memberScoreDao.selectTotalList(pagePerRow);
 					// memberDao변수에 들어있는 주소값을 찾아가 CountMemberList()메서드안에 pagePerRow변수값을 가지고 실행을 하고 결과값을 int형식으로 선언한 lsatPage변수에 대입했습니다.
@@ -79,7 +78,6 @@
 				%>
 				<a href="./memberList.jsp" class="btn">&nbsp;&nbsp;리스트페이지로</a>
 				<a href="../../index.jsp" class="btn">&nbsp;&nbsp;홈페이지로</a>
-			</div>
 		</div>
 	</body>
 </html>

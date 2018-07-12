@@ -16,7 +16,6 @@
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 	</head>
 	<body>
-		<div align="center">
 		<%		
 			request.setCharacterEncoding("EUC-KR");
 			//페이징을 위해 첫 페이지의 값을 1로 지정합니다.
@@ -38,7 +37,8 @@
 			ArrayList<Teacher> teacherList = teacherDao.selectTeacherByPage(currentPage, rowPerPage, searchWord);
 			
 		%>
-			<h2>교사 목록</h2><br>
+			<div align="center">
+				<h2>교사 목록</h2><br>
 				<table>
 					<tr>
 						<th>번호</th>
@@ -94,6 +94,6 @@
 						}
 					%>
 							<a href = "<%=request.getContextPath()%>/index.jsp">인덱스로</a>
-		</div>
+			</div>
 	</body>
 </html>

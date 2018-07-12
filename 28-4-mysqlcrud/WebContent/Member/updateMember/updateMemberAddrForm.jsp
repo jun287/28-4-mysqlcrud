@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<link rel="stylesheet" type="text/css" href="../../css/member/insertMemberForm.css">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 		<title>주소 수정 화면</title>
 	</head>
 	<body>
@@ -20,7 +20,7 @@
 			memberAddr = memberAddrDao.selectMemberAddrList(memberAddrNo);
 			
 		%>
-			<div id="wrap">
+			<div align="center">
 				<br><br><br>
 				<h3>멤버 수정 </h3>
 				<form action="./updateMemberAddrAction.jsp?memberNo=<%=memberAddr.getMemberNo()%>" method="post">

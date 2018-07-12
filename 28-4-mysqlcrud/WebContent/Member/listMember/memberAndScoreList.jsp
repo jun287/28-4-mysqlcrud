@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<link  rel="stylesheet" type="text/css" href="../../css/member/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 		<title>점수 리스트</title>
 	</head>
 	<body>
@@ -18,14 +18,14 @@
 			MemberScoreDao memberScoreDao = new MemberScoreDao();
 			ArrayList<MemberAndScore> totalList = memberScoreDao.selectMemberAndScore(memberName);
 		%>
-			<div class="container">
+			<div align="center">
 				<h3>점수 목록</h3>
-				<table class="table table-hover">
+				<table>
 					<thead>
 						<tr>
-							<td>번호</td>
-							<td>이름</td>
-							<td>점수</td>
+							<th>번호</th>
+							<th>이름</th>
+							<th>점수</th>
 						</tr>
 					</thead>
 					<%
@@ -44,9 +44,7 @@
 						}
 					%>
 				</table>
-				<div class="text-center">
 					<a href="./memberList.jsp" class="btn">&nbsp;&nbsp;리스트페이지로</a>
-				</div>
 			</div>
 	</body>
 </html>
