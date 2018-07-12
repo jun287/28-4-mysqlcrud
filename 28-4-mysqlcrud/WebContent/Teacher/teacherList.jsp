@@ -36,7 +36,7 @@
 			ArrayList<Teacher> teacherList = teacherDao.selectTeacherByPage(currentPage, rowPerPage, searchWord);
 			
 		%>
-			<h2>교사 목록</h2>	
+			<h2>교사 목록</h2><br>
 				<table border="1">
 					<tr>
 						<th>번호</th>
@@ -96,5 +96,6 @@
 						}
 					%>
 							<a href = "<%=request.getContextPath()%>/index.jsp">인덱스로</a>
+
 	</body>
 </html>

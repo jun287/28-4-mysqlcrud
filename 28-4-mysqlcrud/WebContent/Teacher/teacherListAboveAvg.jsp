@@ -15,7 +15,7 @@
 		<title>teacherListAboveAvg</title>
 	</head>
 	<body>
-		<h1>교사점수 평균이상 목록</h1>
+		<h1>교사점수 목록(평균이상)</h1><br>
 		<%
 			TeacherScoreDao teacherScoreDao = new TeacherScoreDao();
 			int scoreAvg = teacherScoreDao.selectScoreAvg();
@@ -24,10 +24,8 @@
 			arrayList = teacherScoreDao.selectTeacherListAboveAvg();
 			
 		%>
-		<div>
-			평균 : <%=scoreAvg %>점
-		</div>
-		<table border ="1">
+		평균 : <%=scoreAvg %>점
+		<table border="1">
 			<thead>
 				<tr>
 					<th>번호</th>

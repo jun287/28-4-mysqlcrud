@@ -39,25 +39,27 @@
 	<%
 		}else{
 	%>
-			<h2>교사 점수</h2>	
-				<table border="1">
-					<tr>
-						<th>번호</th>
-						<th>이름</th>
-						<th>나이</th>
-						<th>점수</th>
-					</tr>
-					<tr>
-						<td><%=teacherScore.getTeacherNo()%></td>
-						<td><%=teacher.getTeacherName()%></td>
-						<td><%=teacher.getTeacherAge()%></td>
-						<td><%=teacherScore.getScore()%></td>
-					</tr>
-				</table>
+		
+			<h2>교사 점수</h2><br>
+			<table border="1">
+				<tr>
+					<th>번호</th>
+					<th>이름</th>
+					<th>나이</th>
+					<th>점수</th>
+				</tr>
+				<tr>
+					<td><%=teacherScore.getTeacherNo()%></td>
+					<td><%=teacher.getTeacherName()%></td>
+					<td><%=teacher.getTeacherAge()%></td>
+					<td><%=teacherScore.getScore()%></td>
+				</tr>
+			</table>
 			
 	<%		
 		}
 	%>
 			
+			<a href="<%=request.getContextPath()%>/Teacher/teacherList.jsp">목록으로</a>
 	</body>
 </html>

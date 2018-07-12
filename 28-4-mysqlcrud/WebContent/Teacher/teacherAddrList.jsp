@@ -25,8 +25,8 @@
 			teacherAddress = teacherAddr.getTeacherAddrContent();
 		}
 	%>
-		<h2>林家 格废</h2>
-		<table border="1">
+		<h2>林家 格废</h2><br>
+		<table class="table table-hover">
 			<tr>
 				<th>锅龋</th>
 				<th>林家</th>
@@ -36,5 +36,6 @@
 				<td><%=teacherAddress%></td>
 			</tr>
 		</table>
+		<a href="<%=request.getContextPath()%>/Teacher/teacherList.jsp">格废栏肺</a>
 	</body>
 </html>

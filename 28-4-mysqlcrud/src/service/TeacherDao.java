@@ -326,6 +326,9 @@ public class TeacherDao {
 		
 		Connection connection = null; 
 		PreparedStatement statement = null;
+		PreparedStatement statement2 = null;
+		PreparedStatement statement3 = null;
+		ResultSet resultSet = null;
 
 		// 프로그램 실행중 발생하는 문제적인 상황을 예외 처리 하기 위해 try를 사용합니다.
 		try {
@@ -336,13 +339,28 @@ public class TeacherDao {
 			System.out.println("DB연결");
 			System.out.println(teacherAddr.getTeacherNo());
 			System.out.println(teacherAddr.getTeacherAddrContent());
-
-			statement = connection.prepareStatement("INSERT INTO teacheraddr(teacher_no, teacher_addr_content) VALUES (?,?)");
+			
+			statement = connection.prepareStatement("SELECT teacher_no, teacher_addr_content FROM teacheraddr WHERE teacher_no=?");
 			statement.setInt(1, teacherAddr.getTeacherNo());
-			statement.setString(2, teacherAddr.getTeacherAddrContent());
 			
-			statement.executeUpdate();
+			resultSet = statement.executeQuery();
 			
+			if(resultSet.next()) {
+				
+				statement2 = connection.prepareStatement("UPDATE teacherAddr SET teacher_addr_content=? WHERE teacher_no=?");
+				statement2.setString(1, teacherAddr.getTeacherAddrContent());
+				statement2.setInt(2, teacherAddr.getTeacherNo());
+				
+				statement2.executeUpdate();
+				
+			}else {
+				
+				statement3 = connection.prepareStatement("INSERT INTO teacheraddr(teacher_no, teacher_addr_content) VALUES (?,?)");
+				statement3.setInt(1, teacherAddr.getTeacherNo());
+				statement3.setString(2, teacherAddr.getTeacherAddrContent());
+				
+				statement3.executeUpdate();
+			}
 		/* DriverManager클래스객체에 getConnection 메서드를 호출
 		Connection 클래스 타입의 connection객체참조변수에 대입하고 DB연결 및 Connection클래스 객체의 prepareStatement 메서드에 쿼리문을 대입하고 호출하여
 		statement(PreparedStatement클래스객체)에 executeUpdate 메서드로 쿼리문 실행시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.
@@ -433,7 +451,7 @@ public class TeacherDao {
 		ResultSet resultSet = null;
 		
 		int startRow = (currentPage-1)*pagePerRow; //currentPage, pagePerRow 매개변수를 받아서 시작하는 데이터열을 구하고 starRow 변수에 대입합니다.
-		String sql = "SELECT * FROM teacher ORDER BY teacher_no LIMIT ?,?";
+		String sql = "SELECT * FROM teacher ORDER BY teacher_no DESC LIMIT ?,?";
 		
 		try {
 			
@@ -441,12 +459,12 @@ public class TeacherDao {
 			connection = dbConnection.getConnection();
 			
 			if(searchWord.equals("")) {
-				sql = "SELECT * FROM teacher ORDER BY teacher_no LIMIT ?,?";
+				sql = "SELECT * FROM teacher ORDER BY teacher_no DESC LIMIT ?,?";
 				statement = connection.prepareStatement(sql);
 				statement.setInt(1, startRow);
 				statement.setInt(2, pagePerRow);
 			}else {
-				sql = "SELECT * FROM teacher WHERE teacher_name like ? ORDER BY teacher_no LIMIT ?,?";
+				sql = "SELECT * FROM teacher WHERE teacher_name like ? ORDER BY teacher_no DESC LIMIT ?,?";
 				statement = connection.prepareStatement(sql);
 				statement.setString(1, "%"+searchWord+"%");
 				statement.setInt(2, startRow);
