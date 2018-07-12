@@ -2,11 +2,11 @@ package memberDTO;
 
 public class MemberAndScore {
 
-	private int memberNo;
 	private String memberName;
+	private int memberNo;
+	private int memberAge;
 	private int memberScoreNo;
 	private int score;
-	private int memberAge;
 	
 	public int getMemberNo() {
 		return memberNo;

@@ -10,14 +10,35 @@
 	</head>
 	<body>
 		<%
+			//화면에서 입력한 한글값이 안깨지도록 넣어줬습니다
 			request.setCharacterEncoding("euc-kr");
-			//화면에서  입력하는 이름값이 한글이기때문에 euc-kr을 넣어 한글이 안깨지도록 Encoding을 넣었습니다..
+			
+			int memberAge = 0;
+			String memberName = request.getParameter("member_name");
+			System.out.println(memberName +"<-getMember_name");
+			
+			//화면에서 입력하는 값이 없을때와 있을때 구분을 위해 if문을 작성했습니다.
+			if(request.getParameter("member_age") != "") {
+				memberAge = Integer.parseInt(request.getParameter("member_age"));
+				System.out.println(memberAge +"<-getMember_age");
+			}else {
+				
+			}
 			Member member = new Member();
-			//Member클래스에 값을 넣기 위해  Member()생성자 메소드를 통해 새로운객체를 생성을 한 후 그주소값을 Member형식으로 선언된 변수에 할당을 시켰습니다.  
-			String memberName = null;
-			int memberAge =0;
+			
+			//둘다 값이 없을시 다시 입력창으로 보내주도록 만들었습니다
 			if(request.getParameter("member_name") == "" && request.getParameter("member_age") == "") {
 				System.out.println("입력값이 없습니다.");
+				response.sendRedirect("./insertMemberForm.jsp");
+			
+			//이름값이 있고 age값이 없을시에도 다시 입력창으로 보내도록 만들었습니다
+			}else if(memberName != "" && memberAge == 0) {
+				System.out.println("나이를 입력해주세요");
+				response.sendRedirect("./insertMemberForm.jsp");
+			
+			//이름값이 없고 나이값만 있을시에도 입력창으로 보내도록 만들었습니다.
+			}else if(memberName == "" && memberAge != 0) {	
+				System.out.println("이름를 입력해주세요");
 				response.sendRedirect("./insertMemberForm.jsp");
 				
 			}else {

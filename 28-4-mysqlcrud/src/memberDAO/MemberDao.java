@@ -1,10 +1,9 @@
 package memberDAO;
 import java.sql.*;
 import java.util.ArrayList;
-
 import DBConnectionPool.DBconnection;
 import memberDTO.Member;
-
+import memberDTO.MemberAndScore;
 //2018.06.26 28기 전재현.
 public class MemberDao {
 	
@@ -195,10 +194,10 @@ public class MemberDao {
 		return lastPage;
 	} 
 	
-	//member테이블에 들어있는 데이터를 출력하는 메서드입니다.
-	public ArrayList<Member> selectMemberByPage(int currentPage, int pagePerRow ,String searchWord){
+	//목록리스트를 보여주는 메서드입니다.
+	public ArrayList<MemberAndScore> selectMemberByPage(int currentPage, int pagePerRow ,String searchWord){
 		
-		ArrayList<Member> memberList = new ArrayList<Member>(); 
+		ArrayList<MemberAndScore> memberJoinList = new ArrayList<MemberAndScore>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -210,28 +209,31 @@ public class MemberDao {
 			int startRow = (currentPage-1)*pagePerRow; 
 			//시작행 기준
 			if(searchWord.equals("")) {
-				String SelectQuery = "SELECT member_no ,member_name ,member_age FROM member ORDER BY member_no LIMIT ?,?";
-				preparedStatement = connection.prepareStatement(SelectQuery);
+				String joinQuery = "SELECT member.member_no ,member.member_name ,member.member_age ,member_score.score FROM member LEFT JOIN member_score ON member.member_no = member_score.member_no ORDER BY member.member_no DESC LIMIT ? ,?";
+				preparedStatement = connection.prepareStatement(joinQuery);
 				preparedStatement.setInt(1, startRow);
 				preparedStatement.setInt(2, pagePerRow);
+				
 			}else {
-				String selectQuery = "SELECT member_no ,member_name ,member_age FROM member WHERE member_name LIKE ? ORDER BY member_no LIMIT ? ,?";
-				preparedStatement = connection.prepareStatement(selectQuery);
+				//점수값 여부를 알기 위한 LEFT JOIN QEURY입니다
+				String joinQuery = "SELECT member.member_no ,member.member_name ,member.member_age ,member_score.score FROM member LEFT JOIN member_score ON member.member_no = member_score.member_no WHERE member.member_name LIKE ? ORDER BY member.member_no  LIMIT ? ,?";
+				preparedStatement = connection.prepareStatement(joinQuery);
 				preparedStatement.setString(1, "%"+searchWord+"%");
 				preparedStatement.setInt(2, startRow);
 				preparedStatement.setInt(3, pagePerRow);
 			}
 			
 			resultSet = preparedStatement.executeQuery();
-			Member member = null;
+			MemberAndScore memberAndScore = null;
 
 			while(resultSet.next()){ 
-				member = new Member();
-				member.setMemberNo(resultSet.getInt("member_no"));
-				member.setMemberName(resultSet.getString("member_name"));
-				member.setMemberAge(resultSet.getInt("member_age"));
+				memberAndScore = new MemberAndScore();
+				memberAndScore.setScore(resultSet.getInt("score"));
+				memberAndScore.setMemberNo(resultSet.getInt("member_no"));
+				memberAndScore.setMemberName(resultSet.getString("member_name"));
+				memberAndScore.setMemberAge(resultSet.getInt("member_age"));
 				
-				memberList.add(member);
+				memberJoinList.add(memberAndScore);
 			}
 			
 		}catch(SQLException close) {
@@ -257,7 +259,7 @@ public class MemberDao {
 				}
 		}
 	
-		return memberList;
+		return memberJoinList;
 
 	}
 	

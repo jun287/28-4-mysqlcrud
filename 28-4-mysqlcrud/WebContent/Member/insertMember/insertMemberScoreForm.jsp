@@ -18,7 +18,7 @@
 				<table>
 					<tr>
 						<td>점수 </td>
-						<td><input type="text" name="memberScore"  placeholder="score..." maxlength="5"></td>
+						<td><input type="text" name="memberScore"  placeholder="3글자 이내..." maxlength="3"></td>
 					</tr>
 				</table>
 				<br><input type="submit" value="등록"> &nbsp;<input type="button" value="취소">
