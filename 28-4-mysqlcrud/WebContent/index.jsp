@@ -14,8 +14,8 @@
 				<table>
 					<thead>
 						<tr>
-							<td>이름</td>
-							<td>링크</td>
+							<th>이름</th>
+							<th>링크</th>
 						<tr>
 					</thead>
 					<tbody>
