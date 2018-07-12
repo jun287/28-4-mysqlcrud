@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="service.MemberAddrDao" %>
-<%@ page import="service.MemberAddr" %>
-<%@ page import="service.Member" %>
+<%@ page import="memberDao.MemberAddrDao" %>
+<%@ page import="memberDto.MemberAddr" %>
+<%@ page import="memberDto.Member" %>
 <%@ page import="java.util.ArrayList" %>
 <!-- 2018.07.08 28기 전재현 -->
 <!DOCTYPE html>
@@ -32,6 +32,7 @@
 				<tr>
 					<td>번호</td>
 					<td>주소</td>
+					<td>등록 기간</td>
 					<td>수정</td>
 					<td>삭제</td>
 				</tr> 
@@ -42,6 +43,7 @@
 						<tr>
 							<td><%=memberAddr.getMemberAddrNo()%></td>
 							<td><%=memberAddr.getMemberAddrContent()%></td>
+							<td><%=memberAddr.getMemberAddrDate()%></td>
 							<td><a href="../updateMember/updateMemberAddrForm.jsp?memberAddrNo=<%=memberAddr.getMemberAddrNo()%>">수정</a></td>
 							<td><a href="../deleteMember/deleteMemberAddrAction.jsp?memberAddrNo=<%=memberAddr.getMemberAddrNo()%>">삭제</a></td>
 						</tr>

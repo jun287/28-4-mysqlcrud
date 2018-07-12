@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="service.MemberScoreDao"%>
-<%@ page import="service.MemberAndScore"%>
+<%@ page import="memberDao.MemberScoreDao"%>
+<%@ page import="memberDto.MemberAndScore"%>
 <%@ page import="java.util.ArrayList"%>
 <!-- 2018.07.09 28기 전재현 -->
 <!DOCTYPE html>
@@ -13,10 +13,10 @@
 	<body>
 		<%
 			request.setCharacterEncoding("EUC-KR");
-			int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-			System.out.println(memberNo +"<-memberNo");
+			String memberName = request.getParameter("memberName");
+			System.out.println(memberName +"<-memberName");
 			MemberScoreDao memberScoreDao = new MemberScoreDao();
-			ArrayList<MemberAndScore> totalList = memberScoreDao.selectMemberAndScore(memberNo);
+			ArrayList<MemberAndScore> totalList = memberScoreDao.selectMemberAndScore(memberName);
 		%>
 			<div class="container">
 				<h3>점수 목록</h3>

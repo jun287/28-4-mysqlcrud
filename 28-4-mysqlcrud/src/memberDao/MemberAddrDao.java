@@ -1,16 +1,56 @@
-package service;
+package memberDao;
 
 import java.sql.*;
 import java.util.ArrayList;
-import service.MemberAddr;
+
+import memberDto.MemberAddr;
+import service.DBconnection;
 
 //java.sql패키지내에 내장되어있는 클래스를 클래스이름만으로 사용가능하도록 import 시킵니다.
 //2018.06.26 28기 전재현.
 public class MemberAddrDao {
 	
-	//
+	//주소값 수정을 위한 메서드입니다
+	public int updateMemberAddr(MemberAddr memberAddr) {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int updateResult = 0;
+		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
+		try {
+			String updateQuery = "UPDATE member_addr SET memberAddr_content=? WHERE memberAddr_no=?";
+			preparedStatement = connection.prepareStatement(updateQuery);
+			preparedStatement.setString(1, memberAddr.getMemberAddrContent());
+			preparedStatement.setInt(2, memberAddr.getMemberAddrNo());
+			
+			System.out.println(preparedStatement +"<-preparedStatement");
+			updateResult = preparedStatement.executeUpdate();
+			System.out.println(updateResult +"<-updateResult");
+		}catch(SQLException close) {
+			close.printStackTrace();
+		}finally {
+			if(preparedStatement != null)
+				try {
+					preparedStatement.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			if(connection != null) {
+				try {
+					connection.close();
+				}catch(SQLException close) {
+					close.printStackTrace();
+				}
+			}
+		}
+		
+		return updateResult;
+	}
 	
-	//member_addr클래스 조회 메서드입니다.
+	//member_addr테이블 조회 메서드입니다.
 	public MemberAddr selectMemberAddrList(int memberAddrNo) {
 		
 		Connection connection = null;
@@ -18,16 +58,10 @@ public class MemberAddrDao {
 		ResultSet resultSet = null;
 		MemberAddr memberAddr = null;
 		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩 입니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPassword = "java0000";
-			//my-sql(DB)연결하기 위해 포트번호 ,데이터베이스명 ,ID ,PW값을 변수에 대입 입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)연결 입니다
-			
 			String selectQeury = "SELECT memberAddr_no ,memberAddr_content ,member_no FROM member_addr WHERE member_no=?";
 			preparedStatement = connection.prepareStatement(selectQeury);
 			preparedStatement.setInt(1, memberAddrNo);
@@ -41,8 +75,6 @@ public class MemberAddrDao {
 				
 			}
 			
-		}catch(ClassNotFoundException close) {
-			close.printStackTrace();
 		}catch(SQLException close) {
 			close.printStackTrace();
 		}finally {
@@ -79,17 +111,11 @@ public class MemberAddrDao {
 		ArrayList<MemberAddr> totalMemberAddr = null;
 		MemberAddr memberAddr = null;
 		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩 입니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPassword = "java0000";
-			//my-sql(DB)연결하기 위해 포트번호 ,데이터베이스명 ,ID ,PW값을 변수에 대입 입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)연결 입니다
-			
-			String SelectQuery = "SELECT member.member_no ,member_addr.memberAddr_no ,member_addr.memberAddr_content FROM member JOIN member_addr ON member.member_no = member_addr.member_no WHERE member_name=? ORDER BY memberAddr_no DESC";
+			String SelectQuery = "SELECT member.member_no ,member_addr.memberAddr_no ,member_addr.memberAddr_content ,left(memberAddr_date ,10) AS memberAddr_date FROM member JOIN member_addr ON member.member_no = member_addr.member_no WHERE member_name=? ORDER BY memberAddr_no DESC";
 			//LEFT JOIN을 통해 member테이블 기준으로 member_name컬럼의 값이 있을시 member테이블의 member_no 값과 member_addr테이블의 member_no 값이 일치하는 행만 출력이 되고 member_addr테이블에 값이 출력이 되도록 했습니다. 
 			preparedStatement = connection.prepareStatement(SelectQuery);
 			preparedStatement.setString(1, memberName);
@@ -104,11 +130,10 @@ public class MemberAddrDao {
 				memberAddr.setMemberNo(resultSet.getInt("member_no"));
 				memberAddr.setMemberAddrNo(resultSet.getInt("memberAddr_no"));
 				memberAddr.setMemberAddrContent(resultSet.getString("memberAddr_content"));
+				memberAddr.setMemberAddrDate(resultSet.getString("memberAddr_date"));
 				totalMemberAddr.add(memberAddr);
 			}
 			//while문으로 resultSet변수값이false가 나올때까지 실행을 시켜 memberAddr참조변수에 셋팅을 한다음 totalMEmberAddr참조 변수에 add메서드에 memberADdr참조 변구 값을 담아 할당 시켜줬습니다.
-		}catch(ClassNotFoundException close) {
-			close.printStackTrace();
 		}catch(SQLException close) {
 			close.printStackTrace();
 		}finally {
@@ -143,15 +168,10 @@ public class MemberAddrDao {
 		ResultSet resultSet = null;
 		String memberName = null;
 		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩 입니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPassword = "java0000";
-			//my-sql(DB)연결하기 위해 포트번호 ,데이터베이스명 ,ID ,PW값을 변수에 대입 입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)연결 입니다
 			String selectQuery = "SELECT member_name FROM member WHERE member_no=?";
 			preparedStatement = connection.prepareStatement(selectQuery);
 			preparedStatement.setInt(1, memberNo);
@@ -161,8 +181,6 @@ public class MemberAddrDao {
 				memberName = resultSet.getString("member_name");
 			}
 			
-		}catch(ClassNotFoundException close) {
-			close.printStackTrace();
 		}catch(Exception close) {
 			close.printStackTrace();
 		}finally {
@@ -195,24 +213,17 @@ public class MemberAddrDao {
 		
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
+		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩 입니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPassword = "java0000";
-			//my-sql(DB)연결하기 위해 포트번호 ,데이터베이스명 ,ID ,PW값을 변수에 대입 입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)연결 입니다
-			
 			String deleteQuery = "DELETE FROM member_addr WHERE memberAddr_no=?";
 			preparedStatement = connection.prepareStatement(deleteQuery);
 			preparedStatement.setInt(1, memberAddrNo);
 			
 			preparedStatement.executeUpdate();
 		
-		}catch(ClassNotFoundException close) {
-			close.printStackTrace();
 		}catch(SQLException close) {
 			close.printStackTrace();
 		}finally {
@@ -240,17 +251,12 @@ public class MemberAddrDao {
 		//Query문 실행을 위해 class타입의 참조변수를 선언을 하고 주소값을 null로 지정했습니다.
 		int execution = 0;
 		//처리 결과값 받기 위한 변수입니다
+		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩 입니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPassword = "java0000";
-			//my-sql(DB)연결하기 위해 포트번호 ,데이터베이스명 ,ID ,PW값을 변수에 대입 입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)연결 입니다
-			
-			String insertQuery = "INSERT INTO member_addr(member_no ,memberAddr_content) VALUES(? ,?)";
+			String insertQuery = "INSERT INTO member_addr(member_no ,memberAddr_content ,memberAddr_date) VALUES(? ,? ,now())";
 			preparedStatement = connection.prepareStatement(insertQuery);
 			preparedStatement.setInt(1, memberNo);
 			preparedStatement.setString(2, memberAddrContent);
@@ -259,8 +265,6 @@ public class MemberAddrDao {
 			execution = preparedStatement.executeUpdate();
 			//memberAddrContent변수에 값이 있으면 query문을 실행을 하고 리턴값으로 보내기 위해 실행값을 execution변수에 대입합니다
 			
-		}catch(ClassNotFoundException close) {
-			close.printStackTrace();
 		}catch(SQLException close) {
 			close.printStackTrace();
 		}finally {

@@ -1,11 +1,9 @@
-package service;
+package memberDto;
+//2018.06.25 28기 전재현.
 
-public class MemberAndScore {
-
+public class Member {
 	private int memberNo;
 	private String memberName;
-	private int memberScoreNo;
-	private int score;
 	private int memberAge;
 	
 	public int getMemberNo() {
@@ -20,22 +18,12 @@ public class MemberAndScore {
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-	public int getMemberScoreNo() {
-		return memberScoreNo;
-	}
-	public void setMemberScoreNo(int memberScoreNo) {
-		this.memberScoreNo = memberScoreNo;
-	}
-	public int getScore() {
-		return score;
-	}
-	public void setScore(int score) {
-		this.score = score;
-	}
 	public int getMemberAge() {
 		return memberAge;
 	}
 	public void setMemberAge(int memberAge) {
 		this.memberAge = memberAge;
 	}
+	
+	
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="service.MemberDao" %>
-<%@ page import="service.Member" %>
+<%@ page import="memberDao.MemberDao" %>
+<%@ page import="memberDto.Member" %>
 <!-- 2018.06.26 28기 개발자 전재현. -->
 <!DOCTYPE html>
 <html>

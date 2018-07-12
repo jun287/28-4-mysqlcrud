@@ -1,8 +1,9 @@
-package service;
-import service.Member;
-
+package memberDao;
 import java.sql.*;
 import java.util.ArrayList;
+import service.DBconnection;
+
+import memberDto.Member;
 
 //2018.06.26 28기 전재현.
 public class MemberDao {
@@ -13,18 +14,10 @@ public class MemberDao {
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
 		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩을 해줬습니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			//연결을 위해 String타입으로 선언한 변수안에 포트번호 ,데이터베이스명 ,Encoding을 대입을 했습니다
-			String dbUser = "java";
-			//my-sql(DB) ID값입니다
-			String dbPassword = "java0000";
-			//my-sql(DB) Password값입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
-			
 			String deleteQuery = "DELETE FROM member WHERE member_no=?";
 			//query문을 String형식으로 선언된 변수에 대입했습니다
 			preparedStatement = connection.prepareStatement(deleteQuery);
@@ -33,8 +26,7 @@ public class MemberDao {
 			
 			preparedStatement.executeUpdate();
 			//preparedStatement참조변수안 들어있는 주소값을 찾아가 실행을 합니다.
-		}catch(ClassNotFoundException close) {
-			close.printStackTrace();
+			
 		}catch(SQLException close) {
 			close.printStackTrace();
 		}finally {
@@ -61,18 +53,10 @@ public class MemberDao {
 		Connection connection = null;
 		ResultSet resultSet = null;
 		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩을 해줬습니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			//연결을 위해 String타입으로 선언한 변수안에 포트번호 ,데이터베이스명 ,Encoding을 대입을 했습니다
-			String dbUser = "java";
-			//my-sql(DB) ID값입니다
-			String dbPassword = "java0000";
-			//my-sql(DB) Password값입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
-			
 			String selectQuery = "SELECT member_no ,member_name ,member_age FROM member WHERE member_no=?";
 			//SELECTQUERY문을 String으로 선언한 변수에 대입을 시켜줬습니다.
 			preparedStatement = connection.prepareStatement(selectQuery);
@@ -87,8 +71,6 @@ public class MemberDao {
 				
 			}
 			
-		}catch(ClassNotFoundException close) {
-			close.printStackTrace();
 		}catch(SQLException close) {
 			close.printStackTrace();
 		}finally {
@@ -121,18 +103,10 @@ public class MemberDao {
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
 		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩을 해줬습니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			//연결을 위해 String타입으로 선언한 변수안에 포트번호 ,데이터베이스명 ,Encoding을 대입을 했습니다
-			String dbUser = "java";
-			//my-sql(DB) ID값입니다
-			String dbPassword = "java0000";
-			//my-sql(DB) Password값입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
-			
 			String updateQuery = "UPDATE member SET member_name=? ,member_age=? WHERE member_no=?";
 			//member_no값에 있는 행을 수정처리 합니다
 			preparedStatement = connection.prepareStatement(updateQuery);
@@ -142,8 +116,6 @@ public class MemberDao {
 			
 			preparedStatement.executeUpdate();
 			
-		}catch(ClassNotFoundException close) {
-			close.printStackTrace();
 		}catch(SQLException close) {
 			close.printStackTrace();
 		}finally {
@@ -169,21 +141,18 @@ public class MemberDao {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		int totalPage = 0;
 		int lastPage = 0;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPassword = "java0000";
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			
 			if(searchWord.equals("")) {
-				String SelectQuery = "SELECT COUNT(member_no) AS memberNo FROM member";
+				String SelectQuery = "SELECT COUNT(member_no) AS memberNo FROM member ORDER BY member_no DESC";
 				preparedStatement = connection.prepareStatement(SelectQuery);
 				System.out.println(SelectQuery +"<- SelectQuery");
 			}else {
-				String SelectQuery = "SELECT COUNT(member_no) AS memberNo FROM member WHERE member_name LIKE ?";
+				String SelectQuery = "SELECT COUNT(member_no) AS memberNo FROM member WHERE member_name LIKE ? ORDER BY member_no DESC";
 				preparedStatement = connection.prepareStatement(SelectQuery);
 				preparedStatement.setString(1, "%"+searchWord+"%");
 			}
@@ -200,8 +169,7 @@ public class MemberDao {
 				lastPage++;
 			}
 			System.out.println(totalPage +"<- totalPage");
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
+
 		}catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -234,19 +202,11 @@ public class MemberDao {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		System.out.println(searchWord +"<- searchWord");
+		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩을 해줬습니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			//연결을 위해 String타입으로 선언한 변수안에 포트번호 ,데이터베이스명 ,Encoding을 대입을 했습니다
-			String dbUser = "java";
-			//my-sql(DB) ID값입니다
-			String dbPassword = "java0000";
-			//my-sql(DB) Password값입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
-			
 			int startRow = (currentPage-1)*pagePerRow; 
 			//시작행 기준
 			if(searchWord.equals("")) {
@@ -274,8 +234,6 @@ public class MemberDao {
 				memberList.add(member);
 			}
 			
-		}catch(ClassNotFoundException close) {
-			close.printStackTrace();
 		}catch(SQLException close) {
 			close.printStackTrace();	
 		}finally {
@@ -309,18 +267,10 @@ public class MemberDao {
 		PreparedStatement preparedStatement = null;
 		Connection connection = null;
 		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩을 해줬습니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			//연결을 위해 String타입으로 선언한 변수안에 포트번호 ,데이터베이스명 ,Encoding을 대입을 했습니다
-			String dbUser = "java";
-			//my-sql(DB) ID값입니다
-			String dbPassword = "java0000";
-			//my-sql(DB) Password값입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
-			
 			String insertQuery = "INSERT INTO member(member_name ,member_age) VALUES(? ,?)";
 			preparedStatement = connection.prepareStatement(insertQuery);
 			preparedStatement.setString(1, member.getMemberName());
@@ -328,12 +278,8 @@ public class MemberDao {
 			System.out.println(preparedStatement +"<- preparedStatement");
 			//preparedStatement에 들어있는 주소값을 찾아가 member참조변수에 setting되어 있는 값을 가져와 ?에 대입을 시켜줬습니다.
 			preparedStatement.executeUpdate();
-		}catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.print(e.getMessage());
 			
-		}catch (ClassNotFoundException e) {
+		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.print(e.getMessage());

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="service.MemberAddrDao"%>
+<%@ page import="memberDao.MemberAddrDao"%>
 <!-- 2018.07.08. 28기 전재현 -->
 <!DOCTYPE html>
 <html>

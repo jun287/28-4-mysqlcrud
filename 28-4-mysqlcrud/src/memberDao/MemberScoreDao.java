@@ -1,9 +1,8 @@
-package service;
+package memberDao;
 import java.util.ArrayList;
-
+import memberDto.MemberAndScore;
+import service.DBconnection;
 import java.sql.*;
-import service.MemberAndScore;
-//2018. 07.09. 28기 전재현
 
 public class MemberScoreDao {
 	
@@ -18,18 +17,10 @@ public class MemberScoreDao {
 		int lastPage = 0;
 		int totalList = 0;
 		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩을 해줬습니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			//연결을 위해 String타입으로 선언한 변수안에 포트번호 ,데이터베이스명 ,Encoding을 대입을 했습니다
-			String dbUser = "java";
-			//my-sql(DB) ID값입니다
-			String dbPassword = "java0000";
-			//my-sql(DB) Password값입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
-			
 			String SelectQuery = "SELECT count(score>=(SELECT avg(score) AS score FROM member_score)) AS totalList FROM member_score";
 			//서브쿼리를 사용하여 평균값보다 높은사람의 수를 구하는 Query입니다.
 			preparedStatement = connection.prepareStatement(SelectQuery);
@@ -43,8 +34,6 @@ public class MemberScoreDao {
 				lastPage++;
 			}
 			
-		}catch(ClassNotFoundException check) {
-			check.printStackTrace();
 		}catch(SQLException check) {
 			check.printStackTrace();
 		} finally {
@@ -79,20 +68,12 @@ public class MemberScoreDao {
 		ArrayList<MemberAndScore> averageTotalList = new ArrayList<MemberAndScore>();
 		MemberAndScore memberAndScore = null;
 		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩을 해줬습니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			//연결을 위해 String타입으로 선언한 변수안에 포트번호 ,데이터베이스명 ,Encoding을 대입을 했습니다
-			String dbUser = "java";
-			//my-sql(DB) ID값입니다
-			String dbPassword = "java0000";
-			//my-sql(DB) Password값입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
-			
 			int startRow = (currentPage-1)*pagePerRow;
-			String selectQuery = "SELECT member.member_name ,member.member_age ,member_score.member_no ,member_score.score FROM member_score INNER JOIN member ON member_score.member_no = member.member_no WHERE member_score.score >= (SELECT avg(score) AS score FROM member_score) ORDER BY member_no ASC LIMIT ? ,?";
+			String selectQuery = "SELECT member.member_name ,member.member_age ,member_score.member_no ,member_score.score FROM member_score INNER JOIN member ON member_score.member_no = member.member_no WHERE member_score.score >= (SELECT avg(score) AS score FROM member_score) ORDER BY member_score.score DESC LIMIT ? ,?";
 			//INNER JOIN문을 통해 평균점수를 낸 서브쿼리의 score값보다 같거나 더 높은 score값을 가진사람의 list를 출력하는 QUERY문 입니다.
 			preparedStatement = connection.prepareStatement(selectQuery);
 			preparedStatement.setInt(1, startRow);
@@ -108,8 +89,7 @@ public class MemberScoreDao {
 				averageTotalList.add(memberAndScore);
 			}
 			//while문을 통해 resultSet변수에 들어있는 값이 false가 나올때까지 memberAndScore변수에 대입시켜줬습니다.
-		}catch(ClassNotFoundException check) {
-			check.printStackTrace();
+		
 		}catch(Exception check) {
 			check.printStackTrace();
 		}finally {
@@ -143,26 +123,17 @@ public class MemberScoreDao {
 		ResultSet resultSet = null;
 		int average = 0;
 		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩을 해줬습니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			//연결을 위해 String타입으로 선언한 변수안에 포트번호 ,데이터베이스명 ,Encoding을 대입을 했습니다
-			String dbUser = "java";
-			//my-sql(DB) ID값입니다
-			String dbPassword = "java0000";
-			//my-sql(DB) Password값입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
-			
 			String selectQuery = "SELECT avg(Score) AS average FROM member_score";
 			preparedStatement = connection.prepareStatement(selectQuery);
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
 				average = resultSet.getInt("average");
 			}
-		}catch(ClassNotFoundException check) {
-			check.printStackTrace();
+		
 		}catch(Exception check) {
 			check.printStackTrace();
 		}finally {
@@ -202,18 +173,10 @@ public class MemberScoreDao {
 		int totalCount = 0;
 		//SELECT QUERY문 실행 후 결과값을 담기 위해 설정했습니다.
 		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
+		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩을 해줬습니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			//연결을 위해 String타입으로 선언한 변수안에 포트번호 ,데이터베이스명 ,Encoding을 대입을 했습니다
-			String dbUser = "java";
-			//my-sql(DB) ID값입니다
-			String dbPassword = "java0000";
-			//my-sql(DB) Password값입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
-			
 			String selectQuery = "SELECT COUNT(member_no) AS member_no FROM member_score WHERE member_no=?";
 			selectPreparedStatement = connection.prepareStatement(selectQuery);
 			selectPreparedStatement.setInt(1, memberNo);
@@ -246,8 +209,7 @@ public class MemberScoreDao {
 			preparedStatement.executeUpdate();
 			//preparedStatement변수에 들어있는 주소값을 실행을 했습니다.
 			System.out.println(totalCount +"<- totalCount");
-		}catch(ClassNotFoundException check) {
-			check.printStackTrace();
+
 		}catch(SQLException check) {
 			check.printStackTrace();
 		}finally {
@@ -281,92 +243,55 @@ public class MemberScoreDao {
 	}
 	
 	//member테이블과 member_score테이블 JOIN하는 메서드 입니다.
-	public ArrayList<MemberAndScore> selectMemberAndScore(int memberNo) {
+	public ArrayList<MemberAndScore> selectMemberAndScore(String memberName) {
 		ArrayList<MemberAndScore> list = new ArrayList<MemberAndScore>();
 		//return값을 보내주기 위해 ArrayList생성자 메서드를 통해서 새로운 객체를 생성을 시킨후 생성된 주소값을 class타입으로 선언된 변수에 할당을 시켜줬습니다
 		MemberAndScore memberAndScore = null;
 		//JOIN문을 통해 출력된 값을 담기 위해 class타입으로 변수를 선언을 시킨후 값을 null로 설정을 했습니다.
-		PreparedStatement memberAndScorePreparedStatement = null;
-		PreparedStatement memberPreparedStatement = null;
+		PreparedStatement preparedStatement = null;
 		Connection  connection = null;
-		ResultSet memberResultSet = null;
-		ResultSet memberAndScoreResultSet = null;
-		String memberName = null;
+		ResultSet resultSet = null;
+		
+		DBconnection dbConnection = new DBconnection();
+		connection = dbConnection.getConnection();
 		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			//my-sql(DB)로딩을 해줬습니다
-			String dbUrl = "jdbc:mysql://localhost:3306/284db?useUnicode=true&characterEncoding=euckr";
-			//연결을 위해 String타입으로 선언한 변수안에 포트번호 ,데이터베이스명 ,Encoding을 대입을 했습니다
-			String dbUser = "java";
-			//my-sql(DB) ID값입니다
-			String dbPassword = "java0000";
-			//my-sql(DB) Password값입니다
-			connection = DriverManager.getConnection(dbUrl ,dbUser ,dbPassword);
-			//my-sql(DB)DriverManager클래스를 통해 getConnection메서드에 들어있는 매개변수값으로 연결을 실행하고 실행주소값을 참조변수에 할당시켜줬습니다.
-			
-			String memberSelectQuery = "SELECT member_name FROM member WHERE member_no=?";
-			memberPreparedStatement = connection.prepareStatement(memberSelectQuery);
-			memberPreparedStatement.setInt(1, memberNo);
-			//memberNo값으로 name값을 찾기 위한 SELECT Query문입니다.
-			memberResultSet = memberPreparedStatement.executeQuery();
-			//memberPreparedStatement참조변수에 들어있는 주소값을 찾아가 쿼리를 실행을 하고 결과값을 memberResultSet변수에 담았습니다.
-			if(memberResultSet.next()) {
-				memberName = memberResultSet.getString("member_name");
-			}
-			System.out.println(memberName +"<-memberName");
-			//memberRreusltSet변수에 들어있는 값을 memberName변수에 담았습니다.
-			
 			String memberAndScoreSelectQuery = "SELECT member.member_no ,member.member_name ,member_score.member_score_no ,member_score.score FROM member INNER JOIN member_score ON member.member_no = member_score.member_no WHERE member_name=?";
 			//member테이블을 기준으로 member_score테이블을 INNER JOIN을 했으며, member테이블과 member_score테이블의 member_no값이 같을 경우 얻고자 하는 컬럼값이 출력이 됩니다. 
-			memberAndScorePreparedStatement = connection.prepareStatement(memberAndScoreSelectQuery);
+			preparedStatement = connection.prepareStatement(memberAndScoreSelectQuery);
 			//connection참조변수에 들어있는 주소값을 찾아가 prepareStatement메서드를 selectQuery변수에 들어있는 query문을 셋팅을한 후, 참조 변수에 주소값을 할당시킵니다.
-			memberAndScorePreparedStatement.setString(1, memberName);
+			preparedStatement.setString(1, memberName);
 			//preparedStatement참조 변수에 들어있는 주소값을 찾아가 ?값을 셋팅을 했습니다.
-			memberAndScoreResultSet = memberAndScorePreparedStatement.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 			//preparedStatement에 들어있는 주소값을 실행을 시킨후 출력값을 resultSet변수에 대입했습니다.
-			if(memberAndScoreResultSet.next()) {
+			if(resultSet.next()) {
 			//출력되는 값이 한 행이기 때문에 if 문으로 실행을 했습니다
 				memberAndScore = new MemberAndScore();
 				//출력된 값을 셋팅하기 위해 생성자 메서드를 통해 새로운 객체를 생성후 생성된 주소값을 참조변수에 할당했습니다.
-				memberAndScore.setMemberName(memberAndScoreResultSet.getString("member_name"));
-				memberAndScore.setMemberNo(memberAndScoreResultSet.getInt("member_no"));
-				memberAndScore.setMemberScoreNo(memberAndScoreResultSet.getInt("member_score_no"));
-				memberAndScore.setScore(memberAndScoreResultSet.getInt("score"));
+				memberAndScore.setMemberName(resultSet.getString("member_name"));
+				memberAndScore.setMemberNo(resultSet.getInt("member_no"));
+				memberAndScore.setMemberScoreNo(resultSet.getInt("member_score_no"));
+				memberAndScore.setScore(resultSet.getInt("score"));
 				//참조변수에 들어있는 주소값을 들어가  query문 실행으로 나온값들을 setting을 합니다.
 				list.add(memberAndScore);
 				//list변수에 내장되어있는 add메스드를 통해서 memberAndScore변수의 주소값을 list변수에 할당 시켜줬습니다
 			}
-		}catch(ClassNotFoundException check) {
-			check.printStackTrace();
+			
 		}catch(SQLException check) {
 			check.printStackTrace();
 		}finally {
-			if(memberAndScoreResultSet != null)
+			if(resultSet != null)
 				try {
-					memberAndScoreResultSet.close();
+					resultSet.close();
 				}catch(SQLException close) {
 					close.printStackTrace();
 				}
-			if(memberAndScorePreparedStatement != null)
+			if(preparedStatement != null)
 				try {
-					memberAndScorePreparedStatement.close();
+					preparedStatement.close();
 				}catch(SQLException close) {
 					close.printStackTrace();
 				}
-			if(memberResultSet != null)
-				try {
-					memberResultSet.close();
-				}catch(SQLException close) {
-					close.printStackTrace();
-				}
-			if(memberPreparedStatement != null)
-				try {
-					memberPreparedStatement.close();
-				}catch(SQLException close) {
-					close.printStackTrace();
-				}
-			
 			if(connection != null)
 				try {
 					connection.close();

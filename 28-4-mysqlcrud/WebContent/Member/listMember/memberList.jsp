@@ -1,8 +1,8 @@
 <!-- 2018.07.02 28기 전재현 -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="service.Member" %>
-<%@ page import="service.MemberDao" %>
+<%@ page import="memberDto.Member" %>
+<%@ page import="memberDao.MemberDao" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -71,7 +71,7 @@
 							<td><%=member.getMemberAge()%></td>
 							<td><a href="../insertMember/insertMemberAddrForm.jsp?memberNo=<%=member.getMemberNo()%>">주소입력</a></td>
 							<td><a href="../insertMember/insertMemberScoreForm.jsp?memberNo=<%=member.getMemberNo()%>">점수 등록</a></td>
-							<td><a href="../listMember/memberAndScoreList.jsp?memberNo=<%=member.getMemberNo()%>">점수 보기</a></td>
+							<td><a href="../listMember/memberAndScoreList.jsp?memberName=<%=member.getMemberName()%>">점수 보기</a></td>
 							<td><a href="../deleteMember/deleteMember.jsp?memberNo=<%=member.getMemberNo()%>">삭제하기</a></td>
 							<td><a href="../updateMember/updateMemberForm.jsp?memberNo=<%=member.getMemberNo()%>">수정하기</a></td>
 						</tr>
@@ -86,17 +86,17 @@
 					System.out.println(totalList +"<- totalList");
 					if(currentPage>1){
 				%>
-						<a href = "./memberList.jsp?currentPage=<%=currentPage-1%>" class="btn">◀ 이전</a>
+						<a href = "./memberList.jsp?currentPage=<%=currentPage-1%>&searchWord=<%=searchWord%>" class="btn">◀ 이전</a>
 				<%
 					}
 					for(int j=1; j<=totalList; j++) {
 				%>
-						<a href = "./memberList.jsp?currentPage=<%=j%>" class="btn"><%=j%></a>
+						<a href = "./memberList.jsp?currentPage=<%=j%>&searchWord=<%=searchWord%>" class="btn"><%=j%></a>
 				<%
 					}
 					if(currentPage<totalList){
 				%>
-						<a href = "./memberList.jsp?currentPage=<%=currentPage+1%>" class="btn">다음 ▶</a>
+						<a href = "./memberList.jsp?currentPage=<%=currentPage+1%>&searchWord=<%=searchWord%>" class="btn">다음 ▶</a>
 				<%
 					}
 				%>

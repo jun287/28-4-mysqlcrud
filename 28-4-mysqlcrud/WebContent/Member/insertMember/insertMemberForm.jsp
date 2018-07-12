@@ -15,11 +15,11 @@
 				<table>
 					<tr>
 						<td id="title">이름 </td>
-						<td><input type="text" name="member_name"  placeholder="name..." maxlength="20"></td>
+						<td><input type="text" name="member_name"  placeholder="5글자 이내..." maxlength="5"></td>
 					</tr>
 					<tr>
 						<td id="title">나이 </td>
-						<td><input type="text" name="member_age"  placeholder="age..." maxlength="3"></td>
+						<td><input type="text" name="member_age"  placeholder="3자릿수이내..." maxlength="3"></td>
 					</tr>
 				</table>
 				<br><input type="submit" value="등록">

@@ -1,9 +1,10 @@
-package service;
+package memberDto;
 
 public class MemberAddr {
 	private int memberAddrNo;
 	private int memberNo;
 	private String memberAddrContent;
+	private String memberAddrDate;
 	//private접근 지정자를 통해 기본타입으로 통해 선언한 변수들을 MemberAddr클래스에만 사용 할수 있도록 지정했습니다. 
 	
 
@@ -27,4 +28,10 @@ public class MemberAddr {
 	public void setMemberAddrContent(String memberAddrContent) {
 		this.memberAddrContent = memberAddrContent;
 	}	
+	public String getMemberAddrDate() {
+		return memberAddrDate;
+	}
+	public void setMemberAddrDate(String memberAddrDate) {
+		this.memberAddrDate = memberAddrDate;
+	}
 }

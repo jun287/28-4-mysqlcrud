@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="service.MemberAndScore"%>
-<%@ page import="service.MemberScoreDao"%>
+<%@ page import="memberDto.MemberAndScore"%>
+<%@ page import="memberDao.MemberScoreDao"%>
 <%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
@@ -11,15 +11,18 @@
 	</head>
 	<body>
 		<%
-			int currentPage = 1;
 			//현재 페이지 설정 입니다.
+			int currentPage = 1;
+			
 			if(request.getParameter("currentPage") != null) {
 				currentPage = Integer.parseInt(request.getParameter("currentPage"));
 			}
-			int pagePerRow = 5;
 			//한페이지에 나올 갯수입니다.
+			int pagePerRow = 5;
 			
+			int memberNo = 0;
 			MemberScoreDao memberScoreDao = new MemberScoreDao();
+			
 			int average = memberScoreDao.MemberAverage();
 			ArrayList<MemberAndScore> totalAverage = memberScoreDao.MemberAverageList(currentPage ,pagePerRow);
 			
@@ -42,11 +45,12 @@
 						<tbody>
 							<tr>
 								<td><%=memberAndScore.getMemberNo()%></td>
-								<td><%=memberAndScore.getMemberName()%></td>
+								<td><a href="./memberAddrList.jsp"><%=memberAndScore.getMemberName()%></a></td>
 								<td><%=memberAndScore.getScore()%></td>
 							</tr>
 						</tbody>
 				<%
+						memberNo = memberAndScore.getMemberNo();
 					}
 				%>
 			</table>
@@ -74,6 +78,7 @@
 					//currentPage가 lastPage보다 작으면 a link태그가 나오도록 설정했습니다 
 				%>
 				<a href="./memberList.jsp" class="btn">&nbsp;&nbsp;리스트페이지로</a>
+				<a href="../../index.jsp" class="btn">&nbsp;&nbsp;홈페이지로</a>
 			</div>
 		</div>
 	</body>

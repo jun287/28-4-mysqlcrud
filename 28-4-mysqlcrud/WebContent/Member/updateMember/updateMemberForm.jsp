@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="service.MemberDao" %>
-<%@ page import="service.Member" %>
+<%@ page import="memberDao.MemberDao" %>
+<%@ page import="memberDto.Member" %>
 <!-- 2018.07.03 28기 전재현 -->
 <!DOCTYPE html>
 <html>
@@ -23,7 +23,7 @@
 				<table>
 					<tr>
 						<td id="title">이름 </td>
-						<td><input type="text" name="memberName" value="<%=member.getMemberName()%>" maxlength="10"></td>
+						<td><input type="text" name="memberName" value="<%=member.getMemberName()%>" maxlength="10" readonly></td>
 					</tr>
 					<tr>
 						<td id="title">나이 </td>

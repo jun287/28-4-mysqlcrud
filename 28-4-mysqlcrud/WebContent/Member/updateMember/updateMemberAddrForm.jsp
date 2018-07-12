@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="service.MemberAddrDao" %>
-<%@ page import="service.MemberAddr" %>
+<%@ page import="memberDao.MemberAddrDao" %>
+<%@ page import="memberDto.MemberAddr" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,16 +22,16 @@
 		%>
 			<div id="wrap">
 				<br><br><br>
-				<h3>멤버 등록 </h3>
+				<h3>멤버 수정 </h3>
 				<form action="./updateMemberAddrAction.jsp?memberNo=<%=memberAddr.getMemberNo()%>" method="post">
 					<table>
 						<tr>
 							<td id="title">번호 </td>
-							<td><input type="text" name="sendContent" value="<%=memberAddr.getMemberAddrNo()%>" readonly></td>
+							<td><input type="text" name="sendAddrNo" value="<%=memberAddr.getMemberAddrNo()%>" readonly></td>
 						</tr>
 						<tr>
 							<td id="title">주소 </td>
-							<td><input type="text" name="sendContent" value="<%=memberAddr.getMemberAddrContent()%>" maxlength="50"></td>
+							<td><input type="text" name="sendAddrContent" value="<%=memberAddr.getMemberAddrContent()%>" maxlength="50"></td>
 						</tr>
 					</table>
 					<br><input type="submit" value="수정"> &nbsp;<input type="button" value="취소">
