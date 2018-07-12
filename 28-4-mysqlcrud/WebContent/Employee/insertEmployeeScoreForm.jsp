@@ -7,8 +7,7 @@
 		<script>
 			//로딩 되었을 때 안에 있는 문장들을 실행 시켜라
 			window.addEventListener("load", function() {
-				
-				
+	
 		 	 	var btn=document.getElementById("btn");
 				var score=document.getElementById("score").value;
 				

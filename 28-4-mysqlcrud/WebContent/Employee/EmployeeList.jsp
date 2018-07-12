@@ -19,6 +19,7 @@
 				<button type="button">검색</button>
 			</div>
 		</form>
+		
 		<table border="1">
 			<tr>
 				<th>번호</th>
@@ -57,14 +58,14 @@
 			%>
 					<tr>
 						<td><%=employee.getEmployeeNo() %></td>
-						<td><a href="./EmployeeAddrList.jsp"><%=employee.getEmployeeName() %></a></td>
+						<td><a href="<%=request.getContextPath() %>/Employee/EmployeeAddrList.jsp?no=<%=employee.getEmployeeNo() %>"><%=employee.getEmployeeName() %></a></td>
 						<td><%=employee.getEmployeeAge() %></td>
 						<!--주소입력을 눌렀을시  insertEmployeeAddrForm.jsp,삭제를 눌렀을시 deleteEmployee.jsp,수정을 눌렀을시 updateEmployeeForm.jsp에 각각 no변수에 employee.getEmployeeNo()값을 담아 넘긴다-->
-						<td><a href="./insertEmployeeAddrForm.jsp?no=<%=employee.getEmployeeNo() %>">주소입력</a></td>
-						<td><a href="./deleteEmployee.jsp?no=<%=employee.getEmployeeNo() %>">삭제</a></td>
-						<td><a href="./updateEmployeeForm.jsp?no=<%=employee.getEmployeeNo() %>">수정</a></td>						
-						<td><a href="./insertEmployeeScoreForm.jsp?no=<%=employee.getEmployeeNo() %>">점수입력</a></td>						
-						<td><a href="./EmployeeAndScoreList.jsp?no=<%=employee.getEmployeeNo() %>">점수보기</a></td>						
+						<td><a href="<%=request.getContextPath() %>/Employee/insertEmployeeAddrForm.jsp?no=<%=employee.getEmployeeNo() %>">주소보기</a></td>
+						<td><a href="<%=request.getContextPath() %>/Employee/deleteEmployee.jsp?no=<%=employee.getEmployeeNo() %>">삭제</a></td>
+						<td><a href="<%=request.getContextPath() %>/Employee/updateEmployeeForm.jsp?no=<%=employee.getEmployeeNo() %>">수정</a></td>						
+						<td><a href="<%=request.getContextPath() %>/Employee/insertEmployeeScoreForm.jsp?no=<%=employee.getEmployeeNo() %>">점수입력</a></td>						
+						<td><a href="<%=request.getContextPath() %>/Employee/EmployeeAndScoreList.jsp?no=<%=employee.getEmployeeNo() %>">점수보기</a></td>						
 					</tr>
 			<%
 				}

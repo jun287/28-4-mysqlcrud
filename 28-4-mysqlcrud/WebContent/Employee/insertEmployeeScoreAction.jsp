@@ -21,7 +21,7 @@
 			EmployeeScoreDao employeeScoreDao=new EmployeeScoreDao();
 			employeeScoreDao.insertScore(employeeScore);
 			
-			/* response.sendRedirect(request.getContextPath()+"Employee/EmployeeList.jsp"); */
+			response.sendRedirect(request.getContextPath()+"/Employee/EmployeeList.jsp");
 		%>
 	</body>
 </html>

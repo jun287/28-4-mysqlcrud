@@ -1,6 +1,6 @@
 @charset "EUC-KR";
 form{
-	width: 250px;
+	width: 300px;
 	height:100px;
 	background-color: black;
 	border-radius: 10px;
@@ -18,10 +18,31 @@ form{
 	color: #ffffff;
 }
 #ok{
-	width: 50px;
+	position:relative;
+	bottom:60px;
+	width: 80px;
+	height:80px;
+	background-color: #ffffff;
+	border-radius: 10px;
+	margin:5px 15px 0 0;
+	float: right;
+}
+#addrok{
+	position:relative;
+	bottom:30px;
+	width: 70px;
 	height:30px;
 	background-color: #ffffff;
 	border-radius: 10px;
 	margin:5px 15px 0 0;
 	float: right;
+}
+#addr{
+	width: 320px;
+	height:60px;
+	background-color: black;
+	border-radius: 10px;
+	position: relative;
+	top:100px;
+	left:600px;
 }

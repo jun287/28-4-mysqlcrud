@@ -21,12 +21,12 @@
 			employeeAddr.setEmployee_no(no);
 			employeeAddr.setEmployee_addr_content(addr);
 			
-			//EmployeeDao class data type으로 변수를 선언하고 생성잠 메서드로 EmployeeDao클래스를 통해서 객체를 생성한다음 주소를 대입한다
+			//EmployeeDao class data type으로 변수를 선언하고 생성자 메서드로 EmployeeDao클래스를 통해서 객체를 생성한다음 주소를 대입한다
 			EmployeeDao employeeDao =new EmployeeDao();
-			//EmployeeDao class data type으로 변수를 선언하고 생성잠 메서드로 EmployeeDao클래스를 통해서 객체를 생성한다음 주소를 대입한다
+			//EmployeeDao class data type으로 변수를 선언하고 생성자 메서드로 EmployeeDao클래스를 통해서 객체를 생성한다음 주소를 대입한다
 			employeeDao.insertEmployeeAddr(employeeAddr);
 			
-			response.sendRedirect("./EmployeeList.jsp");
+			response.sendRedirect(request.getContextPath()+"/Employee/EmployeeAddrList.jsp?no="+no);
 		%>
 	</body>
 </html>

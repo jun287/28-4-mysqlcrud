@@ -255,6 +255,67 @@ public class EmployeeDao {
 	
 	}
 	
+	
+	//db에서 주소데이터를 검색하는메소드
+	//매개변수개 EmployeeAddrDto를 대입하여 주소 정보들을 담는다.
+	public ArrayList<EmployeeAddr> selectEmployeeAddr(int no) {
+		System.out.println("selectEmployeeAddr");
+		
+		Connection connection=null;
+		PreparedStatement statement=null;
+		ResultSet resultSet=null;
+		
+		ArrayList<EmployeeAddr> arrayList=new ArrayList<EmployeeAddr>();
+		
+		//ip주소,포트번호,db명,사용자id,패스워드를 각각 String data type으로 선언된 변수에 담아라
+		String dbname="jdbc:mysql://localhost:3306/284db?"+"useUnicode=true&characterEncoding=euckr";
+		String userid="java";
+		String userpw="java0000";
+	
+		//Driver로딩
+		String dbDriver="com.mysql.jdbc.Driver";
+		
+		//employee_addr table에 있는 employee_addr_content컬럼을 조회하여라 employee_no가?일때
+		String sql="select employee_addr_content from employee_addr where employee_no=?";
+
+		
+		try {
+			//driver 로딩
+			Class.forName(dbDriver);
+			
+			//db연결
+			connection=DriverManager.getConnection(dbname, userid, userpw);
+			
+			//쿼리실행준비
+			statement=connection.prepareStatement(sql);
+			statement.setInt(1, no);
+			//쿼리실행
+			resultSet=statement.executeQuery();
+			
+			while(resultSet.next()) {
+				EmployeeAddr employeeAdder=new EmployeeAddr();
+				employeeAdder.setEmployee_addr_content(resultSet.getString("employee_addr_content"));
+				
+				arrayList.add(employeeAdder);
+			}
+		}catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+			ex.printStackTrace();
+		
+		 //예외가 발생해도 반드시 실행한다
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}finally {
+			try {resultSet.close();} catch (SQLException e) {e.printStackTrace();}
+			try {statement.close();} catch (SQLException e) {e.printStackTrace();}
+			try {connection.close();} catch (SQLException e) {e.printStackTrace();}
+		}
+	
+	
+	
+		return arrayList;
+	}
+	
 	//회원정보에서 주소 추가
 	//dto의 변수에 담겨있는 값을 사용하기위해서 매개변수에 dto의 주소를 담는다
 	public void insertEmployeeAddr(EmployeeAddr employeeAddr) {

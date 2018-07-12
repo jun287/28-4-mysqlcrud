@@ -33,9 +33,9 @@
 			<table border="1">
 					<thead>
 							<tr>
-									<th>no</th>
-									<th>name</th>
-									<th>score</th>
+								<th>no</th>
+								<th>name</th>
+								<th>score</th>
 							</tr>
 					</thead>
 					
