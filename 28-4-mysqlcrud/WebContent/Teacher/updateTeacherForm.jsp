@@ -30,7 +30,7 @@
 			}
 		
 		%>
-			<div align="center">
+			<div id="main" align="center">
 				<h3>정보 수정</h3>
 				<form action="<%= request.getContextPath()%>/Teacher/updateTeacherAction.jsp" method="post">
 					<ul id="mem_form">

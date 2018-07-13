@@ -10,7 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 	</head>
 	<body>
-		<div align="center">
+		<div id="main" align="center">
 			<h3>교사 등록</h3>
 			<form action="<%= request.getContextPath()%>/Teacher/insertTeacherAction.jsp" method="post">
 				<ul id="mem_form">

@@ -26,7 +26,7 @@
 			teacherAddress = teacherAddr.getTeacherAddrContent();
 		}
 	%>
-		<div align="center" >
+		<div id="main" align="center" >
 			<h2>주소 목록</h2><br>
 			<table>
 				<tr>

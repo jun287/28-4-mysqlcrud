@@ -12,7 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 	</head>
 	<body>
-		<div align="center">
+		<div id="main" align="center">
 		<%
 			request.setCharacterEncoding("EUC-KR");
 		

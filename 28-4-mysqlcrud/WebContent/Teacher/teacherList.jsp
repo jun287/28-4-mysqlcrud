@@ -44,7 +44,7 @@
 			ArrayList<Teacher> teacherList = teacherDao.selectTeacherByPage(currentPage, rowPerPage, searchWord, ageOrder);
 			
 		%>
-			<div align="center">
+			<div id="main" align="center">
 				<h2>교사 목록</h2><br>
 				<table>
 					<tr>
