@@ -33,27 +33,63 @@
 	if(count >= 1){							// 입력된 점수가 있을 시
 		studentAndScore=studentAndScoreList.get(0);
 %>
-		<div id="main" style="align:center">점수수정
+		<div id="main" align="center">
+			<h3>점수 수정</h3>
 			<form action="<%=request.getContextPath()%>/Student/insertStudentScoreAction.jsp" method="post">
-				<label for="name">이름</label>	
-				<input type="text" id="name" name="studentName" value="<%=studentAndScore.getStudent().getStudentName() %>" readonly>
-				<input type="hidden" id="studentNo" name="studentNo" value="<%=studentAndScore.getStudent().getStudentNo() %>">
-				<label for="score">점수</label>
-				<input type="text" id="score" name="score" value="<%=studentAndScore.getStudentScore().getScore() %>" required>
-				<input type="submit" value="수정">
+				<ul id="mem_form">
+					<li>
+						<ul class="cols">
+							<li class="col1"><label for="name">이름 :</label></li>
+							<li class="col2">
+								<input type="text" id="name" name="studentName" value="<%=studentAndScore.getStudent().getStudentName() %>" readonly>
+								<input type="hidden" id="studentNo" name="studentNo" value="<%=studentAndScore.getStudent().getStudentNo() %>">
+							</li>
+						</ul>
+					</li>
+					<li>
+						<ul class="cols">
+							<li class="col1"><label for="score">점수</label></li>
+							<li class="col2"><input type="text" id="score" name="score" value="<%=studentAndScore.getStudentScore().getScore() %>" required></li>	
+						</ul>
+					</li>
+					<li>
+						<ul class="cols">
+							<li class="col1"></li>
+							<li class="col2"><input type="submit" value="수정"></li>
+						</ul>
+					</li>
+				</ul>
 			</form>
 		</div>
 <%		
 	}else{									// 입력된 점수가 없을 시
 %>	
-		<div id="main" style="align:center">점수입력
+		<div id="main" align="center">
+			<h3>점수 입력</h3>
 			<form action="<%=request.getContextPath()%>/Student/insertStudentScoreAction.jsp" method="post">
-				<label for="name">이름</label>	
-				<input type="text" id="name" name="studentName" value="<%=student.getStudentName() %>" readonly>
-				<input type="hidden" id="studentNo" name="studentNo" value="<%=student.getStudentNo()%>">
-				<label for="score">점수</label>
-				<input type="text" id="score" name="score" required>
-				<input type="submit" value="입력">
+				<ul id="mem_form">
+					<li>
+						<ul class="cols">
+							<li class="col1"><label for="name">이름 :</label></li>
+							<li class="col2">
+								<input type="text" id="name" name="studentName" value="<%=student.getStudentName() %>" readonly>
+								<input type="hidden" id="studentNo" name="studentNo" value="<%=student.getStudentNo()%>">
+							</li>
+						</ul>
+					</li>
+					<li>
+						<ul class="cols">
+							<li class="col1"><label for="score">점수 :</label></li>
+							<li class="col2"><input type="text" id="score" name="score" required></li>							
+						</ul>
+					</li>
+					<li>
+						<ul class="cols">
+							<li class="col1"></li>
+							<li class="col2"><input type="submit" value="입력"></li>
+						</ul>
+					</li>
+				</ul>
 			</form>
 		</div>
 

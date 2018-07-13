@@ -31,26 +31,37 @@ window.addEventListener("load", function(){
 <title>학생 주소입력 화면</title>
 </head>
 <body>
-	<div id="main" style="align:center">주소 등록
+	<div id="main" align="center">
+		<h3>주소 등록</h3>
 		<form action="<%=request.getContextPath()%>/Student/insertStudentAddrAction.jsp" method="post" id="insertForm">
-			<ul>
+			<ul id="mem_form">
 				<li>
-					<label for="name">이름</label>	
-					<input type="text" id="name" name="studentName" value="<%=student.getStudentName() %>" readonly>
-					<input type="hidden" name="studentNo" value="<%=studentNo%>">
-					<span id="namehelper" class="helper"></span>
+					<ul class="cols">
+						<li class="col1"><label for="name">이름 :</label></li>	
+						<li class="col2">
+							<input type="text" id="name" name="studentName" value="<%=student.getStudentName() %>" readonly>
+							<input type="hidden" name="studentNo" value="<%=studentNo%>">
+							<span id="namehelper" class="helper"></span>
+						</li>
+					</ul>
 				</li>
-				<li>	
-					<label for="age">나이</label>	
-					<input type="text" id="age" name="studentAge" value="<%=student.getStudentAge() %>" readonly>
+				<li>
+					<ul class="cols">	
+						<li class="col1"><label for="age">나이 :</label></li>
+						<li class="col2"><input type="text" id="age" name="studentAge" value="<%=student.getStudentAge() %>" readonly></li>
+					</ul>
 				</li>
-				<li>	
-					<label for="address">주소</label>	
-					<input type="text" id="address" name="studentAddrContent" required>
-					<span id="addressHelper"></span>
+				<li>
+					<ul class="cols">
+						<li class="col1"><label for="address">주소 :</label></li>
+						<li class="col2"><input type="text" id="address" name="studentAddrContent" required><span id="addressHelper"></span></li>
+					</ul>
 				</li>
-				<li>	
-					<input type="button" id="insertButton" value="등록">
+				<li>
+					<ul class="cols">
+						<li class="col1"></li>
+						<li class="col2"><input type="button" id="insertButton" value="등록"></li>
+					</ul>
 				</li>	
 			</ul>	
 		</form>

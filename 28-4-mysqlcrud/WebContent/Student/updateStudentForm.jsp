@@ -26,22 +26,32 @@ window.addEventListener("load", function(){
 </script>
 </head>
 <body>
-	<div id="main" style="align:center">
-		<div id="updateStudentForm">학생 수정
+	<div id="main" align="center">
+		<div id="updateStudentForm">
+			<h3>학생 수정</h3>
 			<form action="<%=request.getContextPath()%>/Student/updateStudentAction.jsp" method="post" id="updateForm">
-				<ul>
+				<ul id="mem_form">
 					<li>
-						<label for="name">이름</label>	
-						<input type="text" id="name" name="studentName" value="<%=student.getStudentName() %>">
-						<input type="hidden" name="studentNo" value="<%=studentNo%>">
-						<span id="namehelper" class="helper"></span>
+						<ul class="cols">
+							<li class="col1"><label for="name">이름 :</label></li>
+							<li class="col2">
+								<input type="text" id="name" name="studentName" value="<%=student.getStudentName() %>">
+								<input type="hidden" name="studentNo" value="<%=studentNo%>">
+								<span id="namehelper" class="helper"></span>
+							</li>
+						</ul>
 					</li>
-					<li>	
-						<label for="age">나이</label>	
-						<input type="text" id="age" name="studentAge" value="<%=student.getStudentAge() %>">
+					<li>
+						<ul class="cols">
+							<li class="col1"><label for="age">나이 :</label></li>
+							<li class="col2"><input type="text" id="age" name="studentAge" value="<%=student.getStudentAge() %>"></li>
+						</ul>
 					</li>
-					<li>	
-						<input type="button" id="updateButton" value="수정">
+					<li>
+						<ul class="cols">
+							<li class="col1"></li>	
+							<li class="col2"><input type="button" id="updateButton" value="수정"></li>
+						</ul>
 					</li>	
 				</ul>	
 			</form>
