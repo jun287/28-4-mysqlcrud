@@ -8,7 +8,6 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
-		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/member/button.css">
 		<title>회원 정보 리스트 출력창</title>
 	</head>
 	<body>
