@@ -77,7 +77,7 @@
 									<%
 								}else {
 									%>
-										<td><a href="../insertMember/insertMemberScoreForm.jsp?memberName=<%=memberJoinList.getMemberName()%>">점수 입력</a></td>
+										<td><a href="../insertMember/insertMemberScoreForm.jsp?memberNo=<%=memberJoinList.getMemberNo()%>">점수 입력</a></td>
 									<%
 								}
 							%>
