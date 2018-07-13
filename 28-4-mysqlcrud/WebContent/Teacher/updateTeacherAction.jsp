@@ -5,6 +5,7 @@
 <%@ page import = "TeacherDTO.Teacher" %>
 <%@ page import = "TeacherDTO.TeacherAddr" %>
 <%@ page import = "TeacherDAO.TeacherDao" %>
+<%@ page import = "TeacherDAO.TeacherAddrDao" %>
 
 <!DOCTYPE html>
 
@@ -33,7 +34,8 @@
 			teacher.setTeacherAge(teacherAge);
 			
 			TeacherDao teacherDao = new TeacherDao();
-			teacherDao.updateTeacherAddr(teacherAddr);
+			TeacherAddrDao teacherAddrDao = new TeacherAddrDao();
+			teacherAddrDao.updateTeacherAddr(teacherAddr);
 			teacherDao.updateTeacher(teacher);
 			
 			response.sendRedirect(request.getContextPath()+"/Teacher/teacherList.jsp");

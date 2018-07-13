@@ -57,6 +57,7 @@
 						<th>주소입력</th><!-- 다수 -->
 						<th>삭제</th>
 						<th>수정</th>
+						<th>점수입력</th>
 						<th>점수보기</th><!-- Join문 연습 -->
 					</tr>
 					<%
@@ -71,6 +72,7 @@
 							<td><a href ="<%= request.getContextPath() %>/Teacher/insertTeacherAddrForm.jsp?no=<%=teacher.getTeacherNo()%>">주소입력</a></td>
 							<td><a href ="<%= request.getContextPath() %>/Teacher/deleteTeacherAction.jsp?no=<%=teacher.getTeacherNo()%>">삭제</a></td>
 							<td><a href ="<%= request.getContextPath() %>/Teacher/updateTeacherForm.jsp?no=<%=teacher.getTeacherNo()%>">수정</a></td>
+							<td><a href ="<%= request.getContextPath() %>/Teacher/insertTeacherScoreForm.jsp?no=<%=teacher.getTeacherNo()%>">점수입력</a></td>
 							<td><a href ="<%= request.getContextPath() %>/Teacher/teacherAndScoreList.jsp?no=<%=teacher.getTeacherNo()%>">점수보기</a></td>
 							<!-- updateTeacherForm.jsp -> updateTeacherAction.jsp -->
 						</tr>
