@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import DBConnectionPool.DBconnection;
+import DBConnection.DBconnection;
 import StudentDTO.StudentAddr;
 
 public class StudentAddrDao {

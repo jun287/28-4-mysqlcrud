@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * 배열	: 갯수가 정적, 배열.length, 배열[4],
  */
 
-import DBConnectionPool.DBconnection;
+import DBConnection.DBconnection;
 import TeacherDTO.Teacher;
 import TeacherDTO.TeacherAddr;
 

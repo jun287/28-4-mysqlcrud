@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import DBConnectionPool.DBconnection;
+import DBConnection.DBconnection;
 import TeacherDTO.TeacherAddr;
 
 public class TeacherAddrDao {

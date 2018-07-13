@@ -1,7 +1,8 @@
 package memberDAO;
 import java.sql.*;
 import java.util.ArrayList;
-import DBConnectionPool.DBconnection;
+
+import DBConnection.DBconnection;
 import memberDTO.Member;
 import memberDTO.MemberAndScore;
 //2018.06.26 28기 전재현.

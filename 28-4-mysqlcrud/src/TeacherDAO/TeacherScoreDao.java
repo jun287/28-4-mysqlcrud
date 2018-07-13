@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import DBConnectionPool.DBconnection;
+import DBConnection.DBconnection;
 import TeacherDTO.Teacher;
 import TeacherDTO.TeacherAndScore;
 import TeacherDTO.TeacherScore;

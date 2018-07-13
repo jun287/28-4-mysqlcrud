@@ -3,7 +3,7 @@ package StudentDAO;
 import java.sql.*;			// java.sql패키지내 클래스 임포트(Connection,PreparedStatement,SQLException,DriverManager)
 import java.util.ArrayList;
 
-import DBConnectionPool.DBconnection;
+import DBConnection.DBconnection;
 import StudentDTO.Student;
 public class StudentDao {
 	/*

@@ -37,7 +37,6 @@
 				ageOrder = request.getParameter("ageOrder");
 				System.out.println(ageOrder);
 			}
-			System.out.println(ageOrder);
 			
 			// 페이지당 10개의 데이터를 보여줍니다.
 			int rowPerPage = 10;

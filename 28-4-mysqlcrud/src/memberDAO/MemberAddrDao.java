@@ -3,7 +3,7 @@ package memberDAO;
 import java.sql.*;
 import java.util.ArrayList;
 
-import DBConnectionPool.DBconnection;
+import DBConnection.DBconnection;
 import memberDTO.MemberAddr;
 
 //java.sql패키지내에 내장되어있는 클래스를 클래스이름만으로 사용가능하도록 import 시킵니다.
