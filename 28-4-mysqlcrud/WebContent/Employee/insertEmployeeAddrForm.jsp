@@ -16,11 +16,11 @@
 		System.out.println(no+"<--no");
 
 	%>	
-		<div align="center">
+		<div id="main" align="center">
 			<!-- 林家 涝仿 -->
 			<form action="./insertEmployeeAddrAction.jsp?no=<%=no %>" method="post" id="addr">
 				林家&nbsp;:&nbsp;
-				<input type='text' name="addr">
+				<input type='text' name="addr" placeholder="林家 涝仿" required>
 				<input type="submit" value="林家涝仿" id="addrok">
 			</form>
 		</div>

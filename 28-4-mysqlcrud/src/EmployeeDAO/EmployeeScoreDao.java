@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import DBConnection.DBconnection;
 import EmployeeDTO.Employee;
 import EmployeeDTO.EmployeeAndScore;
 import EmployeeDTO.EmployeeScore;
@@ -20,15 +21,6 @@ public class EmployeeScoreDao {
 		PreparedStatement statement=null;
 		ResultSet resultSet=null;
 		
-		//ip주소,포트번호,db명,사용자id,패스워드를 각각 String data type으로 선언된 변수에 담아라
-		String dbname="jdbc:mysql://localhost:3306/284db?"+"useUnicode=true&characterEncoding=euckr";
-		String userid="java";
-		String userpw="java0000";
-				
-				
-		//db로딩 sql문 준비
-		String dbDriver="com.mysql.jdbc.Driver";
-		
 		//employee_score table의 안에 있는 score 칼럼에 평균 값을 구하여라
 		String sql="select avg(score) from employee_score";
 		
@@ -36,11 +28,9 @@ public class EmployeeScoreDao {
 		int score=0;
 		
 		try {
-			//Driver로딩
-			Class.forName(dbDriver);
-			
 			//db연결
-			connection=DriverManager.getConnection(dbname, userid, userpw);
+			DBconnection dbConnection=new DBconnection();
+			connection=dbConnection.getConnection();
 			
 			//쿼리 실행 준비
 			statement=connection.prepareStatement(sql);
@@ -71,7 +61,7 @@ public class EmployeeScoreDao {
 	}
 	
 	//평균점수 이상인사람을 구하는 메소드
-	public ArrayList<EmployeeAndScore> selectmemberListAboveAvg(){
+	public ArrayList<EmployeeAndScore> selectmemberListAboveAvg(int currentPage,int StartRow){
 		
 		//
 		ArrayList<EmployeeAndScore> list=new ArrayList<EmployeeAndScore>();
@@ -81,28 +71,25 @@ public class EmployeeScoreDao {
 		PreparedStatement statement=null;
 		ResultSet resultSet=null;
 		
-		//ip주소,포트번호,db명,사용자id,패스워드를 각각 String data type으로 선언된 변수에 담아라
-		String dbname="jdbc:mysql://localhost:3306/284db?"+"useUnicode=true&characterEncoding=euckr";
-		String userid="java";
-		String userpw="java0000";
-		
-		
-		//db로딩 sql문 준비
-		String dbDriver="com.mysql.jdbc.Driver";
+		int start=(currentPage-1)*StartRow;
 		
 		//평균값보다 score칼럼에 들어 있는 값이 더크고 employee_score 과 employee 를 employee_no 칼럼안에 있는 값이 같을때 employee_score_no,employee_name,score 칼럼 안에 있는 값을 보여줘라
-		String sql="SELECT es.employee_score_no ,e.employee_name,es.score FROM   employee_score es  INNER JOIN employee e ON es.employee_no=e.employee_no WHERE score>=(SELECT AVG(score) FROM employee_score)";
+		String sql="SELECT es.employee_score_no,e.employee_name,es.score\r\n" + 
+				"FROM employee_score es\r\n" + 
+				"INNER JOIN employee e ON es.employee_no=e.employee_no\r\n" + 
+				"WHERE score>=(\r\n" + 
+				"SELECT AVG(score)\r\n" + 
+				"FROM employee_score) order by employee_score_no asc limit ?,?";
 	
 		try {
-			//Driver로딩
-			Class.forName(dbDriver);
-			
 			//db연결
-			connection=DriverManager.getConnection(dbname,userid,userpw);
+			DBconnection dbConnection=new DBconnection();
+			connection=dbConnection.getConnection();
 			
 			//쿼리 실행준비
 			statement=connection.prepareStatement(sql);
-			
+			statement.setInt(1, start);
+			statement.setInt(2, StartRow);
 			//쿼리 실행
 			resultSet=statement.executeQuery();
 			
@@ -148,27 +135,14 @@ public class EmployeeScoreDao {
 		Connection connection=null;
 		PreparedStatement statement=null;
 		
-		
-		
-		//ip주소,포트번호,db명,사용자id,패스워드를 각각 String data type으로 선언된 변수에 담아라
-		String dbname="jdbc:mysql://localhost:3306/284db?"+"useUnicode=true&characterEncoding=euckr";
-		String userid="java";
-		String userpw="java0000";
-		
-		
-		//Driver로딩
-		String dbDriver="com.mysql.jdbc.Driver";
-		
 		//employee_score의 table에 있는 employee_no,score칼럼에 각각 대입해준다
 		String sql="INSERT INTO employee_score(employee_no,score) VALUES(?,?)";
 
 		
 		try {
-			//db로딩
-			Class.forName(dbDriver);
-			
 			//db연결
-			connection=DriverManager.getConnection(dbname, userid, userpw);
+			DBconnection dbConnection=new DBconnection();
+			connection=dbConnection.getConnection();
 			
 			//쿼리 실행준비
 			statement=connection.prepareStatement(sql);
@@ -181,9 +155,6 @@ public class EmployeeScoreDao {
 			
 			System.out.println(statement+"<--statement");
 		
-		}catch(ClassNotFoundException e) {
-			
-			e.printStackTrace();
 		}catch (SQLException e) {
 		
 			e.printStackTrace();
@@ -204,25 +175,17 @@ public class EmployeeScoreDao {
 		PreparedStatement statement=null;
 		ResultSet resultSet=null;
 		
-		//ip주소,포트번호,db명,사용자id,패스워드를 각각 String data type으로 선언된 변수에 담아라
-		String dbname="jdbc:mysql://localhost:3306/284db?"+"useUnicode=true&characterEncoding=euckr";
-		String userid="java";
-		String userpw="java0000";
-		
 		//EmployeeAndScore에 최종 저장하기위해서 객체를 선언하고 저장한다음 EmployeeAndScore에 Employee,EmployeeScore의 주소들을 저장한다.
 		EmployeeAndScore employeeAndScore=new EmployeeAndScore();
 		EmployeeScore employeeScore=new EmployeeScore();
 		Employee employee=new Employee();
 		
 		
-		String dbDriver="com.mysql.jdbc.Driver";
-		
 		try {
-			//Driver로딩
-			Class.forName(dbDriver);
-			
 			//db연결
-			connection=DriverManager.getConnection(dbname, userid, userpw);
+			DBconnection dbConnection=new DBconnection();
+			connection=dbConnection.getConnection();
+			
 			//employee_score.employee_no가 ?일때 employee와employee_score에서 employee_no컬럼에 있는 값들이 같으면 employee_no,employee_name,employee_age,score칼럼에 있는 값들을 보여줘라
 			statement=connection.prepareStatement("select employee.employee_no,employee_name,employee_age,score from employee inner join employee_score on employee.employee_no=employee_score.employee_no where employee_score.employee_no=?");
 			statement.setInt(1, no);
@@ -245,9 +208,6 @@ public class EmployeeScoreDao {
 				employeeAndScore.setEmployee(employee);
 			}
 			
-		}catch(ClassNotFoundException e) {
-	
-			e.printStackTrace();
 		}catch (SQLException e) {
 		
 			e.printStackTrace();
@@ -261,5 +221,140 @@ public class EmployeeScoreDao {
 		//employeeAndScore에 담겨있는 주소값을 리턴한다.
 		return employeeAndScore;
 	}
+	
+	//employee_score db 테이블에 있는값들을 수정해준다
+	//매개변수에 수정할 점수와 수정할 행의 no값을 매개변수로 받아준다.
+	public int updateEmployeeScore(int no,int score) {
+			
+			System.out.println("updateEmployeeScore");
+			
+			//db 연결 쿼리 실행 결과 조회 관련 변수들을 생성
+			Connection connection=null;
+			PreparedStatement statement=null;
+			
+			//employee_score의 table에 있는 employee_no,score칼럼에 각각 수정한다.
+			String sql="update employee_score set score=? where employee_no=?";
+	
+			
+			try {
+				//db연결
+				DBconnection dbConnection=new DBconnection();
+				connection=dbConnection.getConnection();
+				
+				//쿼리 실행준비
+				statement=connection.prepareStatement(sql);
+				statement.setInt(1, score);
+				statement.setInt(2, no);
+				
+				System.out.println(statement+"<--statement");
+				//쿼리 실행
+				statement.executeUpdate();
+				
+				System.out.println(statement+"<--statement");
+			
+			}catch (SQLException e) {
+			
+				e.printStackTrace();
+			}
+			finally {
+				//객체 사용후 반납
+				try {statement.close();} catch (SQLException e) {e.printStackTrace();}
+				try {connection.close();} catch (SQLException e) {e.printStackTrace();}
+			}
+		return 0;
 	}
+
+	//수정버튼을 눌렀을 때 원래 있었던 값을 가져오기위하여 select문으로 조회를 한다.
+	//수정할 행의 no값을 조회하기위하여 no값을 매개변수로 받아온다.
+	public EmployeeScore updateSelectEmployee(int no) {
+		System.out.println("updateSelectEmployee");
+		
+		Connection connection=null;
+		PreparedStatement statement=null;
+		ResultSet resultSet=null;
+		
+		//employee_score table에employee_no가?인 employee_score컬럼에 있는 값을 조회하여라
+		String sql="select * from employee_score where employee_no=?";
+		
+		EmployeeScore employeeScore=new EmployeeScore();
+		
+		try {
+			
+			//db연결
+			DBconnection dbConnection=new DBconnection();
+			connection=dbConnection.getConnection();
+			
+			//쿼리 실행 준비
+			statement=connection.prepareStatement(sql);
+			statement.setInt(1, no);
+			//쿼리실행
+			resultSet=statement.executeQuery();
+			
+			//만약 쿼리실행 결과가 있으면 실행문을 실행 시켜라
+			if(resultSet.next()) {
+				employeeScore.setScore(resultSet.getInt("score"));
+				
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+			//객체 사용후  반납
+		}finally {
+			try {resultSet.close();} catch (SQLException e) {e.printStackTrace();}
+			try {statement.close();} catch (SQLException e) {e.printStackTrace();}
+			try {connection.close();} catch (SQLException e) {e.printStackTrace();}
+		}
+		
+		//변수 score에 담겨있는 값을 리턴
+		return employeeScore;
+	}
+
+	//페이징 작업
+	
+	public int paging(int StartRow) {
+			
+			Connection connection=null;
+			PreparedStatement statement=null;
+			ResultSet resultset=null;
+			
+			//employee table에 있는 갯수를 조회하여라
+			String sql="select count(*) from employee_score where score>=(select avg(score) from employee_score)";
+			
+			int total=0;
+			
+			try {
+				
+				//db연결
+				DBconnection dbConnection=new DBconnection();
+				connection=dbConnection.getConnection();
+				
+				//쿼리 실행 준비
+				statement=connection.prepareStatement(sql);
+				//쿼리 실행
+				resultset=statement.executeQuery();
+				
+				//총 몇페이지인지로 할건지 total변수를 선언하고 값을 0으로 초기화한다
+				
+				
+				//쿼리 실행해서 조회한 결과 가있으면 실행문을 실행
+				if(resultset.next()){
+					// 총갯수에 출력할 갯수를 나눠서 0이면 total에 나눈 값을 대입하고 아니면 나눈값에 1을 더해서 대입한다
+					if(resultset.getInt("count(*)")%StartRow==0){
+						total=resultset.getInt("count(*)")/StartRow;
+					}else{
+						total=(resultset.getInt("count(*)")/StartRow)+1;
+					}
+				}
+			
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				try {resultset.close();} catch (SQLException e) {e.printStackTrace();}
+				try {statement.close();} catch (SQLException e) {e.printStackTrace();}
+				try {connection.close();} catch (SQLException e) {e.printStackTrace();}
+			}
+			return total;
+		}
+}
 

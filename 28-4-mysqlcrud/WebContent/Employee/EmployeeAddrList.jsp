@@ -20,7 +20,7 @@
 			ArrayList<EmployeeAddr> resultList=employeeDao.selectEmployeeAddr(no);
 		%>
 		
-			<div align="center">
+			<div id="main" align="center">
 				<!--테이블 만들기  -->
 				<table>
 					<tr>
