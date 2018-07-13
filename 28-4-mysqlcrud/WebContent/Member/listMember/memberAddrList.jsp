@@ -26,7 +26,7 @@
 			
 				
 		%>
-		<div align="center">
+		<div id="main" align="center">
 			<h2><%=memberName%>님 주소 리스트</h2>
 			<table>
 				<tr>

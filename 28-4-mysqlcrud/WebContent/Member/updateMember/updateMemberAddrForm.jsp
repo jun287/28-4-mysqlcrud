@@ -20,7 +20,7 @@
 			memberAddr = memberAddrDao.selectMemberAddrList(memberAddrNo);
 			
 		%>
-			<div align="center">
+			<div id="main" align="center">
 				<br><br><br>
 				<h3>¸â¹ö ¼öÁ¤ </h3>
 				<form action="./updateMemberAddrAction.jsp?memberNo=<%=memberAddr.getMemberNo()%>" method="post">

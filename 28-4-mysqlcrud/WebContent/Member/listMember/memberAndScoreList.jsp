@@ -18,7 +18,7 @@
 			MemberScoreDao memberScoreDao = new MemberScoreDao();
 			ArrayList<MemberAndScore> totalList = memberScoreDao.selectMemberAndScore(memberName);
 		%>
-			<div align="center">
+			<div id="main" align="center">
 				<h3>점수 목록</h3>
 				<table>
 					<thead>

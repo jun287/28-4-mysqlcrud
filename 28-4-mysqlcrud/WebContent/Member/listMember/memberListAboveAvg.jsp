@@ -27,8 +27,8 @@
 			ArrayList<MemberAndScore> totalAverage = memberScoreDao.MemberAverageList(currentPage ,pagePerRow);
 			
 		%>
-		<div align="center">
-			<h3>점수 목록</h3>
+		<div id="main" align="center">
+			<h1>회원점수 목록(평균이상)</h1><br>
 			<table>
 				<thead>
 					<tr>

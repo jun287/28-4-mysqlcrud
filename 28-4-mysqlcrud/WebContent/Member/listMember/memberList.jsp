@@ -40,7 +40,8 @@
 			System.out.println(getTotalList +"<- getTotalList");
 			
 		%>
-		<div align="center">
+		<div id="main" align="center">
+		
 			<h2>멤버 리스트</h2><br>
 			<form action="./memberList.jsp" method="post">
 				<!-- placeholder=>text 박스안 글씨가 보이도록 설정 -->

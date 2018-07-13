@@ -8,7 +8,7 @@
 		<title>member등록 화면</title>
 	</head>
 	<body>
-		<div align="center">
+		<div id="main" align="center">
 			<br><br><br>
 			<h3>멤버 등록 </h3>
 			<form action="./insertMemberAction.jsp" method="post">

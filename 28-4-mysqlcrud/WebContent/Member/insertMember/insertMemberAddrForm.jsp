@@ -10,7 +10,7 @@
 		<%
 			int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		%>
-		<div align="center">
+		<div id="main" align="center">
 			<br><br><br>
 			<h3>주소 등록 </h3>
 			<form action="./insertMemberAddrAction.jsp?memberNo=<%=memberNo%>" method="post">

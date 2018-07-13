@@ -16,7 +16,7 @@
 			MemberDao memberDao = new MemberDao();
 			Member member = memberDao.updateMemberSelect(getMemberNo);
 		%>
-		<div align="center">
+		<div id="main" align="center">
 			<br><br><br>
 			<h3>¸â¹ö ¼öÁ¤ </h3>
 			<form action="./updateMemberAction.jsp?memberNo=<%=getMemberNo%>" method="post">
