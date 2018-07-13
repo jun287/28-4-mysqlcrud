@@ -32,6 +32,7 @@
 					</li>				
 				</ul>
 			</form>
+			<a href = "<%=request.getContextPath()%>/index.jsp">메인으로</a>
 		</div>
 	</body>
 </html>
