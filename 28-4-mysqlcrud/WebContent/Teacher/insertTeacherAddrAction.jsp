@@ -4,6 +4,7 @@
 
 <%@ page import = "TeacherDTO.TeacherAddr" %>
 <%@ page import = "TeacherDAO.TeacherDao" %>
+<%@ page import = "TeacherDAO.TeacherAddrDao" %>
 
 <!DOCTYPE html>
 
@@ -26,8 +27,8 @@
 			System.out.println(teacherAddr.getTeacherNo());
 			System.out.println(teacherAddr.getTeacherAddrContent());
 			
-			TeacherDao teacherDao = new TeacherDao();
-			teacherDao.insertTeacherAddr(teacherAddr);
+			TeacherAddrDao teacherAddrDao = new TeacherAddrDao();
+			teacherAddrDao.insertTeacherAddr(teacherAddr);
 			
 			response.sendRedirect(request.getContextPath()+"/Teacher/teacherList.jsp");
 		%>

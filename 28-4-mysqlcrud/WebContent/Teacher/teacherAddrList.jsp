@@ -2,7 +2,7 @@
 
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
-<%@ page import = "TeacherDAO.TeacherDao" %>
+<%@ page import = "TeacherDAO.TeacherAddrDao" %>
 <%@ page import = "TeacherDTO.TeacherAddr" %>
 
 <!DOCTYPE html>
@@ -16,8 +16,8 @@
 	<body>
 	<%	
 		int teacherNo = Integer.parseInt(request.getParameter("no"));
-		TeacherDao teacherDao = new TeacherDao();
-		TeacherAddr teacherAddr = teacherDao.selectTeacherAddr(teacherNo);
+		TeacherAddrDao teacherAddrDao = new TeacherAddrDao();
+		TeacherAddr teacherAddr = teacherAddrDao.selectTeacherAddr(teacherNo);
 		String teacherAddress= null;
 		
 		if(teacherAddr.getTeacherAddrContent() == null){

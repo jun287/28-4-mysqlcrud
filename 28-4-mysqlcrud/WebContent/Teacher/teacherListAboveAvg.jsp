@@ -16,7 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 	</head>
 	<body>
-		<div align="center">
+		<div id="main" align="center">
 			<h1>교사점수 목록(평균이상)</h1><br>
 			<%
 				TeacherScoreDao teacherScoreDao = new TeacherScoreDao();

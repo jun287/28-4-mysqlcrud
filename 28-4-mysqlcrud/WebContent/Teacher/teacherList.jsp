@@ -84,18 +84,18 @@
 					</form>
 					<%
 						// 마지막 페이지를 구하기 위해 int 기본타입으로 lastPage 변수를 선언하고 teacherDao 클래스객체의 lastPage() 메서드를 호출하고 리턴값을 대입합니다.
-						int lastPage = teacherDao.lastPageTeacher(rowPerPage,searchWord);
+						int lastPage = teacherDao.lastPageTeacher(rowPerPage,searchWord,ageOrder);
 			
 						
 						if(currentPage>1){
 							%>
-							<a href = "./teacherList.jsp?currentPage=<%=currentPage-1%>&searchWord=<%=searchWord%>">◀ 이전</a>
+							<a href = "./teacherList.jsp?currentPage=<%=currentPage-1%>&searchWord=<%=searchWord%>&ageOrder=<%=ageOrder%>">◀ 이전</a>
 							<%
 						}
 			
 						if(currentPage<lastPage){
 							%>
-							<a href = "./teacherList.jsp?currentPage=<%=currentPage+1%>&searchWord=<%=searchWord%>">다음 ▶</a>
+							<a href = "./teacherList.jsp?currentPage=<%=currentPage+1%>&searchWord=<%=searchWord%>&ageOrder=<%=ageOrder%>">다음 ▶</a>
 							<%
 						}else{
 							%>

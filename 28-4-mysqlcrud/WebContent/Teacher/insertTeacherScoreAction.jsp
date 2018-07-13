@@ -26,8 +26,8 @@
 			System.out.println(teacherScore.getTeacherNo());
 			System.out.println(teacherScore.getScore());
 			
-			TeacherScoreDao teacherDao = new TeacherScoreDao();
-			teacherDao.insertTeacherScore(teacherScore);
+			TeacherScoreDao teacherScoreDao = new TeacherScoreDao();
+			teacherScoreDao.insertTeacherScore(teacherScore);
 			
 			response.sendRedirect(request.getContextPath()+"/Teacher/teacherList.jsp");
 		%>
