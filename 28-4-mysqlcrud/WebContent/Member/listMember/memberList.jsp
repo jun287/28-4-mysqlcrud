@@ -13,7 +13,6 @@
 	<body>
 		<%
 			request.setCharacterEncoding("euc-kr");
-		
 			
 			int currentPage = 1;
 			System.out.println(currentPage +"<- currentPage");
@@ -37,14 +36,13 @@
 			/*
 				몇 페이지당 나올 갯수설정과 검색시 실행결과를 처리하기 위해 메서드안에 변수를 담아 실행을 시켰습니다.
 			*/
-			
 			ArrayList<MemberAndScore> getTotalList = memberDao.selectMemberByPage(currentPage ,pagePerRow ,searchWord);
 			System.out.println(getTotalList +"<- getTotalList");
 			
 		%>
 		<div align="center">
 			<h2>멤버 리스트</h2><br>
-			<form action="./memberList.jsp" method="post" class="textBox">
+			<form action="./memberList.jsp" method="post">
 				<!-- placeholder=>text 박스안 글씨가 보이도록 설정 -->
 				<input type="text" name="searchWord" placeholder="이름검색...">
 				
