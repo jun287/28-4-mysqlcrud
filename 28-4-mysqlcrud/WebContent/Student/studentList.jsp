@@ -8,11 +8,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>학생 리스트</title>
+<link rel= "stylesheet" type= "text/css" href="<%=request.getContextPath() %>/css/main.css">
 <link rel= "stylesheet" type= "text/css" href="<%=request.getContextPath() %>/css/studentList.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/script/studentList.js">
 </script>
 </head>
 <body>
+	<div id="main" style="align:center">주소 목록
 <%
 	request.setCharacterEncoding("euc-kr");
 	StudentDao studentDao = new StudentDao();
@@ -42,130 +44,131 @@
 	ArrayList<Student> studentList = studentDao.selectStudentByPage(currentPage, pagePerRow, searchWord, ageSelect); 
 %>
 
-	<form action="<%=request.getContextPath() %>/Student/studentList.jsp" method="post" id="selectForm">
+		<form action="<%=request.getContextPath() %>/Student/studentList.jsp" method="post" id="selectForm">
 <%
 	if(pagePerRow == 3){
 %>
-		<select id="pagePerRow" name="pagePerRow">
-			<option value="3" selected>3개씩 보기</option>
-			<option value="5">5개씩 보기</option>
-			<option value="7">7개씩 보기</option>
-			<option value="10">10개씩 보기</option>
-		</select>
-		<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
-		<input hidden="text" name="searchWord" value="<%=searchWord%>">
+			<select id="pagePerRow" name="pagePerRow">
+				<option value="3" selected>3개씩 보기</option>
+				<option value="5">5개씩 보기</option>
+				<option value="7">7개씩 보기</option>
+				<option value="10">10개씩 보기</option>
+			</select>
+			<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
+			<input hidden="text" name="searchWord" value="<%=searchWord%>">
 <%		
 	}else if(pagePerRow == 5){
 %>
-		<select id="pagePerRow" name="pagePerRow">
-			<option value="3">3개씩 보기</option>
-			<option value="5" selected>5개씩 보기</option>
-			<option value="7">7개씩 보기</option>
-			<option value="10">10개씩 보기</option>
-		</select>
-		<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
-		<input hidden="text" name="searchWord" value="<%=searchWord%>">
+			<select id="pagePerRow" name="pagePerRow">
+				<option value="3">3개씩 보기</option>
+				<option value="5" selected>5개씩 보기</option>
+				<option value="7">7개씩 보기</option>
+				<option value="10">10개씩 보기</option>
+			</select>
+			<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
+			<input hidden="text" name="searchWord" value="<%=searchWord%>">
 <%		
 	}else if(pagePerRow == 7){
 %>
-		<select id="pagePerRow" name="pagePerRow">
-			<option value="3">3개씩 보기</option>
-			<option value="5">5개씩 보기</option>
-			<option value="7" selected>7개씩 보기</option>
-			<option value="10">10개씩 보기</option>
-		</select>
-		<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
-		<input hidden="text" name="searchWord" value="<%=searchWord%>">
+			<select id="pagePerRow" name="pagePerRow">
+				<option value="3">3개씩 보기</option>
+				<option value="5">5개씩 보기</option>
+				<option value="7" selected>7개씩 보기</option>
+				<option value="10">10개씩 보기</option>
+			</select>
+			<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
+			<input hidden="text" name="searchWord" value="<%=searchWord%>">
 <%		
 	}else if(pagePerRow == 10){
 %>
-		<select id="pagePerRow" name="pagePerRow">
-			<option value="3">3개씩 보기</option>
-			<option value="5">5개씩 보기</option>
-			<option value="7">7개씩 보기</option>
-			<option value="10" selected>10개씩 보기</option>
-		</select>
-		<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
-		<input hidden="text" name="searchWord" value="<%=searchWord%>">
+			<select id="pagePerRow" name="pagePerRow">
+				<option value="3">3개씩 보기</option>
+				<option value="5">5개씩 보기</option>
+				<option value="7">7개씩 보기</option>
+				<option value="10" selected>10개씩 보기</option>
+			</select>
+			<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
+			<input hidden="text" name="searchWord" value="<%=searchWord%>">
 <%
 	}
 %>	
-		<button type="button" id="pagePerRowButton">보기설정</button>	
-	</form>
-	<form id="oldAgeForm" style="float:left">
-		<button type="button" name="oldAge" id="old">높은 나이순</button>
-		<input hidden="text" value="oldAge" name="ageSelect">
-		<input hidden="text" name="pagePerRow" value="<%=pagePerRow%>">
-		<input hidden="text" name="searchWord" value="<%=searchWord%>">
-	</form>
-	<form id="youngAgeForm" style="float:left">
-		<button type="button" name="youngAge" id="young">낮은 나이순</button>
-		<input hidden="text" value="youngAge" name="ageSelect">
-		<input hidden="text" name="pagePerRow" value="<%=pagePerRow%>">
-		<input hidden="text" name="searchWord" value="<%=searchWord%>">
-	</form>
+			<button type="button" id="pagePerRowButton">보기설정</button>	
+		</form>
+		<form id="oldAgeForm" style="float:left">
+			<button type="button" name="oldAge" id="old">높은 나이순</button>
+			<input hidden="text" value="oldAge" name="ageSelect">
+			<input hidden="text" name="pagePerRow" value="<%=pagePerRow%>">
+			<input hidden="text" name="searchWord" value="<%=searchWord%>">
+		</form>
+		<form id="youngAgeForm" style="float:left">
+			<button type="button" name="youngAge" id="young">낮은 나이순</button>
+			<input hidden="text" value="youngAge" name="ageSelect">
+			<input hidden="text" name="pagePerRow" value="<%=pagePerRow%>">
+			<input hidden="text" name="searchWord" value="<%=searchWord%>">
+		</form>
 <%
 	if(ageSelect.equals("")){
 %>
-		<span></span>
+			<span></span>
 <%
 	}else if(ageSelect.equals("oldAge")){
 %>
-		<span>나이 오름차순 정렬 중</span>
+			<span>나이 오름차순 정렬 중</span>
 <%		
 	}else if(ageSelect.equals("youngAge")){
 %>
-		<span>나이 내림차순 정렬 중</span>
+			<span>나이 내림차순 정렬 중</span>
 <%		
 	}
 %>	
-	<table style="clear:both">
-		<tr>
-			<th>학생번호</th><th>학생이름</th><th>학생나이</th><th>주소입력</th><th>삭제</th><th>수정</th><th>점수입력</th><th>점수보기</th>
-		</tr>
+		<table style="clear:both">
+			<tr>
+				<th>학생번호</th><th>학생이름</th><th>학생나이</th><th>주소입력</th><th>삭제</th><th>수정</th><th>점수입력</th><th>점수보기</th>
+			</tr>
 <%
 	for(int i=0; i<studentList.size(); i++){
 		student = studentList.get(i);
 %>
-		<tr>
-			<td><%=student.getStudentNo() %></td>
-			<td><a href="<%=request.getContextPath() %>/Student/studentAddrList.jsp?studentNo=<%=student.getStudentNo() %>"><%=student.getStudentName() %></a></td>
-			<td><%=student.getStudentAge() %></td>
-			<td><a href="<%=request.getContextPath() %>/Student/insertStudentAddrForm.jsp?studentNo=<%=student.getStudentNo() %>">주소입력</a></td>
-			<td><a href="<%=request.getContextPath() %>/Student/deleteStudentAction.jsp?studentNo=<%=student.getStudentNo() %>">삭제</a></td>
-			<td><a href="<%=request.getContextPath() %>/Student/updateStudentForm.jsp?studentNo=<%=student.getStudentNo() %>">수정</a></td>
-			<td><a href="<%=request.getContextPath() %>/Student/insertStudentScoreForm.jsp?studentNo=<%=student.getStudentNo() %>">점수입력</a></td>
-			<td><a href="<%=request.getContextPath() %>/Student/studentAndScoreList.jsp?studentNo=<%=student.getStudentNo() %>">점수보기</a></td>
-		</tr>
+			<tr>
+				<td><%=student.getStudentNo() %></td>
+				<td><a href="<%=request.getContextPath() %>/Student/studentAddrList.jsp?studentNo=<%=student.getStudentNo() %>"><%=student.getStudentName() %></a></td>
+				<td><%=student.getStudentAge() %></td>
+				<td><a href="<%=request.getContextPath() %>/Student/insertStudentAddrForm.jsp?studentNo=<%=student.getStudentNo() %>">주소입력</a></td>
+				<td><a href="<%=request.getContextPath() %>/Student/deleteStudentAction.jsp?studentNo=<%=student.getStudentNo() %>">삭제</a></td>
+				<td><a href="<%=request.getContextPath() %>/Student/updateStudentForm.jsp?studentNo=<%=student.getStudentNo() %>">수정</a></td>
+				<td><a href="<%=request.getContextPath() %>/Student/insertStudentScoreForm.jsp?studentNo=<%=student.getStudentNo() %>">점수입력</a></td>
+				<td><a href="<%=request.getContextPath() %>/Student/studentAndScoreList.jsp?studentNo=<%=student.getStudentNo() %>">점수보기</a></td>
+			</tr>
 <% 		
 	}
 %>				
-	</table>
-	<form action="<%=request.getContextPath()%>/Student/studentList.jsp" method="post">
+		</table>
+		<form action="<%=request.getContextPath()%>/Student/studentList.jsp" method="post">
+			<div>
+				이름 :
+				<input type="text" name="searchWord">
+				<input type="submit" id="nameSearch" value="검색">
+				<input hidden="text" name="pagePerRow" value="<%=pagePerRow%>">
+				<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
+			</div>	
+		</form>
 		<div>
-			이름 :
-			<input type="text" name="searchWord">
-			<input type="submit" id="nameSearch" value="검색">
-			<input hidden="text" name="pagePerRow" value="<%=pagePerRow%>">
-			<input hidden="text" value="<%=ageSelect%>" name="ageSelect">
-		</div>	
-	</form>
-	<div>
 <%
 	if(currentPage !=0 && currentPage != 1){
 %>
-		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=currentPage-1 %>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>&searchWord=<%=searchWord%>">이전</a>
+			<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=currentPage-1 %>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>&searchWord=<%=searchWord%>">이전</a>
 <%
 	}for(int p=1; p<=lastPage; p++){
 %>		
-		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=p%>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>&searchWord=<%=searchWord%>"><%=p%></a>
+			<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=p%>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>&searchWord=<%=searchWord%>"><%=p%></a>
 <%		
 	}if(currentPage < lastPage){
 %>	
-		<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=currentPage+1 %>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>&searchWord=<%=searchWord%>">다음</a>
+			<a href="<%=request.getContextPath() %>/Student/studentList.jsp?currentPage=<%=currentPage+1 %>&pagePerRow=<%=pagePerRow%>&ageSelect=<%=ageSelect%>&searchWord=<%=searchWord%>">다음</a>
 <%
 	}
 %>		
+		</div>
 	</div>	
 </body>
 </html>

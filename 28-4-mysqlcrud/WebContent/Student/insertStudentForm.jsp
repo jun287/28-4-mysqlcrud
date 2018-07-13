@@ -4,13 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel= "stylesheet" type= "text/css" href="<%=request.getContextPath() %>/css/main.css">
 <link rel= "stylesheet" type= "text/css" href="<%=request.getContextPath() %>/css/studentForm.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/script/insertStudentForm.js">
 </script>
 <title>학생 입력 폼</title>
 </head>
 <body>
-	<div>학생등록
+	<div id="main" style="align:center">학생등록
 		<form action="<%=request.getContextPath()%>/Student/insertStudentAction.jsp" method="post" id="insertStudentForm">
 		<!-- placeholder속성 : 짧은 힌트나 짧은 구를 나타내 사용자가 데이터를 입력하는데 도움을 주기 위해 사용하는 속성 -->
 			<ul>

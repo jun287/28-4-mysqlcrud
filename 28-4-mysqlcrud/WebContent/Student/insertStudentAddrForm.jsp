@@ -14,6 +14,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel= "stylesheet" type= "text/css" href="<%=request.getContextPath() %>/css/main.css">
 <link rel= "stylesheet" type= "text/css" href="<%=request.getContextPath() %>/css/studentForm.css">
 <script>
 window.addEventListener("load", function(){
@@ -31,7 +32,7 @@ window.addEventListener("load", function(){
 <title>학생 주소입력 화면</title>
 </head>
 <body>
-	<div>주소 등록
+	<div id="main" style="align:center">주소 등록
 		<form action="<%=request.getContextPath()%>/Student/insertStudentAddrAction.jsp" method="post" id="insertForm">
 			<ul>
 				<li>
