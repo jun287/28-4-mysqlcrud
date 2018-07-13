@@ -12,7 +12,6 @@
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 	</head>
 	<body>
-		<div id="main" align="center">
 		<%
 			request.setCharacterEncoding("EUC-KR");
 		
@@ -20,6 +19,7 @@
 			System.out.println(teacherNo);
 			
 		%>
+		<div id="main" align="center">
 			<h3>점수 입력</h3>
 			<form action="<%= request.getContextPath()%>/Teacher/insertTeacherScoreAction.jsp?no=<%=request.getParameter("no")%>" method="post">
 				<ul id="mem_form">

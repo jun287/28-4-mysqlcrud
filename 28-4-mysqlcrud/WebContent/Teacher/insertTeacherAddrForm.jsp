@@ -10,6 +10,7 @@
 		<title>insertTeacherForm</title>
 	</head>
 	<body>
+		<!-- 주소 등록 폼입니다.  -->
 		<div id="main" align="center">
 			<h3>주소 등록</h3>
 			<form action="<%= request.getContextPath()%>/Teacher/insertTeacherAddrAction.jsp?no=<%=request.getParameter("no")%>" method="post">

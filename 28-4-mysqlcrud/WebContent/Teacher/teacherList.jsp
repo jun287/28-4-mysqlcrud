@@ -12,7 +12,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<title>Insert title here</title>
+		<title>teacherList</title>
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/main.css">
 	</head>
 	<body>
@@ -24,12 +24,14 @@
 				currentPage = Integer.parseInt(request.getParameter("currentPage"));
 			}
 			
+			// 초기값을 "" 로 하고 조건문으로 null이 아닐경우 검색 키워드를 받습니다.
 			String searchWord = "";
 			if(request.getParameter("searchWord")!=null) {
 				searchWord = request.getParameter("searchWord");
 				System.out.println(searchWord);
 			}
 			
+			// 초기값을 "" 로 하고 조건문으로 null이 아닐경우 나이 차순정렬 키워드를 받습니다.
 			String ageOrder = "";
 			if(request.getParameter("ageOrder")!=null) {
 				ageOrder = request.getParameter("ageOrder");
@@ -40,7 +42,7 @@
 			// 페이지당 10개의 데이터를 보여줍니다.
 			int rowPerPage = 10;
 			TeacherDao teacherDao = new TeacherDao();
-
+			
 			ArrayList<Teacher> teacherList = teacherDao.selectTeacherByPage(currentPage, rowPerPage, searchWord, ageOrder);
 			
 		%>
@@ -51,8 +53,8 @@
 						<th>번호</th>
 						<th>이름</th>
 						<th>나이
-							<a href="<%=request.getContextPath()%>/Teacher/teacherList.jsp?ageOrder=DESC&searchWord=<%=searchWord%>">△</a>
-							<a href="<%=request.getContextPath()%>/Teacher/teacherList.jsp?ageOrder=ASC&searchWord=<%=searchWord%>">▽</a>
+							<a href="<%=request.getContextPath()%>/Teacher/teacherList.jsp?ageOrder=DESC&searchWord=<%=searchWord%>">△</a> <!-- 나이를 내림차순으로 정렬합니다.  -->
+							<a href="<%=request.getContextPath()%>/Teacher/teacherList.jsp?ageOrder=ASC&searchWord=<%=searchWord%>">▽</a> <!-- 나이를 오름차순으로 정렬합니다.  -->
 						</th>
 						<th>주소입력</th><!-- 다수 -->
 						<th>삭제</th>
@@ -74,7 +76,6 @@
 							<td><a href ="<%= request.getContextPath() %>/Teacher/updateTeacherForm.jsp?no=<%=teacher.getTeacherNo()%>">수정</a></td>
 							<td><a href ="<%= request.getContextPath() %>/Teacher/insertTeacherScoreForm.jsp?no=<%=teacher.getTeacherNo()%>">점수입력</a></td>
 							<td><a href ="<%= request.getContextPath() %>/Teacher/teacherAndScoreList.jsp?no=<%=teacher.getTeacherNo()%>">점수보기</a></td>
-							<!-- updateTeacherForm.jsp -> updateTeacherAction.jsp -->
 						</tr>
 					<%
 						}
@@ -87,8 +88,9 @@
 					<%
 						// 마지막 페이지를 구하기 위해 int 기본타입으로 lastPage 변수를 선언하고 teacherDao 클래스객체의 lastPage() 메서드를 호출하고 리턴값을 대입합니다.
 						int lastPage = teacherDao.lastPageTeacher(rowPerPage,searchWord,ageOrder);
-			
 						
+					
+						// 페이징 함으로서 검색키워드와 나이차순정렬 키워드를 get 방식으로 값을 넘겨줍니다.
 						if(currentPage>1){
 							%>
 							<a href = "./teacherList.jsp?currentPage=<%=currentPage-1%>&searchWord=<%=searchWord%>&ageOrder=<%=ageOrder%>">◀ 이전</a>

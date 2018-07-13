@@ -17,7 +17,12 @@
 	</head>
 	<body>
 		<%
-			
+			/* 
+				교사 정보를 업데이트하는 폼으로 데이터베이스에 이미 저정된 값을 가져와서 출력하고
+				수정하려는 값이 있으면 그 값들을 폼에 담아 post방식으로 updateTeacherAction.jsp로 보냅니다.
+				
+			*/	
+		
 			int teacherNo = Integer.parseInt(request.getParameter("no"));
 			TeacherAddrDao teacherAddrDao = new TeacherAddrDao();
 			TeacherDao teacherDao = new TeacherDao();
