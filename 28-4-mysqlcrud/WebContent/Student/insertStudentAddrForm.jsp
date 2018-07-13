@@ -15,7 +15,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel= "stylesheet" type= "text/css" href="<%=request.getContextPath() %>/css/main.css">
-<link rel= "stylesheet" type= "text/css" href="<%=request.getContextPath() %>/css/studentForm.css">
 <script>
 window.addEventListener("load", function(){
 	var insertButton = document.getElementById("insertButton");

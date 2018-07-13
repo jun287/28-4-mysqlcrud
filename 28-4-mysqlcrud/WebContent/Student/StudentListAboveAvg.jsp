@@ -14,7 +14,7 @@
 <title>평균이상 점수의 학생 List</title>
 </head>
 <body>
-	<div id="main" style="align:center">주소 목록
+	<div id="main" style="align:center">
 		<h1>평균점수 이상 학생 리스트</h1>
 	<%
 		StudentScoreDao studentScoreDao = new StudentScoreDao();

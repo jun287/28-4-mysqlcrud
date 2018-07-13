@@ -16,7 +16,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>학생정보 수정 화면</title>
 <link rel= "stylesheet" type= "text/css" href="<%=request.getContextPath() %>/css/main.css">
-<link rel= "stylesheet" type= "text/css" href="<%=request.getContextPath() %>/css/studentForm.css">
 <script>
 window.addEventListener("load", function(){
 	var updateButton = document.getElementById("updateButton");
@@ -27,7 +26,7 @@ window.addEventListener("load", function(){
 </script>
 </head>
 <body>
-	<div id="main" style="align:center">주소 목록
+	<div id="main" style="align:center">
 		<div id="updateStudentForm">학생 수정
 			<form action="<%=request.getContextPath()%>/Student/updateStudentAction.jsp" method="post" id="updateForm">
 				<ul>

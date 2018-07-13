@@ -14,7 +14,7 @@
 </script>
 </head>
 <body>
-	<div id="main" style="align:center">林家 格废
+	<div id="main" style="align:center">切积 格废
 <%
 	request.setCharacterEncoding("euc-kr");
 	StudentDao studentDao = new StudentDao();

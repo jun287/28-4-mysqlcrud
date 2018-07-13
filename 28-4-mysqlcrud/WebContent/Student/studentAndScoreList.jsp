@@ -14,7 +14,7 @@
 <link rel= "stylesheet" type= "text/css" href="<%=request.getContextPath()%>/css/studentList.css">
 </head>
 <body>	
-	<div id="main" style="align:center">주소 목록
+	<div id="main" style="align:center">점수 목록
 		<table>
 			<tr>
 				<th>학생번호</th><th>학생이름</th><th>학생나이</th><th>점수번호</th><th>점수</th>

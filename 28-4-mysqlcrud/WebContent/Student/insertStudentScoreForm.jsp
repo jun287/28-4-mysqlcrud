@@ -19,7 +19,7 @@
 	student.setStudentNo(studentNo);
 	studentDao.selectStudentDetail(student);
 %>
-	<div id="main" style="align:center">
+	<div id="main" style="align:center">점수입력
 		<form action="<%=request.getContextPath()%>/Student/insertStudentScoreAction.jsp" method="post">
 			<label for="name">이름</label>	
 			<input type="text" id="name" name="studentName" value="<%=student.getStudentName() %>" readonly>
