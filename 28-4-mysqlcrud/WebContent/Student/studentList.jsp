@@ -123,7 +123,7 @@
 %>	
 		<table style="clear:both">
 			<tr>
-				<th>학생번호</th><th>학생이름</th><th>학생나이</th><th>주소입력</th><th>삭제</th><th>수정</th><th>점수입력</th><th>점수보기</th>
+				<th>학생번호</th><th>학생이름</th><th>학생나이</th><th>주소입력</th><th>삭제</th><th>수정</th><th>점수입력 및 수정</th><th>점수보기</th>
 			</tr>
 <%
 	for(int i=0; i<studentList.size(); i++){
@@ -136,7 +136,7 @@
 				<td><a href="<%=request.getContextPath() %>/Student/insertStudentAddrForm.jsp?studentNo=<%=student.getStudentNo() %>">주소입력</a></td>
 				<td><a href="<%=request.getContextPath() %>/Student/deleteStudentAction.jsp?studentNo=<%=student.getStudentNo() %>">삭제</a></td>
 				<td><a href="<%=request.getContextPath() %>/Student/updateStudentForm.jsp?studentNo=<%=student.getStudentNo() %>">수정</a></td>
-				<td><a href="<%=request.getContextPath() %>/Student/insertStudentScoreForm.jsp?studentNo=<%=student.getStudentNo() %>">점수입력</a></td>
+				<td><a href="<%=request.getContextPath() %>/Student/insertStudentScoreForm.jsp?studentNo=<%=student.getStudentNo() %>">점수입력 및 수정</a></td>
 				<td><a href="<%=request.getContextPath() %>/Student/studentAndScoreList.jsp?studentNo=<%=student.getStudentNo() %>">점수보기</a></td>
 			</tr>
 <% 		

@@ -75,7 +75,7 @@ public class StudentDao {
 			int startRow = (currentPage-1)*pagePerRow;
 			if(searchWord.equals("") && ageSelect.equals("")) {
 				System.out.println("01조건. 검색어가 없고, 나이순 정렬이 없다.");
-				String sql = "select student_no,student_name,student_age from student order by student_no asc limit ?,?";
+				String sql = "select student_no,student_name,student_age from student order by student_no desc limit ?,?";
 				preparedStatement = connection.prepareStatement(sql);
 				preparedStatement.setInt(1, startRow);
 				preparedStatement.setInt(2, pagePerRow);	
