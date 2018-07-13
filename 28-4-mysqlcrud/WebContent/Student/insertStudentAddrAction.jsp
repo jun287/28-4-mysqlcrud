@@ -9,7 +9,7 @@
 	studentAddr.setStudentAddrContent(request.getParameter("studentAddrContent"));
 	// studentAddr 객체참조변수에 Form에서 받아온 parameter Setting
 	
-	StudentAddrDao studentAddrDao = new StudentAddrDao();
+	StudentAddrDao studentAddrDao = new StudentAddrDao();	//StudentAddrDao클래스 메소드 사용을 위한 객체참조변수 선언,생성,할당
 	studentAddrDao.insertStudentAddress(studentAddr);
 	response.sendRedirect(request.getContextPath()+"/Student/studentAddrList.jsp?studentNo="+studentAddr.getStudentNO());
 %>
