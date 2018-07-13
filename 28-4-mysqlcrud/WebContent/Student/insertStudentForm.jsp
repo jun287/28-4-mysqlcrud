@@ -29,10 +29,6 @@
 					<label for="age">나이</label>	
 					<input type="text" id="age" name="studentAge" placeholder="생년월일 입력시 자동입력" readonly>
 				</li>
-				<li>
-					<label for="address">주소</label>	
-					<input type="text" id="address" name="studentAddrContent" required>	
-				</li>
 				<li>	
 					<button type="button" id="signup" >등록</button>
 					<button type="button" id="list">목록으로</button>
