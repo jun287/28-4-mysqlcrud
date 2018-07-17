@@ -23,7 +23,7 @@
 						<tr>
 							<td>1. 전재현</td> <!-- 회원 등록 및 목록 과 평균점수 리스트를 보여줍니다. -->
 							<td>
-								<a href="<%= request.getContextPath() %>/Member/insertMember/insertMemberForm.jsp">회원 등록</a>&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="<%= request.getContextPath() %>/Member/insertMember/insertMemberForm.jsp">회원 등록</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<a href="<%= request.getContextPath() %>/Member/listMember/memberList.jsp">회원 목록</a>&nbsp;&nbsp;&nbsp;&nbsp;
 								<a href="<%= request.getContextPath() %>/Member/listMember/memberListAboveAvg.jsp">회원점수 목록(평균이상)</a>&nbsp;&nbsp;&nbsp;&nbsp;
 							</td>
